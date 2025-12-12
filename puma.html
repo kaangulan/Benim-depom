@@ -1,48 +1,218 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    img{
+      width: 150%;
+      height: 100%;
+    }
+    .container{
+      width: 100%;
+      height: 100vh;
+      background-color: #1e2227;
+      color: #fff;
+    }
+    nav{
+      background-color: #1e2227;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 8%;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+    }
+    .logo{
+      cursor: pointer;
+      width: 120px;
+    }
+     nav .nav-link {
+      display: flex;
+      column-gap: 20px;
+     }
+    nav .nav-link a{
+      color: #fff;
+      font-size: 26px;
+      text-decoration: none;
+    }
+    .row{
+      height: 100%;
+      width: 100%;
+      display: flex;
+    }
+    .row .col-1,
+    .row .col-2{
+      flex-basis: 50%;
+      height: 100%;
+      display: flex;
+      justify-content:center ;
+      flex-direction: column;
+    }
+    .row .col-1{
+         padding-left: 8%;
+    }
+    .row .col-1 h1{
+         font-size: 74px;
+         line-height: 100px;
+         margin-bottom: 5px;
+    }
+    .row .col-1 p{
+         padding-right: 10px;
+         line-height: 1.4;
+    }
+    .row .col-1 .price {
+         display: flex;
+         align-items: flex-end;
+         column-gap: 10px;
+         margin-top: 10px;
+    }
+    .row .col-1 h2 {
+         font-size: 25px;
+         line-height: 1;
+    }
+     .row .col-1 .buttons {
+         display: flex;
+         column-gap: 10px;
+         flex-wrap: wrap;
+    }
+     .col-1 .buttons button,
+     .col-1 .buttons a {
+         display: inline-block;
+         width: fit-content;
+         padding: 18px 50px;
+         background: red;
+         border: none;
+         color: #fff;
+         font-size: 18px;
+         margin-top: 20px;
+         text-decoration: none;
+         cursor: pointer;
+         transition: 0.5s ease-in-out;
+    }
+    .col-1 .buttons button:hover,
+     .col-1 .buttons a:hover {
+        background-color: black ;
+        transform: translateY(-5px);
+    }
+    .col-2{
+      background:red;
+      position: relative;
+    }
+    .col-2 .feature-img{
+      width: 100%;
+      text-align: center;
+    }
+    .col-2 .feature-img img{
+      width: 80%;
+      transform: rotate(-20deg);
+      transition: 0.5s ease;
+      }
+      .col-2 .feature-img img:hover{
+      transform: rotate(0);
+      }
+      .small-img-wrapper{
+        display: flex;
+        width: 80%;
+        margin: 70px auto 0;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .small-img{
+        width: 90px;
+        height: 80px;
+      }
+      .small-img img{
+        width: 120px;
+        transform: rotate(-15deg);
+      transition: transform 0.3s ease, filter 0.3s ease;
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      }
+      .small-img img:hover{
+        width: 120px;
+         transform: rotate(0);
+         transform: translateX(-10px);
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
+
+      }
+
+      .small-img:nth-child(1){
+        background: #b9c8ff;
+      }
+      .small-img:nth-child(2){
+        background: #9dff90;
+      }
+      .small-img:nth-child(3){
+        background: #fff;
+      }
+  </style>
+  <title>StepUp</title>
+</head>
+<body>
+<body>
    <!-- Navbar başlangıc -->
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg sticky-top" style="border-radius: 100px; margin: 20px; padding: 10px 0;">
-  <div class="container">
-    <a class="navbar-brand" href="#"> StepUp</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="index.html" style="color: white;">Anasayfa</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#" style="color: white;">Mağazalarımız</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#" style="color: white;">İletişim</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Ara">
-        <button class="btn btn-outline-primary " type="submit">Ara</button>
-      </form>
-    </div>
-  </div>
-</nav>
-   <!-- NAvbar bitiş -->
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </body>
+   <div class="container">
+     <nav>
+        <div class="logo">
+          <a href="index.html"> <img src="logo.png"></a>
+        </div>
+        <div class="nav-link">
+          <a href="#">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+          <a href="#">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
+          <a href="#">
+            <i class="fas fa-bars"></i>
+          </a>
+        </div>
+     </nav>
+     <div class="row"> 
+       <div class="col-1">
+         <h1>PUMA <br> SPOR AYAKKABILAR</h1>
+         <p>ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+         cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+         <div class="price">
+           <h2>$450</h2>
+           <s>$500</s>
+         </div>
+         <div class="buttons">
+           <button>ADD TO Card</button>
+           <a href="#">CATEGORIES</a>
+         </div>
+       </div>
+       <div class="col-2">
+         <div class="feature-img">
+           <img src="Puma/logo1.png">
+         </div>
+         <div class="small-img-wrapper">
+           <div class="small-img">
+             <img src="Puma/logo2.png" style="width: 120px; height: 100px;">
+           </div>
+           <div class="small-img">
+             <img src="Puma/logo3.png">
+           </div>
+           <div class="small-img">
+             <img src="Puma/logo1.png">
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+</body>
 </html>
