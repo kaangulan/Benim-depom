@@ -1,58 +1,194 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>StepUp Harita</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    <title>Hello, world!</title>
+    <style>
+      body { background:#f7f7f8; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+      #map { height: 500px; width: 100%; margin-top: 20px; border-radius: 12px; }
+      #store-info { margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+      #store-list li { margin-bottom: 10px; }
+      .navbar { margin: 20px; border-radius: 100px; padding: 10px 0; }
+    </style>
   </head>
   <body>
-    <!-- navbar başlangıc -->
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg sticky-top" style="border-radius: 100px; margin: 20px; padding: 10px 0;">
-  <div class="container">
-    <a class="navbar-brand" href="#"> StepUp</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.html">Anasayfa</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Mağazalarımız</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">StepUp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="index.html">Anasayfa</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Mağazalarımız</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item store-link" data-store="adidas" href="#">ADİDAS</a></li>
+                <li><a class="dropdown-item store-link" data-store="nike" href="#">NİKE</a></li>
+                <li><a class="dropdown-item store-link" data-store="puma" href="#">PUMA</a></li>
+                <li><a class="dropdown-item store-link" data-store="vans" href="#">VANS</a></li>
+                <li><a class="dropdown-item store-link" data-store="converse" href="#">CONVERSE</a></li>
+                <li><a class="dropdown-item store-link" data-store="newbalance" href="#">NEW BALANCE</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link active" href="#" id="reset-map">Haritayı Sıfırla</a></li>
+            <li class="nav-item"><a class="nav-link active" href="#" id="contact-link">İletişim</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">İletişim</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search"  aria-label="">
-        <button class="btn btn-outline-primary" type="submit">Ara</button>
-      </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Harita ve Bilgi -->
+    <div class="container">
+      <div id="map"></div>
+      <div id="store-info">
+        <h5>Bilgiler</h5>
+        <ul id="store-list"></ul>
+      </div>
     </div>
-  </div>
-</nav>
 
-    <!-- navbar bitiş -->
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+      // Harita başlangıcı
+      const map = L.map('map').setView([39.0, 35.0], 6);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap katkıda bulunanlar'
+      }).addTo(map);
+
+      // Mağaza verileri: her marka için birden fazla mağaza (koordinat, şehir, AVM, Google Maps link, contact)
+      const stores = {
+        adidas: [
+          { coords:[41.0082,28.9784], city:"İstanbul", place:"Kanyon AVM", url:"https://www.google.com/maps/search/adidas+kanyon+istanbul", contact:"Tel: (0212) 987 65 43 | Email: adidas.istanbul@stepup.com" },
+          { coords:[39.9208,32.8541], city:"Ankara", place:"Armada AVM", url:"https://www.google.com/maps/search/adidas+armada+ankara", contact:"Tel: (0312) 555 44 33 | Email: adidas.ankara@stepup.com" },
+          { coords:[38.4192,27.1287], city:"İzmir", place:"Optimum AVM", url:"https://www.google.com/maps/search/adidas+optimum+izmir", contact:"Tel: (0232) 123 45 67 | Email: adidas.izmir@stepup.com" }
+        ],
+        nike: [
+          { coords:[41.0082,28.9784], city:"İstanbul", place:"Forum İstanbul", url:"https://www.google.com/maps/search/nike+forum+istanbul", contact:"Tel: (0212) 333 44 55 | Email: nike.istanbul@stepup.com" },
+          { coords:[40.1826,29.0669], city:"Bursa", place:"Kent Meydanı AVM", url:"https://www.google.com/maps/search/nike+kent+meydani+bursa", contact:"Tel: (0224) 111 22 33 | Email: nike.bursa@stepup.com" },
+          { coords:[36.8969,30.7133], city:"Antalya", place:"MarkAntalya", url:"https://www.google.com/maps/search/nike+markantalya", contact:"Tel: (0242) 444 55 66 | Email: nike.antalya@stepup.com" }
+        ],
+        puma: [
+          { coords:[41.0082,28.9784], city:"İstanbul", place:"Zorlu Center", url:"https://www.google.com/maps/search/puma+zorlu+istanbul", contact:"Tel: (0212) 888 99 00 | Email: puma.istanbul@stepup.com" },
+          { coords:[39.9208,32.8541], city:"Ankara", place:"Next Level / Armada", url:"https://www.google.com/maps/search/puma+ankara", contact:"Tel: (0312) 666 77 88 | Email: puma.ankara@stepup.com" },
+          { coords:[38.4192,27.1287], city:"İzmir", place:"Agora AVM", url:"https://www.google.com/maps/search/puma+agora+izmir", contact:"Tel: (0232) 456 78 90 | Email: puma.izmir@stepup.com" }
+        ],
+        vans: [
+          { coords:[41.0082,28.9784], city:"İstanbul", place:"Cevahir AVM", url:"https://www.google.com/maps/search/vans+cevahir+istanbul", contact:"Tel: (0212) 111 22 33 | Email: vans.istanbul@stepup.com" },
+          { coords:[38.6742,34.8555], city:"Nevşehir", place:"Forum Kapadokya", url:"https://www.google.com/maps/search/vans+forum+kapadokya", contact:"Tel: (0384) 444 55 66 | Email: vans.nevsehir@stepup.com" },
+          { coords:[40.1553,26.4142], city:"Çanakkale", place:"Troya AVM", url:"https://www.google.com/maps/search/vans+troya+canakkale", contact:"Tel: (0286) 777 88 99 | Email: vans.canakkale@stepup.com" }
+        ],
+        converse: [
+          { coords:[38.4192,27.1287], city:"İzmir", place:"Forum Bornova", url:"https://www.google.com/maps/search/converse+bornova+izmir", contact:"Tel: (0232) 999 00 11 | Email: converse.izmir@stepup.com" },
+          { coords:[41.0082,28.9784], city:"İstanbul", place:"İstinyePark", url:"https://www.google.com/maps/search/converse+istinyepark+istanbul", contact:"Tel: (0212) 649 73 00 | Email: converse.istanbul@stepup.com" }
+        ],
+        newbalance: [
+          { coords:[41.0082,28.9784], city:"İstanbul", place:"İstinyePark", url:"https://www.google.com/maps/search/new+balance+istinyepark", contact:"Tel: (0212) 765 43 21 | Email: nb.istanbul@stepup.com" },
+          { coords:[39.9208,32.8541], city:"Ankara", place:"Armada AVM", url:"https://www.google.com/maps/search/new+balance+armada+ankara", contact:"Tel: (0312) 123 45 67 | Email: nb.ankara@stepup.com" }
+        ]
+      };
+
+      // Marka bazlı kurumsal iletişim (isteğe bağlı, contact-link için)
+      const corporateContacts = {
+        adidas: "Adidas Türkiye - Rönesans Biz Plaza, Şişli / İstanbul | Tel: (0212) 355 36 00 | Web: adidas.com.tr",
+        nike: "Nike Türkiye - Nurol Plaza, Levent / İstanbul | Tel: (0212) 365 04 04 | Web: nike.com/tr",
+        puma: "Puma Türkiye - Kadıköy / İstanbul | Tel: 0850 755 19 48 | Web: puma.com",
+        vans: "Vans Türkiye (distributor) - İstanbul | Tel: 0850 532 07 79 | Web: vans.com.tr",
+        converse: "Converse Türkiye - İstanbul | Tel: (0212) 649 73 00 | Web: converse.com.tr",
+        newbalance: "New Balance Türkiye - İstanbul | Tel: (0212) 400 05 85 | Web: newbalance.com.tr"
+      };
+
+      let allMarkers = [];
+
+      function clearMapAndList() {
+        allMarkers.forEach(m => map.removeLayer(m));
+        allMarkers = [];
+        document.getElementById('store-list').innerHTML = '';
+      }
+
+      function showStores(storeName) {
+        clearMapAndList();
+        const group = [];
+        const list = document.getElementById('store-list');
+
+        if (!stores[storeName] || !stores[storeName].length) {
+          list.innerHTML = '<li>Bu markaya ait mağaza verisi bulunamadı.</li>';
+          return;
+        }
+
+        stores[storeName].forEach(s => {
+          const marker = L.marker(s.coords).addTo(map).bindPopup(`${storeName.toUpperCase()} - ${s.city} / ${s.place}`);
+          allMarkers.push(marker);
+          group.push(marker);
+
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${s.city}</strong> - ${s.place} | <a href="${s.url}" target="_blank" rel="noopener">Google Maps</a><br><small>${s.contact}</small>`;
+          list.appendChild(li);
+        });
+
+        if (group.length) {
+          const groupLayer = L.featureGroup(group);
+          map.fitBounds(groupLayer.getBounds(), { padding: [50, 50] });
+        }
+      }
+
+      // Dropdown tıklamaları
+      document.querySelectorAll('.store-link').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const store = e.currentTarget.getAttribute('data-store');
+          showStores(store);
+        });
+      });
+
+      // Haritayı sıfırla
+      document.getElementById('reset-map').addEventListener('click', e => {
+        e.preventDefault();
+        map.setView([39.0, 35.0], 6);
+        clearMapAndList();
+      });
+
+      // İletişim (kurumsal + mağaza bazlı)
+      document.getElementById('contact-link').addEventListener('click', e => {
+        e.preventDefault();
+        clearMapAndList();
+        const list = document.getElementById('store-list');
+
+        // Marka bazlı kurumsal iletişim
+        for (const brand in corporateContacts) {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${brand.toUpperCase()}</strong><br>${corporateContacts[brand]}`;
+          list.appendChild(li);
+        }
+
+        // Ayrıca her mağaza için detaylı iletişim (isteğe bağlı)
+        const hr = document.createElement('hr');
+        hr.style.margin = '12px 0';
+        list.appendChild(hr);
+
+        for (const brand in stores) {
+          stores[brand].forEach(s => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${brand.toUpperCase()}</strong> — ${s.city} (${s.place})<br>${s.contact}<br><a href="${s.url}" target="_blank" rel="noopener">Haritada göster</a>`;
+            list.appendChild(li);
+          });
+        }
+      });
+
+      // (İsteğe bağlı) Sayfa yüklendiğinde tüm markaların kısa bir özetini göstermek istersen burayı aç:
+      // document.addEventListener('DOMContentLoaded', () => { document.getElementById('contact-link').click(); });
+    </script>
   </body>
 </html>
