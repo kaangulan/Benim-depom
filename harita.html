@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <style>
-      body { background:#f7f7f8; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+      body {
+       background:#f7f7f8; 
+       font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        }
       #map { 
        height: 750px;   
        width: 100%; 
@@ -57,7 +60,6 @@
       </div>
     </nav>
 
-    <!-- Harita ve Bilgi -->
     <div class="container">
       <div id="map"></div>
       <div id="store-info">
@@ -71,14 +73,12 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-      // Harita başlangıcı
       const map = L.map('map').setView([39.0, 35.0], 6);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap katkıda bulunanlar'
       }).addTo(map);
 
-      // Mağaza verileri: her marka için birden fazla mağaza (koordinat, şehir, AVM, Google Maps link, contact)
       const stores = {
         adidas: [
           { coords:[41.0082,28.9784], city:"İstanbul", place:"Kanyon AVM", url:"https://www.google.com/maps/search/adidas+kanyon+istanbul", contact:"Tel: (0212) 987 65 43 | Email: adidas.istanbul@stepup.com" },
@@ -110,7 +110,6 @@
         ]
       };
 
-      // Marka bazlı kurumsal iletişim (isteğe bağlı, contact-link için)
       const corporateContacts = {
         adidas: "Adidas Türkiye - Rönesans Biz Plaza, Şişli / İstanbul | Tel: (0212) 355 36 00 | Web: adidas.com.tr",
         nike: "Nike Türkiye - Nurol Plaza, Levent / İstanbul | Tel: (0212) 365 04 04 | Web: nike.com/tr",
@@ -154,7 +153,6 @@
         }
       }
 
-      // Dropdown tıklamaları
       document.querySelectorAll('.store-link').forEach(link => {
         link.addEventListener('click', e => {
           e.preventDefault();
@@ -163,20 +161,18 @@
         });
       });
 
-      // Haritayı sıfırla
       document.getElementById('reset-map').addEventListener('click', e => {
         e.preventDefault();
         map.setView([39.0, 35.0], 6);
         clearMapAndList();
       });
 
-      // İletişim (kurumsal + mağaza bazlı)
+     
       document.getElementById('contact-link').addEventListener('click', e => {
         e.preventDefault();
         clearMapAndList();
         const list = document.getElementById('store-list');
 
-        // Marka bazlı kurumsal iletişim
         for (const brand in corporateContacts) {
           const li = document.createElement('li');
           li.innerHTML = `<strong>${brand.toUpperCase()}</strong><br>${corporateContacts[brand]}`;
@@ -197,7 +193,6 @@
         }
       });
 
-      
     </script>
   </body>
 </html>
