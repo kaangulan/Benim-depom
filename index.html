@@ -1,311 +1,515 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <style type="text/css">
-      body{
-        background-image: url("images/arkaplan.png");
-        
+  <title>StepUp</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+  <style>
+
+    :root{
+      --bg:#0f172a;
+      --card:#1e293b;
+      --text:#f8fafc;
+      --primary:#38bdf8;
+    }
+
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+      linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+      url("images/arkaplan.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      min-height: 100vh;
+    }
+
+    body.dark{
+      background:
+      linear-gradient(rgba(15,23,42,.9),rgba(15,23,42,.9)),
+      url("images/arkaplan.png");
+      color: white;
+    }
+
+    /* NAVBAR */
+
+    .navbar{
+      backdrop-filter: blur(10px);
+      background: rgba(15,23,42,.8)!important;
+      border-radius: 20px;
+      margin: 15px;
+      padding: 12px 20px;
+    }
+
+    .navbar-brand{
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--primary)!important;
+    }
+
+    .nav-link{
+      color: white!important;
+      transition: .3s;
+    }
+
+    .nav-link:hover{
+      color: var(--primary)!important;
+    }
+
+    /* THEME BUTTON */
+
+    .theme-toggle{
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,.1);
+      color: white;
+      transition: .3s;
+    }
+
+    .theme-toggle:hover{
+      background: var(--primary);
+      transform: scale(1.1);
+    }
+
+    /* BRAND CARDS */
+
+    .brand-section{
+      margin-top: 40px;
+    }
+
+    .brand-card{
+      background: rgba(255,255,255,.08);
+      border-radius: 25px;
+      padding: 30px;
+      text-align: center;
+      transition: .4s;
+      backdrop-filter: blur(10px);
+      height: 100%;
+    }
+
+    .brand-card:hover{
+      transform: translateY(-8px);
+      background: rgba(56,189,248,.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    }
+
+    .brand-card img{
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* ABOUT */
+
+    .about{
+      margin-top: 70px;
+      background: rgba(15,23,42,.8);
+      padding: 50px 30px;
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .about h1{
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+
+    .about p{
+      line-height: 1.9;
+      font-size: 17px;
+      text-align: center;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      margin-top: 60px;
+      padding: 40px 20px;
+      border-radius: 30px 30px 0 0;
+      background: rgba(15,23,42,.9);
+      text-align: center;
+    }
+
+    .footer h2{
+      margin-bottom: 30px;
+      color: var(--primary);
+    }
+
+    .social-icons{
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .social-icons i{
+      font-size: 55px;
+      transition: .3s;
+      cursor: pointer;
+    }
+
+    .social-icons i:hover{
+      transform: translateY(-8px) scale(1.1);
+      color: var(--primary);
+    }
+
+    /* MODAL */
+
+    .modal-content{
+      border-radius: 25px;
+      border: none;
+    }
+
+    .form-control{
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .btn-primary{
+      border-radius: 12px;
+      padding: 12px;
+      background: var(--primary);
+      border: none;
+      font-weight: bold;
+    }
+
+    .btn-primary:hover{
+      background: #0ea5e9;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      .navbar{
+        border-radius: 15px;
       }
 
-  
-      body.dark{
-        
-        background-color: #0b1220 !important;
-        color: #e6eef8 !important;
+      .about{
+        padding: 30px 20px;
       }
 
-      .container img{
-        width: 60%;
-        height: 60%;
-        margin: auto;
-        display: flex;
-        transition: 0.5s ease;
-      }
-      .container img:hover{
-        transform: translateY(5px);
-      }
-      .container .row .col-4 {
-        transition: 0.5s ease;
-      }
-      .container .row .col-4:hover {
-        background-color: #a8eaff!important;
-        transform: translateY(5px);
-      }
-      h1,p{
-        text-align: center;
-        font-family: sans-serif;
-        font-size: 30px;
-        color: whitesmoke;
-      }
-      h1{
-        font-size: 50px;
-        color: orange;
-      }
-      .icons i{
-        font-size: 100px;
-        margin: auto;
-        width: 200px;
-        height: 200px;
-        color: black;
-        transition: 0.5s ease;
-      }
-      .icons i:hover{
-        color: #a8eaff;
-        transform: translateY(5px);
-      }
-      .container .row{
-        background: red;
-        opacity: 75%;
+      .about p{
+        font-size: 15px;
       }
 
-      /* Theme toggle button styles */
-      :root{
-        --icon-size: 20px;
-        --btn-size: 40px;
-        --transition: 220ms ease;
+      .social-icons i{
+        font-size: 40px;
       }
+    }
 
-      .theme-toggle{
-        display:inline-grid;
-        place-items:center;
-        width:var(--btn-size);
-        height:var(--btn-size);
-        padding:6px;
-        border-radius:8px;
-        border: none;
-        background: rgba(255,255,255,0.06);
-        cursor:pointer;
-        color: #fff;
-        transition: transform 120ms ease, background var(--transition);
-      }
-      .theme-toggle:active{ transform: scale(0.96); }
+  </style>
+</head>
 
-      .icon{
-        width:var(--icon-size);
-        height:var(--icon-size);
-        display:block;
-        fill: currentColor;
-        transition: opacity var(--transition), transform var(--transition);
-      }
+<body>
 
-      /* Small responsive tweak so button doesn't crowd on very small screens */
-      @media (max-width: 576px){
-        .theme-toggle{ width:36px; height:36px; }
-        :root{ --icon-size:18px; }
-      }
-    </style>
+  <!-- NAVBAR -->
 
-    <title>StepUp.com</title>
-  </head>
-  <body>
-    <!-- navbar başlangıc -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg sticky-top"
-      style="border-radius: 100px; margin: 20px; padding: 10px 0;">
-      <div class="container d-flex align-items-center">
-        <a class="navbar-brand" href="#"> StepUp</a>
+ <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  <div class="container">
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="#" style="color: white;">Anasayfa</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="harita.html" style="color: white;">Mağazalarımız</a>
-            </li>
-            
-            <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           <i class="fa-solid fa-user"></i>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerModa">Giriş yap</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Kayıt ol</a></li>
-          </ul>
+    <a class="navbar-brand" href="#">StepUp</a>
+
+    <button class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#menu">
+
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Anasayfa</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="harita.html">Mağazalarımız</a>
+        </li>
+
+        <!-- USER -->
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle"
+            href="#"
+            data-bs-toggle="dropdown">
+            <i class="fa-solid fa-user"></i>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end">
+
+            <li>
+              <a class="dropdown-item"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal">
+                Giriş Yap
+              </a>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+              <a class="dropdown-item"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#registerModal">
+                Kayıt Ol
+              </a>
+            </li>
+
           </ul>
-        </div>
 
-        <!-- Tema butonu: sağ en tarafa yerleşir -->
-        <button id="themeToggle" class="theme-toggle ms-3" aria-label="Karanlık modu aç" aria-pressed="false"
-          title="Karanlık / Aydınlık" style="margin-left:auto;">
-          <!-- Ay ikonu (başlangıç) -->
-          <svg id="iconMoon" class="icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-          </svg>
-          <!-- Güneş ikonu (gizli) -->
-          <svg id="iconSun" class="icon" viewBox="0 0 24 24" aria-hidden="true" style="display:none;">
-            <path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zM1 13h3v-2H1v2zm10 9h2v-3h-2v3zm7.03-3.03l1.79 1.79 1.79-1.79-1.79-1.79-1.79 1.79zM17 13a4 4 0 11-8 0 4 4 0 018 0zm-1.24-8.16l1.8-1.8-1.79-1.79-1.8 1.8 1.79 1.79zM21 11v2h3v-2h-3zM4.24 19.36l1.8 1.8 1.79-1.8-1.8-1.79-1.79 1.79z"/>
-          </svg>
-        </button>
-      </div>
-    </nav>
-    <!-- navbar bitiş -->
-    <!-- modal Başlangıc -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content rounded-4 shadow-lg">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold" id="registerModalLabel">Kayıt Ol</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-      </div>
-      <div class="modal-body">
-        <form id="registerForm">
-          <div class="mb-3">
-            <label for="regName" class="form-label">Adınız</label>
-            <input type="text" class="form-control" id="regName" placeholder="Adınızı girin" required>
-          </div>
-          <div class="mb-3">
-            <label for="regEmail" class="form-label">E-posta</label>
-            <input type="email" class="form-control" id="regEmail" placeholder="E-posta adresinizi girin" required>
-          </div>
-          <div class="mb-3">
-            <label for="regPassword" class="form-label">Şifre</label>
-            <input type="password" class="form-control" id="regPassword" placeholder="Şifrenizi girin" required>
-          </div>
-          <div class="mb-3">
-            <label for="regConfirmPassword" class="form-label">Şifre Tekrar</label>
-            <input type="password" class="form-control" id="regConfirmPassword" placeholder="Şifrenizi tekrar girin" required>
-          </div>
-          <button type="submit" class="btn btn-primary w-100" >Kaydol</button>
-        </form>
-      </div>
+        </li>
+
+        <!-- 🛒 SEPET (YENİ EKLENEN) -->
+        <li class="nav-item ms-3">
+          <a class="nav-link" href="Sepet.html">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </a>
+        </li>
+
+        <!-- THEME -->
+        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+
+          <button id="themeToggle" class="theme-toggle">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+        </li>
+
+      </ul>
+
     </div>
+
   </div>
-</div>
-<!-- modal bitiş -->
- <!-- modal Başlangıc -->
-    <div class="modal fade" id="registerModa" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content rounded-4 shadow-lg">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold" id="registerModalLabel">Giriş Yap</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-      </div>
-      <div class="modal-body">
-        <form id="registerForm">
-          <div class="mb-3">
-            <label for="regEmail" class="form-label">E-posta</label>
-            <input type="email" class="form-control" id="regEmail" placeholder="E-posta adresinizi girin" required>
+
+</nav>
+
+  <!-- BRANDS -->
+
+  <section class="container brand-section">
+
+    <div class="row g-4">
+
+      <div class="col-6 col-md-4 col-lg-2">
+        <a href="adidas.html" class="text-decoration-none">
+          <div class="brand-card">
+            <img src="images/adidas.png">
           </div>
-          <div class="mb-3">
-            <label for="regPassword" class="form-label">Şifre</label>
-            <input type="password" class="form-control" id="regPassword" placeholder="Şifrenizi girin" required>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Giriş</button>
-        </form>
+        </a>
       </div>
+
+      <div class="col-6 col-md-4 col-lg-2">
+        <a href="nike.html" class="text-decoration-none">
+          <div class="brand-card">
+            <img src="images/nike.png">
+          </div>
+        </a>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-2">
+        <a href="puma.html" class="text-decoration-none">
+          <div class="brand-card">
+            <img src="images/puma.png">
+          </div>
+        </a>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-2">
+        <a href="vans.html" class="text-decoration-none">
+          <div class="brand-card">
+            <img src="images/vans.png">
+          </div>
+        </a>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-2">
+        <a href="converse.html" class="text-decoration-none">
+          <div class="brand-card">
+            <img src="images/Converse.png">
+          </div>
+        </a>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-2">
+        <a href="newbalance.html" class="text-decoration-none">
+          <div class="brand-card">
+            <img src="images/New Balance.png">
+          </div>
+        </a>
+      </div>
+
     </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="container">
+
+    <div class="about">
+
+      <h1>Hakkımızda</h1>
+
+      <p>
+
+        Biz, ayakkabı tutkunlarının buluşma noktasıyız.
+        Adidas’tan Nike’a, Puma’dan Vans’a kadar dünyanın
+        en popüler sneaker markalarını tek çatı altında topluyoruz.
+
+        Amacımız kullanıcılarımıza modern, güvenilir ve
+        kaliteli alışveriş deneyimi sunmak.
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer class="container footer">
+
+    <h2>Bize Ulaşın</h2>
+
+    <div class="social-icons">
+
+      <i class="fa-brands fa-instagram"></i>
+
+      <i class="fa-brands fa-facebook"></i>
+
+      <i class="fa-brands fa-whatsapp"></i>
+
+    </div>
+
+  </footer>
+
+  <!-- LOGIN MODAL -->
+
+  <div class="modal fade" id="loginModal">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+      <div class="modal-content p-3">
+
+        <div class="modal-header border-0">
+
+          <h4>Giriş Yap</h4>
+
+          <button class="btn-close"
+            data-bs-dismiss="modal"></button>
+
+        </div>
+
+        <div class="modal-body">
+
+          <input type="email"
+            class="form-control mb-3"
+            placeholder="E-posta">
+
+          <input type="password"
+            class="form-control mb-3"
+            placeholder="Şifre">
+
+          <button class="btn btn-primary w-100">
+            Giriş Yap
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-</div>
-<!-- modal bitiş -->
 
-    <!-- logo başlangıc -->
-    <div class="container">
-      <div class="row shadow-lg ">
-        <div class="col-4 bg-light bg-gradient  w-25 m-3 me-auto shadow-lg" style="border-radius: 100px;">
-          <a href="adidas.html"> <img src="images/adidas.png" style="width: 75%; height: 75%; margin: auto; margin-top: 25px;"></a>
+  <!-- REGISTER MODAL -->
+
+  <div class="modal fade" id="registerModal">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+      <div class="modal-content p-3">
+
+        <div class="modal-header border-0">
+
+          <h4>Kayıt Ol</h4>
+
+          <button class="btn-close"
+            data-bs-dismiss="modal"></button>
+
         </div>
-        <div class="col-4 bg-light bg-gradient w-25 m-3 me-auto shadow-lg" style="border-radius: 100px">
-          <a href="converse.html"> <img src="images/Converse.png" style=" margin: auto; margin-top:50px;"> </a>
+
+        <div class="modal-body">
+
+          <input type="text"
+            class="form-control mb-3"
+            placeholder="Ad Soyad">
+
+          <input type="email"
+            class="form-control mb-3"
+            placeholder="E-posta">
+
+          <input type="password"
+            class="form-control mb-3"
+            placeholder="Şifre">
+
+          <button class="btn btn-primary w-100">
+            Kaydol
+          </button>
+
         </div>
-        <div class="col-4 bg-light bg-gradient w-25 m-3 me-auto shadow-lg" style="border-radius: 100px;">
-          <a href="newbalance.html"> <img src="images/New Balance.png" style=" margin: auto; margin-top:50px;"></a>
-        </div>
-        <div class="col-4 bg-light bg-gradient w-25 m-3 me-auto shadow-lg" style="border-radius: 100px">
-          <a href="nike.html"> <img src="images/nike.png" style=" margin: auto; margin-top:50px;"></a>
-        </div>
-        <div class="col-4 bg-light bg-gradient w-25 m-3 me-auto shadow-lg" style="border-radius: 100px">
-          <a href="puma.html"> <img src="images/puma.png" style=" margin: auto; margin-top:50px;"></a>
-        </div>
-        <div class="col-4 bg-light bg-gradient w-25 m-3 me-auto shadow-lg" style="border-radius: 100px">
-          <a href="vans.html"> <img src="images/vans.png" style=" margin: auto; margin-top:50px;"> </a>
-        </div>
+
       </div>
+
     </div>
-    <!-- logo bitiş -->
 
-    <!-- hakkımızda başlangıc -->
-    <div class="container">
-      <div class="row shadow-lg bg-dark opacity-75 ">
-        <h1>Hakkımızda</h1>
-        <p> Biz, ayakkabı tutkunlarının buluşma noktasıyız. Spor ayakkabının sadece bir ürün değil, bir yaşam tarzı olduğuna inanıyoruz. Adidas’tan Nike’a, Puma’dan Vans’a kadar dünyanın önde gelen markalarını tek çatı altında topluyor, her adımda konfor ve stil sunuyoruz.
-        Misyonumuz, herkesin kendi tarzını özgürce ifade edebileceği, güvenilir ve kaliteli ayakkabılara kolayca ulaşmasını sağlamak. Vizyonumuz ise sneaker kültürünü Türkiye’de daha da büyütmek ve müşterilerimize sadece ürün değil, aynı zamanda bir deneyim sunmak.
-        Bizim için ayakkabı, sadece yürümek için değil; kendini anlatmanın, özgün olmanın ve hayatın ritmini yakalamanın bir yolu. Bu yüzden her koleksiyonumuzda yenilikçi tasarımlar, sürdürülebilir malzemeler ve müşteri memnuniyetini ön planda tutuyoruz.</p>
-      </div>
-    </div>
-    <!-- hakkımızda bitiş -->
+  </div>
 
-    <!-- footer -->
-   <div class="container icons me-auto">
-      <div class="row shadow-lg bg-light ">
+  <!-- DARK MODE -->
 
-         <h1>Bizlere Burdan Ulaşa bilirsiniz</h1>
-        <i class="fa-brands fa-square-instagram"></i>
-        <i class="fa-brands fa-square-facebook"></i>
-        <i class="fa-brands fa-square-whatsapp"></i>
-      </div>
-    </div>
-    <!-- bitiş -->
+  <script>
 
-    <script>
-      (function(){
-        const KEY = 'prefers-dark';
-        const body = document.body;
-        const btn = document.getElementById('themeToggle');
-        const iconMoon = document.getElementById('iconMoon');
-        const iconSun = document.getElementById('iconSun');
+    const btn = document.getElementById("themeToggle");
 
-        function applyTheme(isDark){
-          if(isDark){
-            body.classList.add('dark');
-            iconMoon.style.display = 'none';
-            iconSun.style.display = 'block';
-            btn.setAttribute('aria-pressed','true');
-            btn.setAttribute('aria-label','Aydınlık modu aç');
-          } else {
-            body.classList.remove('dark');
-            iconMoon.style.display = 'block';
-            iconSun.style.display = 'none';
-            btn.setAttribute('aria-pressed','false');
-            btn.setAttribute('aria-label','Karanlık modu aç');
-          }
-        }
+    btn.addEventListener("click", () => {
 
-        // Başlangıç: localStorage veya sistem tercihi
-        const saved = localStorage.getItem(KEY);
-        if(saved !== null){
-          applyTheme(saved === 'true');
-        } else {
-          const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          applyTheme(prefersDark);
-        }
+      document.body.classList.toggle("dark");
 
-        btn.addEventListener('click', () => {
-          const isDark = body.classList.contains('dark');
-          applyTheme(!isDark);
-          localStorage.setItem(KEY, String(!isDark));
-        });
-      })();
-    </script>
+      if(document.body.classList.contains("dark")){
+        btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+      }else{
+        btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+      }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </body>
+    });
+
+  </script>
+
+  <!-- Bootstrap -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>

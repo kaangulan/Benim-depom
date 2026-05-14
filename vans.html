@@ -1,294 +1,580 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style type="text/css">
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>StepUp - Vans</title>
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- GOOGLE FONT -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+
     *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Poppins",sans-serif;
     }
-    img{
-      width: 150%;
-      height: 100%;
+
+    body{
+      background:
+      linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+      url("vans/bg.jpg");
+
+      background-size:cover;
+      background-position:center;
+      color:white;
+      min-height:100vh;
+      overflow-x:hidden;
     }
-    .container{
-      width: 100%;
-      height: 100vh;
-      background-color: #1e2227;
-      color: #fff;
-    }
+
+    /* NAVBAR */
+
     nav{
-      background-color: #1e2227;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 30px 8%;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1;
+      width:100%;
+      padding:20px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1000;
+
+      background:rgba(0,0,0,.35);
+      backdrop-filter:blur(12px);
     }
-    .logo{
-      cursor: pointer;
-      width: 120px;
+
+    .logo img{
+      width:120px;
     }
-     nav .nav-link {
-      display: flex;
-      column-gap: 20px;
-     }
-    nav .nav-link a{
-      color: #fff;
-      font-size: 26px;
-      text-decoration: none;
+
+    .nav-links{
+      display:flex;
+      gap:25px;
+      align-items:center;
     }
+
+    .nav-links a{
+      color:white;
+      font-size:22px;
+      transition:.3s;
+      text-decoration:none;
+    }
+
+    .nav-links a:hover{
+      color:red;
+      transform:translateY(-3px);
+    }
+
+    /* MAIN */
+
+    .container{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:120px 8% 60px;
+    }
+
     .row{
-      height: 100%;
-      width: 100%;
-      display: flex;
+      width:100%;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
     }
-    .row .col-1,
-    .row .col-2{
-      flex-basis: 50%;
-      height: 100%;
-      display: flex;
-      justify-content:center ;
-      flex-direction: column;
+
+    /* LEFT */
+
+    .content h1{
+      font-size:70px;
+      line-height:1.1;
+      margin-bottom:20px;
+      font-weight:700;
     }
-    .row .col-1{
-         padding-left: 8%;
+
+    .content span{
+      color:red;
     }
-    .row .col-1 h1{
-         font-size: 74px;
-         line-height: 100px;
-         margin-bottom: 5px;
+
+    .content p{
+      font-size:15px;
+      line-height:1.8;
+      color:#ddd;
+      margin-bottom:30px;
     }
-    .row .col-1 p{
-         padding-right: 10px;
-         line-height: 1.4;
+
+    /* VIDEO */
+
+    .video-box{
+      width:100%;
+      overflow:hidden;
+      border-radius:25px;
+      margin-bottom:30px;
+      box-shadow:0 10px 30px rgba(0,0,0,.4);
     }
-    .row .col-1 .price {
-         display: flex;
-         align-items: flex-end;
-         column-gap: 10px;
-         margin-top: 10px;
+
+    video{
+      width:100%;
+      display:block;
     }
-    .row .col-1 h2 {
-         font-size: 25px;
-         line-height: 1;
+
+    /* PRICE */
+
+    .price{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin-bottom:25px;
     }
-     .row .col-1 .buttons {
-         display: flex;
-         column-gap: 10px;
-         flex-wrap: wrap;
+
+    .price h2{
+      font-size:35px;
+      color:red;
     }
-     .col-1 .buttons button,
-     .col-1 .buttons a {
-         display: inline-block;
-         width: fit-content;
-         padding: 18px 50px;
-         background: red;
-         border: none;
-         color: #fff;
-         font-size: 18px;
-         margin-top: 20px;
-         text-decoration: none;
-         cursor: pointer;
-         transition: 0.5s ease-in-out;
+
+    .price s{
+      color:#aaa;
+      font-size:20px;
     }
-    .col-1 .buttons button:hover,
-     .col-1 .buttons a:hover {
-        background-color: #aa0505 ;
-        transform: translateY(-5px);
+
+    /* BUTTONS */
+
+    .buttons{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
     }
-    .col-2{
+
+    .buttons button,
+    .buttons a{
+
+      padding:15px 35px;
+      border:none;
+      border-radius:12px;
+      text-decoration:none;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      transition:.3s;
+      font-size:15px;
+    }
+
+    .cart-btn{
       background:red;
-      position: relative;
     }
-    .col-2 .feature-img{
-      width: 90%;
-      text-align: center;
+
+    .category-btn{
+      background:rgba(255,255,255,.1);
+      backdrop-filter:blur(10px);
     }
-    .col-2 .feature-img img{
-      width: 80%;
-      transform: rotate(-20deg);
-      transition: 0.5s ease;
+
+    .buttons button:hover,
+    .buttons a:hover{
+      transform:translateY(-5px);
+      box-shadow:0 8px 20px rgba(0,0,0,.4);
+    }
+
+    /* RIGHT */
+
+    .product-box{
+      position:relative;
+      text-align:center;
+    }
+
+    .main-shoe{
+      width:100%;
+      max-width:550px;
+      transform:rotate(-20deg);
+      transition:.5s;
+      filter:drop-shadow(0 20px 30px rgba(0,0,0,.5));
+
+      animation:float 3s ease-in-out infinite;
+    }
+
+    .main-shoe:hover{
+      transform:rotate(-8deg) scale(1.05);
+    }
+
+    /* FLOAT */
+
+    @keyframes float{
+
+      0%{
+        transform:rotate(-20deg) translateY(0);
       }
-      .col-2 .feature-img img:hover{
-      transform: rotate(0);
-      }
-      .small-img-wrapper{
-        display: flex;
-        width: 80%;
-        margin: 70px auto 0;
-        align-items: center;
-        justify-content: space-around;
-      }
-      .small-img{
-        width: 90px;
-        height: 80px;
-      }
-      .small-img img{
-        width: 120px;
-        transform: rotate(-15deg);
-      transition: transform 0.3s ease, filter 0.3s ease;
 
-      }
-      .small-img img:hover{
-        width: 120px;
-         transform: rotate(0);
-         transform: translateX(-10px);
-
-
+      50%{
+        transform:rotate(-20deg) translateY(-15px);
       }
 
-      .small-img:nth-child(1){
-        background: #b9c8ff;
+      100%{
+        transform:rotate(-20deg) translateY(0);
       }
-      .small-img:nth-child(2){
-        background: #9dff90;
+
+    }
+
+    /* THUMBNAILS */
+
+    .thumbs{
+      margin-top:40px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .thumb{
+      width:100px;
+      height:100px;
+      border-radius:20px;
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .thumb:hover{
+      transform:translateY(-10px);
+      background:red;
+    }
+
+    .thumb.active{
+      background:red;
+      transform:translateY(-10px);
+      box-shadow:0 10px 25px rgba(255,0,0,.4);
+    }
+
+    .thumb img{
+      width:90%;
+      transform:rotate(-15deg);
+    }
+
+    /* MOBILE */
+
+    @media(max-width:992px){
+
+      .row{
+        grid-template-columns:1fr;
+        text-align:center;
       }
-      .small-img:nth-child(3){
-        background: #fff;
+
+      .content{
+        order:2;
       }
-      @media (max-width: 768px){
 
-  /* NAVBAR */
-  nav{
-    padding: 15px 5%;
-  }
+      .product-box{
+        order:1;
+      }
 
-  nav .nav-link a{
-    font-size: 20px;
-  }
+      .buttons{
+        justify-content:center;
+      }
 
-  .logo{
-    width: 90px;
-  }
+      .price{
+        justify-content:center;
+      }
 
-  /* ROW ALT ALTA GELSİN */
-  .row{
-    flex-direction: column;
-    padding-top: 100px;
-  }
+      .content h1{
+        font-size:50px;
+      }
 
-  /* SOL TARAF */
-  .row .col-1{
-    padding: 20px;
-    text-align: center;
-  }
+      .main-shoe{
+        max-width:400px;
+      }
 
-  .row .col-1 h1{
-    font-size: 40px;
-    line-height: 50px;
-  }
+    }
 
-  .row .col-1 p{
-    font-size: 14px;
-  }
+    @media(max-width:768px){
 
-  /* VİDEO */
-  video{
-    width: 100% !important;
-    height: auto !important;
-  }
+      nav{
+        padding:15px 5%;
+      }
 
-  /* BUTON */
-  .col-1 .buttons{
-    justify-content: center;
-  }
+      .logo img{
+        width:90px;
+      }
 
-  .col-1 .buttons button,
-  .col-1 .buttons a{
-    padding: 12px 25px;
-    font-size: 14px;
-  }
+      .nav-links{
+        gap:18px;
+      }
 
-  /* SAĞ TARAF */
-  .col-2{
-    margin-top: 20px;
-  }
+      .nav-links a{
+        font-size:18px;
+      }
 
-  .col-2 .feature-img img{
-    width: 70%;
-    transform: rotate(0);
-  }
+      .container{
+        padding:100px 5% 50px;
+      }
 
-  /* KÜÇÜK RESİMLER */
-  .small-img-wrapper{
-    width: 100%;
-    margin-top: 20px;
-  }
+      .content h1{
+        font-size:38px;
+      }
 
-  .small-img{
-    width: 60px;
-    height: 60px;
-  }
+      .content p{
+        font-size:14px;
+      }
 
-  .small-img img{
-    width: 80px;
-  }
+      .buttons button,
+      .buttons a{
+        width:100%;
+        text-align:center;
+      }
 
-}
+      .thumb{
+        width:80px;
+        height:80px;
+      }
+
+    }
+
   </style>
-  <title>StepUp</title>
 </head>
+
 <body>
-   <!-- Navbar başlangıc -->
-   <div class="container">
-     <nav>
-        <div class="logo">
-         <a href="index.html"> <img src="logo.png"></a>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">
+      <a href="index.html">
+        <img src="logo.png">
+      </a>
+    </div>
+
+    <div class="nav-links">
+
+      <a href="#">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </a>
+
+       <a href="Sepet.html">
+        <i class="fa-solid fa-bag-shopping"></i>
+      </a>
+
+      <a href="#">
+        <i class="fa-solid fa-bars"></i>
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN -->
+
+  <section class="container">
+
+    <div class="row">
+
+      <!-- LEFT -->
+
+      <div class="content">
+
+        <h1 id="productTitle">
+          VANS <br>
+          <span>SPORT SHOES</span>
+        </h1>
+
+        <div class="video-box">
+
+          <video autoplay muted loop controls playsinline>
+
+            <source src="vans/video.mp4" type="video/mp4">
+
+          </video>
+
         </div>
-        <div class="nav-link">
-          <a href="#">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </a>
-          <a href="#">
-            <i class="fas fa-shopping-bag"></i>
-          </a>
-          <a href="#">
-            <i class="fas fa-bars"></i>
-          </a>
+
+        <p>
+
+          Vans, kaykay kültürünün en ikonik markalarından biridir.
+          Dayanıklı yapısı, özgün tasarımları ve sokak modasına uygun
+          tarzıyla dünya çapında milyonlarca kişinin tercihidir.
+
+        </p>
+
+        <div class="price">
+
+          <h2 id="productPrice">$100</h2>
+
+          <s>$200</s>
+
         </div>
-     </nav>
-     <div class="row"> 
-       <div class="col-1">
-         <h1>VANS <br> SPOR AYAKKABILAR</h1>
-         <video autoplay muted controls playsinline width="640" height="360" style="padding-bottom: 10px;"style="padding-bottom: 20px;">
-  <source src="vans/video.mp4" type="video/mp4">
-</video>
-         <p>Vans, 1966’da Kaliforniya’da kurulan ve kaykay kültürünün simgesi haline gelen bir markadır. Dayanıklı tabanları ve özgün tasarımlarıyla gençliğin enerjisini yansıtan Vans, “Off the Wall” sloganıyla özgürlüğü ve yaratıcılığı temsil eder. Old Skool ve Slip-On gibi ikonik modelleriyle hem spor hem de günlük yaşamda tercih edilen Vans, bugün dünya çapında sokak modasının vazgeçilmez bir parçasıdır.</p>
-         <div class="price">
-           <h2>$100</h2>
-           <s>$200</s>
-         </div>
-         <div class="buttons">
-           <button>ADD TO Card</button>
-           <a href="#">CATEGORIES</a>
-         </div>
-       </div>
-       <div class="col-2">
-         <div class="feature-img">
-           <img src="vans/logo3.png">
-         </div>
-         <div class="small-img-wrapper">
-           <div class="small-img">
-             <img src="vans/logo1.png" style="width: 120px; height: 100px;">
-           </div>
-           <div class="small-img">
-             <img src="vans/logo2.png">
-           </div>
-           <div class="small-img">
-             <img src="vans/logo3.png">
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
+
+        <div class="buttons">
+
+          <button class="cart-btn" id="addToCartBtn">
+            Add To Cart
+          </button>
+
+          <a href="#" class="category-btn">
+            Categories
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div class="product-box">
+
+        <img src="vans/logo3.png"
+             class="main-shoe"
+             id="mainShoe">
+
+        <div class="thumbs">
+
+          <div class="thumb active"
+               data-img="vans/logo3.png"
+               data-title="VANS SPORT SHOES"
+               data-price="$100">
+
+            <img src="vans/logo3.png">
+
+          </div>
+
+          <div class="thumb"
+               data-img="vans/logo1.png"
+               data-title="VANS OLD SKOOL"
+               data-price="$150">
+
+            <img src="vans/logo1.png">
+
+          </div>
+
+          <div class="thumb"
+               data-img="vans/logo2.png"
+               data-title="VANS STREET"
+               data-price="$180">
+
+            <img src="vans/logo2.png">
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    // AYAKKABI DEĞİŞTİRME
+
+    const thumbs = document.querySelectorAll(".thumb");
+    const mainShoe = document.getElementById("mainShoe");
+    const productTitle = document.getElementById("productTitle");
+    const productPrice = document.getElementById("productPrice");
+
+    thumbs.forEach((thumb)=>{
+
+      thumb.addEventListener("click",()=>{
+
+        // active class
+        thumbs.forEach(t =>
+        t.classList.remove("active"));
+
+        thumb.classList.add("active");
+
+        // image değiştir
+        mainShoe.src = thumb.dataset.img;
+
+        // title değiştir
+        const newTitle =
+        thumb.dataset.title;
+
+        const titleParts =
+        newTitle.split(" ");
+
+        productTitle.innerHTML =
+        `${titleParts[0]} <br>
+        <span>
+        ${titleParts.slice(1).join(" ")}
+        </span>`;
+
+        // price değiştir
+        productPrice.innerText =
+        thumb.dataset.price;
+
+      });
+
+    });
+
+
+
+    // ADD TO CART
+
+    const addToCartBtn =
+    document.getElementById("addToCartBtn");
+
+    addToCartBtn.addEventListener("click",()=>{
+
+      const product = {
+
+        title:
+        productTitle.innerText,
+
+        price:
+        productPrice.innerText,
+
+        image:
+        mainShoe.src,
+
+        quantity:1
+
+      };
+
+      // eski ürünleri al
+      let cart =
+      JSON.parse(localStorage.getItem("cart")) || [];
+
+      // aynı ürün varsa artır
+      const existingProduct =
+      cart.find(item =>
+      item.title === product.title);
+
+      if(existingProduct){
+
+        existingProduct.quantity++;
+
+      } else {
+
+        cart.push(product);
+
+      }
+
+      // kaydet
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+      );
+
+      alert("Ürün sepete eklendi!");
+
+    });
+
+  </script>
 </body>
 </html>

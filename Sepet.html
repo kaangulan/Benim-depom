@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>StepUp Sepet</title>
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- GOOGLE FONT -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Poppins",sans-serif;
+    }
+
+    body{
+      background:#0f172a;
+      color:white;
+      min-height:100vh;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      padding:20px 8%;
+      background:#111827;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+
+    .logo{
+      font-size:32px;
+      font-weight:700;
+      color:#ff3c00;
+    }
+
+    .back-btn{
+      color:white;
+      font-size:22px;
+      text-decoration:none;
+      transition:.3s;
+    }
+
+    .back-btn:hover{
+      color:#ff3c00;
+    }
+
+    /* CONTAINER */
+
+    .container{
+      width:100%;
+      padding:40px 8%;
+    }
+
+    .title{
+      font-size:45px;
+      margin-bottom:40px;
+      font-weight:700;
+    }
+
+    /* CART ITEMS */
+
+    .cart-items{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    .cart-item{
+      background:#1e293b;
+      border-radius:25px;
+      padding:25px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+      transition:.3s;
+    }
+
+    .cart-item:hover{
+      transform:translateY(-5px);
+      box-shadow:0 10px 25px rgba(0,0,0,.4);
+    }
+
+    /* PRODUCT */
+
+    .product{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      flex:1;
+    }
+
+    .product img{
+      width:140px;
+      filter:drop-shadow(0 10px 20px rgba(0,0,0,.4));
+    }
+
+    .product-info h2{
+      font-size:24px;
+      margin-bottom:10px;
+    }
+
+    .product-info p{
+      color:#aaa;
+      font-size:14px;
+    }
+
+    /* PRICE */
+
+    .price{
+      font-size:28px;
+      font-weight:700;
+      color:#ff3c00;
+      min-width:100px;
+      text-align:center;
+    }
+
+    /* QUANTITY */
+
+    .quantity{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .quantity button{
+      width:40px;
+      height:40px;
+      border:none;
+      border-radius:10px;
+      background:#ff3c00;
+      color:white;
+      font-size:18px;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .quantity button:hover{
+      transform:scale(1.1);
+    }
+
+    .quantity span{
+      font-size:20px;
+      font-weight:600;
+      min-width:20px;
+      text-align:center;
+    }
+
+    /* REMOVE */
+
+    .remove-btn{
+      background:#ef4444;
+      border:none;
+      color:white;
+      padding:12px 20px;
+      border-radius:12px;
+      cursor:pointer;
+      transition:.3s;
+      font-weight:600;
+    }
+
+    .remove-btn:hover{
+      background:#dc2626;
+    }
+
+    /* SUMMARY */
+
+    .summary{
+      margin-top:50px;
+      background:#1e293b;
+      padding:35px;
+      border-radius:25px;
+    }
+
+    .summary h2{
+      margin-bottom:30px;
+      font-size:32px;
+    }
+
+    .summary-row{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:20px;
+      font-size:18px;
+    }
+
+    .total{
+      font-size:30px;
+      font-weight:700;
+      color:#ff3c00;
+      margin-top:25px;
+    }
+
+    /* CHECKOUT */
+
+    .checkout-btn{
+      width:100%;
+      margin-top:30px;
+      padding:18px;
+      border:none;
+      border-radius:15px;
+      background:#ff3c00;
+      color:white;
+      font-size:18px;
+      font-weight:600;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .checkout-btn:hover{
+      transform:translateY(-5px);
+      box-shadow:0 10px 20px rgba(255,60,0,.4);
+    }
+
+    /* EMPTY */
+
+    .empty-cart{
+      text-align:center;
+      padding:80px 20px;
+      color:#aaa;
+    }
+
+    .empty-cart i{
+      font-size:70px;
+      margin-bottom:20px;
+      color:#ff3c00;
+    }
+
+    .empty-cart h2{
+      font-size:35px;
+      margin-bottom:10px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      nav{
+        padding:15px 5%;
+      }
+
+      .container{
+        padding:30px 5%;
+      }
+
+      .title{
+        font-size:35px;
+      }
+
+      .cart-item{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .product{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      .product img{
+        width:110px;
+      }
+
+      .price{
+        font-size:24px;
+      }
+
+      .summary h2{
+        font-size:26px;
+      }
+
+      .total{
+        font-size:24px;
+      }
+
+      .quantity{
+        width:100%;
+        justify-content:center;
+      }
+
+      .remove-btn{
+        width:100%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">
+      StepUp
+    </div>
+
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
+  </nav>
+
+  <!-- CONTAINER -->
+
+  <div class="container">
+
+    <h1 class="title">
+      Sepetim
+    </h1>
+
+    <!-- SEPET -->
+
+    <div class="cart-items" id="cartItems">
+
+    </div>
+
+    <!-- ÖZET -->
+
+    <div class="summary">
+
+      <h2>Sipariş Özeti</h2>
+
+      <div class="summary-row">
+
+        <span>Kargo</span>
+
+        <span>20$</span>
+
+      </div>
+
+      <div class="summary-row">
+
+        <span>İndirim</span>
+
+        <span>-10$</span>
+
+      </div>
+
+      <div class="summary-row total">
+
+        <span>Toplam</span>
+
+        <span id="totalPrice">$0</span>
+
+      </div>
+
+      <button class="checkout-btn">
+
+        Siparişi Tamamla
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    const cartItems =
+    document.getElementById("cartItems");
+
+    let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+
+
+    // SEPETİ GÖSTER
+
+    function renderCart(){
+
+      cartItems.innerHTML = "";
+
+      if(cart.length === 0){
+
+        cartItems.innerHTML = `
+
+        <div class="empty-cart">
+
+          <i class="fa-solid fa-cart-shopping"></i>
+
+          <h2>Sepetiniz boş</h2>
+
+          <p>Sepete ürün ekleyin</p>
+
+        </div>
+
+        `;
+
+        document.getElementById("totalPrice")
+        .innerText = "$0";
+
+        return;
+
+      }
+
+      let total = 0;
+
+      cart.forEach((item,index)=>{
+
+        // ÜRÜN FİYATI
+        const itemPrice =
+        parseInt(item.price.replace("$",""));
+
+        // TOPLAM FİYAT
+        const itemTotal =
+        itemPrice * item.quantity;
+
+        // GENEL TOPLAM
+        total += itemTotal;
+
+        cartItems.innerHTML += `
+
+        <div class="cart-item">
+
+          <div class="product">
+
+            <img src="${item.image}">
+
+            <div class="product-info">
+
+              <h2>${item.title}</h2>
+
+              <p>Premium Spor Ayakkabı</p>
+
+            </div>
+
+          </div>
+
+          <!-- FİYAT -->
+
+          <div class="price">
+            $${itemTotal}
+          </div>
+
+          <!-- ADET -->
+
+          <div class="quantity">
+
+            <button onclick="decrease(${index})">
+              -
+            </button>
+
+            <span>${item.quantity}</span>
+
+            <button onclick="increase(${index})">
+              +
+            </button>
+
+          </div>
+
+          <!-- SİL -->
+
+          <button class="remove-btn"
+            onclick="removeItem(${index})">
+
+            Sil
+
+          </button>
+
+        </div>
+
+        `;
+
+      });
+
+      // KARGO + İNDİRİM
+
+      const shipping = 20;
+      const discount = 10;
+
+      const finalTotal =
+      total + shipping - discount;
+
+      // TOPLAM YAZ
+
+      document.getElementById("totalPrice")
+      .innerText = "$" + finalTotal;
+
+    }
+
+
+
+    // ARTTIR
+
+    function increase(index){
+
+      cart[index].quantity++;
+
+      saveCart();
+
+    }
+
+
+
+    // AZALT
+
+    function decrease(index){
+
+      if(cart[index].quantity > 1){
+
+        cart[index].quantity--;
+
+        saveCart();
+
+      }
+
+    }
+
+
+
+    // SİL
+
+    function removeItem(index){
+
+      cart.splice(index,1);
+
+      saveCart();
+
+    }
+
+
+
+    // KAYDET
+
+    function saveCart(){
+
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+      );
+
+      renderCart();
+
+    }
+
+
+
+    // SAYFA AÇILINCA
+
+    renderCart();
+
+  </script>
+
+</body>
+
+</html>
