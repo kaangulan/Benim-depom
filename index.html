@@ -1,515 +1,1382 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>StepUp</title>
+<title>StepUp | Premium Sneaker Store</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
-  <style>
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    :root{
-      --bg:#0f172a;
-      --card:#1e293b;
-      --text:#f8fafc;
-      --primary:#38bdf8;
-    }
+<style>
 
-    body{
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-      linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
-      url("images/arkaplan.png");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-      min-height: 100vh;
-    }
+:root{
+  --bg:#060816;
+  --card:#0f172a;
+  --primary:#38bdf8;
+  --secondary:#8b5cf6;
+  --text:#dbe4f0;
+  --white:#ffffff;
+}
 
-    body.dark{
-      background:
-      linear-gradient(rgba(15,23,42,.9),rgba(15,23,42,.9)),
-      url("images/arkaplan.png");
-      color: white;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    /* NAVBAR */
+body{
+  font-family:'Poppins',sans-serif;
+  background:
+  radial-gradient(circle at top right, rgba(56,189,248,.12), transparent 25%),
+  radial-gradient(circle at bottom left, rgba(139,92,246,.12), transparent 25%),
+  var(--bg);
+  color:white;
+  overflow-x:hidden;
+}
 
-    .navbar{
-      backdrop-filter: blur(10px);
-      background: rgba(15,23,42,.8)!important;
-      border-radius: 20px;
-      margin: 15px;
-      padding: 12px 20px;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .navbar-brand{
-      font-size: 28px;
-      font-weight: bold;
-      color: var(--primary)!important;
-    }
+/* SCROLLBAR */
 
-    .nav-link{
-      color: white!important;
-      transition: .3s;
-    }
+::-webkit-scrollbar{
+  width:10px;
+}
 
-    .nav-link:hover{
-      color: var(--primary)!important;
-    }
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(var(--primary),var(--secondary));
+  border-radius:20px;
+}
 
-    /* THEME BUTTON */
+/* NAVBAR */
 
-    .theme-toggle{
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(255,255,255,.1);
-      color: white;
-      transition: .3s;
-    }
+.navbar{
+  background:rgba(6,8,22,.7)!important;
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  padding:18px 0;
+}
 
-    .theme-toggle:hover{
-      background: var(--primary);
-      transform: scale(1.1);
-    }
+.navbar-brand{
+  font-size:32px;
+  font-weight:800;
+  color:var(--primary)!important;
+}
 
-    /* BRAND CARDS */
+.nav-link{
+  color:white!important;
+  font-weight:500;
+  margin-left:15px;
+  transition:.3s;
+}
 
-    .brand-section{
-      margin-top: 40px;
-    }
+.nav-link:hover{
+  color:var(--primary)!important;
+}
 
-    .brand-card{
-      background: rgba(255,255,255,.08);
-      border-radius: 25px;
-      padding: 30px;
-      text-align: center;
-      transition: .4s;
-      backdrop-filter: blur(10px);
-      height: 100%;
-    }
+.nav-icon{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:rgba(255,255,255,.05);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.3s;
+}
 
-    .brand-card:hover{
-      transform: translateY(-8px);
-      background: rgba(56,189,248,.2);
-      box-shadow: 0 10px 30px rgba(0,0,0,.3);
-    }
+.nav-icon:hover{
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  transform:translateY(-3px);
+}
 
-    .brand-card img{
-      width: 100%;
-      max-width: 150px;
-      height: auto;
-      object-fit: contain;
-    }
+/* HERO */
 
-    /* ABOUT */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
 
-    .about{
-      margin-top: 70px;
-      background: rgba(15,23,42,.8);
-      padding: 50px 30px;
-      border-radius: 30px;
-      backdrop-filter: blur(10px);
-    }
+.blur1,
+.blur2{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+}
 
-    .about h1{
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 25px;
-      font-weight: bold;
-    }
+.blur1{
+  width:400px;
+  height:400px;
+  background:rgba(56,189,248,.15);
+  top:-100px;
+  right:-100px;
+}
 
-    .about p{
-      line-height: 1.9;
-      font-size: 17px;
-      text-align: center;
-    }
+.blur2{
+  width:350px;
+  height:350px;
+  background:rgba(139,92,246,.15);
+  bottom:-100px;
+  left:-100px;
+}
 
-    /* FOOTER */
+.hero-text{
+  position:relative;
+  z-index:2;
+}
 
-    .footer{
-      margin-top: 60px;
-      padding: 40px 20px;
-      border-radius: 30px 30px 0 0;
-      background: rgba(15,23,42,.9);
-      text-align: center;
-    }
+.hero-text h1{
+  font-size:85px;
+  font-weight:800;
+  line-height:1;
+  margin-bottom:25px;
+}
 
-    .footer h2{
-      margin-bottom: 30px;
-      color: var(--primary);
-    }
+.gradient{
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-    .social-icons{
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      flex-wrap: wrap;
-    }
+.hero-text p{
+  max-width:650px;
+  color:var(--text);
+  line-height:2;
+  font-size:18px;
+}
 
-    .social-icons i{
-      font-size: 55px;
-      transition: .3s;
-      cursor: pointer;
-    }
+.hero-buttons{
+  margin-top:40px;
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
 
-    .social-icons i:hover{
-      transform: translateY(-8px) scale(1.1);
-      color: var(--primary);
-    }
+.hero-btn{
+  padding:16px 35px;
+  border-radius:18px;
+  text-decoration:none;
+  font-weight:600;
+  transition:.3s;
+}
 
-    /* MODAL */
+.btn-main{
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  color:white;
+}
 
-    .modal-content{
-      border-radius: 25px;
-      border: none;
-    }
+.btn-main:hover{
+  transform:translateY(-5px);
+  color:white;
+}
 
-    .form-control{
-      border-radius: 12px;
-      padding: 12px;
-    }
+.btn-second{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.03);
+  color:white;
+}
 
-    .btn-primary{
-      border-radius: 12px;
-      padding: 12px;
-      background: var(--primary);
-      border: none;
-      font-weight: bold;
-    }
+.btn-second:hover{
+  background:rgba(255,255,255,.08);
+  color:white;
+}
 
-    .btn-primary:hover{
-      background: #0ea5e9;
-    }
+.hero-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(15px);
+  border-radius:35px;
+  padding:35px;
+  position:relative;
+}
 
-    /* MOBILE */
+.hero-card img{
+  width:100%;
+  filter:drop-shadow(0 25px 40px rgba(0,0,0,.5));
+}
 
-    @media(max-width:768px){
+.sale-badge{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  padding:12px 20px;
+  border-radius:15px;
+  font-weight:700;
+}
 
-      .navbar{
-        border-radius: 15px;
-      }
+/* STATS */
 
-      .about{
-        padding: 30px 20px;
-      }
+.stats{
+  margin-top:-70px;
+  position:relative;
+  z-index:5;
+}
 
-      .about p{
-        font-size: 15px;
-      }
+.stat-card{
+  background:rgba(255,255,255,.04);
+  padding:35px;
+  border-radius:30px;
+  text-align:center;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.05);
+}
 
-      .social-icons i{
-        font-size: 40px;
-      }
-    }
+.stat-card h2{
+  font-size:45px;
+  font-weight:800;
+  color:var(--primary);
+}
 
-  </style>
+.stat-card p{
+  color:var(--text);
+}
+
+/* SECTION */
+
+.section-title{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.section-title h2{
+  font-size:52px;
+  font-weight:800;
+}
+
+.section-title p{
+  color:var(--text);
+  margin-top:15px;
+}
+
+/* BRANDS */
+
+.brands{
+  margin-top:120px;
+}
+
+.brand-card{
+  background:rgba(255,255,255,.04);
+  border-radius:30px;
+  padding:40px 20px;
+  text-align:center;
+  transition:.4s;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.brand-card:hover{
+  transform:translateY(-10px);
+  background:rgba(56,189,248,.08);
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
+
+.brand-card img{
+  width:100%;
+  max-width:140px;
+  height:90px;
+  object-fit:contain;
+}
+
+/* PRODUCTS */
+
+.products{
+  margin-top:120px;
+}
+
+.product-card{
+  background:rgba(255,255,255,.04);
+  border-radius:35px;
+  overflow:hidden;
+  transition:.4s;
+  border:1px solid rgba(255,255,255,.05);
+  height:100%;
+}
+
+.product-card:hover{
+  transform:translateY(-10px);
+}
+
+.product-image{
+  height:280px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.03);
+}
+
+.product-image img{
+  width:80%;
+  transition:.4s;
+}
+
+.product-card:hover img{
+  transform:scale(1.08) rotate(-4deg);
+}
+
+.product-info{
+  padding:30px;
+}
+
+.product-info h4{
+  font-weight:700;
+}
+
+.product-info p{
+  color:var(--text);
+  margin:12px 0;
+}
+
+.product-price{
+  color:var(--primary);
+  font-size:28px;
+  font-weight:800;
+}
+
+.buy-btn{
+  width:100%;
+  margin-top:20px;
+  border:none;
+  padding:15px;
+  border-radius:18px;
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  color:white;
+  font-weight:600;
+  transition:.3s;
+}
+
+.buy-btn:hover{
+  transform:translateY(-4px);
+}
+
+/* FEATURES */
+
+.features{
+  margin-top:120px;
+}
+
+.feature-card{
+  background:rgba(255,255,255,.04);
+  padding:45px 30px;
+  border-radius:35px;
+  text-align:center;
+  transition:.4s;
+  border:1px solid rgba(255,255,255,.05);
+  height:100%;
+}
+
+.feature-card:hover{
+  transform:translateY(-10px);
+  background:rgba(139,92,246,.08);
+}
+
+.feature-card i{
+  font-size:60px;
+  margin-bottom:25px;
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.feature-card h4{
+  font-weight:700;
+  margin-bottom:15px;
+}
+
+.feature-card p{
+  color:var(--text);
+  line-height:1.9;
+}
+
+/* NEWSLETTER */
+
+.newsletter{
+  margin-top:120px;
+}
+
+.news-box{
+  background:
+  linear-gradient(135deg, rgba(56,189,248,.12), rgba(139,92,246,.12));
+  border:1px solid rgba(255,255,255,.05);
+  padding:80px 40px;
+  border-radius:40px;
+  text-align:center;
+}
+
+.news-box h2{
+  font-size:55px;
+  font-weight:800;
+}
+
+.news-box p{
+  color:var(--text);
+  margin:20px 0 35px;
+}
+
+.news-form{
+  max-width:750px;
+  margin:auto;
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.news-form input{
+  flex:1;
+  padding:18px;
+  border:none;
+  border-radius:18px;
+  background:rgba(255,255,255,.08);
+  color:white;
+}
+
+.news-form input:focus{
+  outline:none;
+}
+
+.news-form button{
+  border:none;
+  padding:18px 35px;
+  border-radius:18px;
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  color:white;
+  font-weight:600;
+}
+
+/* FOOTER */
+
+.footer{
+  margin-top:120px;
+  background:rgba(255,255,255,.02);
+  border-top:1px solid rgba(255,255,255,.05);
+  padding:80px 20px 30px;
+}
+
+.footer-logo{
+  font-size:42px;
+  font-weight:800;
+  color:var(--primary);
+}
+
+.footer p{
+  color:var(--text);
+  line-height:1.9;
+}
+
+.socials{
+  display:flex;
+  gap:15px;
+  margin-top:25px;
+}
+
+.socials a{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.05);
+  color:white;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.socials a:hover{
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  transform:translateY(-5px);
+}
+
+.footer-links a{
+  display:block;
+  color:var(--text);
+  text-decoration:none;
+  margin-bottom:12px;
+  transition:.3s;
+}
+
+.footer-links a:hover{
+  color:var(--primary);
+  padding-left:5px;
+}
+
+.footer-bottom{
+  margin-top:50px;
+  border-top:1px solid rgba(255,255,255,.05);
+  padding-top:25px;
+  text-align:center;
+  color:#94a3b8;
+}
+
+/* MODAL */
+
+.modal-content{
+  background:#0f172a;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:30px;
+  color:white;
+}
+
+.form-control{
+  background:rgba(255,255,255,.05);
+  border:none;
+  border-radius:15px;
+  padding:15px;
+  color:white;
+}
+
+.form-control:focus{
+  background:rgba(255,255,255,.08);
+  color:white;
+  box-shadow:none;
+}
+
+.form-control::placeholder{
+  color:#94a3b8;
+}
+
+.modal-btn{
+  width:100%;
+  border:none;
+  padding:15px;
+  border-radius:15px;
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  color:white;
+  font-weight:600;
+}
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+  .hero{
+    text-align:center;
+    padding-top:100px;
+  }
+
+  .hero-text h1{
+    font-size:55px;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .hero-card{
+    margin-top:50px;
+  }
+}
+
+@media(max-width:768px){
+
+  .hero-text h1{
+    font-size:42px;
+  }
+
+  .section-title h2{
+    font-size:38px;
+  }
+
+  .news-box h2{
+    font-size:36px;
+  }
+
+  .news-form{
+    flex-direction:column;
+  }
+
+}
+/* BUNU CSS DOSYANIN EN ALTINA EKLE */
+
+/* THEME TOGGLE */
+
+.theme-toggle{
+  width:75px;
+  height:40px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,#0ea5e9,#8b5cf6);
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.5s;
+  display:flex;
+  align-items:center;
+  padding:5px;
+  box-shadow:0 0 20px rgba(56,189,248,.35);
+}
+
+.toggle-circle{
+  width:30px;
+  height:30px;
+  background:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.5s cubic-bezier(.68,-0.55,.27,1.55);
+  color:#111827;
+}
+
+body.light-mode .toggle-circle{
+  transform:translateX(35px) rotate(180deg);
+}
+
+/* LIGHT MODE */
+
+body.light-mode{
+  background:#f5f7fb !important;
+  color:#111827 !important;
+  transition:.5s;
+}
+
+body.light-mode .navbar{
+  background:rgba(255,255,255,.85)!important;
+}
+
+body.light-mode .nav-link{
+  color:#111827!important;
+}
+
+body.light-mode .hero-card,
+body.light-mode .product-card,
+body.light-mode .feature-card,
+body.light-mode .brand-card,
+body.light-mode .stat-card,
+body.light-mode .news-box,
+body.light-mode .footer,
+body.light-mode .modal-content{
+  background:#ffffff !important;
+  color:#111827 !important;
+  border:1px solid rgba(0,0,0,.05);
+}
+
+body.light-mode p,
+body.light-mode .footer-links a{
+  color:#475569 !important;
+}
+
+body.light-mode input{
+  background:#f1f5f9 !important;
+  color:#111827 !important;
+}
+
+body.light-mode .btn-second{
+  color:#111827 !important;
+  border:1px solid rgba(0,0,0,.1);
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <!-- NAVBAR -->
+<!-- NAVBAR -->
 
- <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+<!-- NAVBAR -->
 
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
 
-    <a class="navbar-brand" href="#">StepUp</a>
+<div class="container">
 
-    <button class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#menu">
+<a class="navbar-brand" href="#">
+<i class="fa-solid fa-shoe-prints"></i> StepUp
+</a>
 
-      <span class="navbar-toggler-icon"></span>
+<button class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
 
-    </button>
+<span class="navbar-toggler-icon"></span>
 
-    <div class="collapse navbar-collapse" id="menu">
+</button>
 
-      <ul class="navbar-nav ms-auto align-items-lg-center">
+<div class="collapse navbar-collapse" id="menu">
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Anasayfa</a>
-        </li>
+<ul class="navbar-nav ms-auto align-items-lg-center">
 
-        <li class="nav-item">
-          <a class="nav-link" href="harita.html">Mağazalarımız</a>
-        </li>
+<li class="nav-item">
+<a class="nav-link" href="#">Anasayfa</a>
+</li>
 
-        <!-- USER -->
-        <li class="nav-item dropdown">
+<li class="nav-item">
+<a class="nav-link" href="#brands">Markalar</a>
+</li>
 
-          <a class="nav-link dropdown-toggle"
-            href="#"
-            data-bs-toggle="dropdown">
-            <i class="fa-solid fa-user"></i>
-          </a>
+<li class="nav-item">
+<a class="nav-link" href="#products">Ürünler</a>
+</li>
 
-          <ul class="dropdown-menu dropdown-menu-end">
+<li class="nav-item">
+<a class="nav-link" href="harita.html">Mağazalar</a>
+</li>
 
-            <li>
-              <a class="dropdown-item"
-                href="#"
-                data-bs-toggle="modal"
-                data-bs-target="#loginModal">
-                Giriş Yap
-              </a>
-            </li>
+<!-- USER -->
 
-            <li><hr class="dropdown-divider"></li>
+<li class="nav-item dropdown ms-lg-3">
 
-            <li>
-              <a class="dropdown-item"
-                href="#"
-                data-bs-toggle="modal"
-                data-bs-target="#registerModal">
-                Kayıt Ol
-              </a>
-            </li>
+<a class="nav-link nav-icon"
+href="#"
+data-bs-toggle="dropdown">
 
-          </ul>
+<i class="fa-solid fa-user"></i>
 
-        </li>
+</a>
 
-        <!-- 🛒 SEPET (YENİ EKLENEN) -->
-        <li class="nav-item ms-3">
-          <a class="nav-link" href="Sepet.html">
-            <i class="fa-solid fa-bag-shopping"></i>
-          </a>
-        </li>
+<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
 
-        <!-- THEME -->
-        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+<li>
+<a class="dropdown-item"
+href="#"
+data-bs-toggle="modal"
+data-bs-target="#loginModal">
 
-          <button id="themeToggle" class="theme-toggle">
-            <i class="fa-solid fa-moon"></i>
-          </button>
+Giriş Yap
 
-        </li>
+</a>
+</li>
 
-      </ul>
+<li><hr class="dropdown-divider"></li>
 
-    </div>
+<li>
+<a class="dropdown-item"
+href="#"
+data-bs-toggle="modal"
+data-bs-target="#registerModal">
 
-  </div>
+Kayıt Ol
+
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<!-- CART -->
+
+<li class="nav-item ms-2">
+
+<a class="nav-link nav-icon" href="Sepet.html">
+
+<i class="fa-solid fa-bag-shopping"></i>
+
+</a>
+
+</li>
+
+<!-- THEME TOGGLE -->
+
+<li class="nav-item ms-2">
+
+<button id="themeToggle" class="theme-toggle">
+
+<div class="toggle-circle">
+<i class="fa-solid fa-moon"></i>
+</div>
+
+</button>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
 
 </nav>
 
-  <!-- BRANDS -->
+<!-- HERO -->
 
-  <section class="container brand-section">
+<section class="hero">
 
-    <div class="row g-4">
+<div class="blur1"></div>
+<div class="blur2"></div>
 
-      <div class="col-6 col-md-4 col-lg-2">
-        <a href="adidas.html" class="text-decoration-none">
-          <div class="brand-card">
-            <img src="images/adidas.png">
-          </div>
-        </a>
-      </div>
+<div class="container">
 
-      <div class="col-6 col-md-4 col-lg-2">
-        <a href="nike.html" class="text-decoration-none">
-          <div class="brand-card">
-            <img src="images/nike.png">
-          </div>
-        </a>
-      </div>
+<div class="row align-items-center">
 
-      <div class="col-6 col-md-4 col-lg-2">
-        <a href="puma.html" class="text-decoration-none">
-          <div class="brand-card">
-            <img src="images/puma.png">
-          </div>
-        </a>
-      </div>
+<div class="col-lg-7">
 
-      <div class="col-6 col-md-4 col-lg-2">
-        <a href="vans.html" class="text-decoration-none">
-          <div class="brand-card">
-            <img src="images/vans.png">
-          </div>
-        </a>
-      </div>
+<div class="hero-text">
 
-      <div class="col-6 col-md-4 col-lg-2">
-        <a href="converse.html" class="text-decoration-none">
-          <div class="brand-card">
-            <img src="images/Converse.png">
-          </div>
-        </a>
-      </div>
+<h1>
+Tarzını <span class="gradient">Yansıt</span><br>
+Sokağa Güç Kat
+</h1>
 
-      <div class="col-6 col-md-4 col-lg-2">
-        <a href="newbalance.html" class="text-decoration-none">
-          <div class="brand-card">
-            <img src="images/New Balance.png">
-          </div>
-        </a>
-      </div>
+<p>
+Premium sneaker koleksiyonlarını keşfet.
+Nike, Adidas, Puma ve daha fazlası modern tasarımla StepUp'ta.
+</p>
 
-    </div>
+<div class="hero-buttons">
 
-  </section>
+<a href="#products" class="hero-btn btn-main">
+Ürünleri İncele
+</a>
 
-  <!-- ABOUT -->
+<a href="harita.html" class="hero-btn btn-second">
+Mağazalarımız
+</a>
 
-  <section class="container">
+</div>
 
-    <div class="about">
+</div>
 
-      <h1>Hakkımızda</h1>
+</div>
 
-      <p>
+<div class="col-lg-5">
 
-        Biz, ayakkabı tutkunlarının buluşma noktasıyız.
-        Adidas’tan Nike’a, Puma’dan Vans’a kadar dünyanın
-        en popüler sneaker markalarını tek çatı altında topluyoruz.
+<div class="hero-card">
 
-        Amacımız kullanıcılarımıza modern, güvenilir ve
-        kaliteli alışveriş deneyimi sunmak.
+<div class="sale-badge">
+%30 İndirim
+</div>
 
-      </p>
+<img src="images/logo2.png">
 
-    </div>
+</div>
 
-  </section>
+</div>
 
-  <!-- FOOTER -->
+</div>
 
-  <footer class="container footer">
+</div>
 
-    <h2>Bize Ulaşın</h2>
+</section>
 
-    <div class="social-icons">
+<!-- STATS -->
 
-      <i class="fa-brands fa-instagram"></i>
+<section class="stats container">
 
-      <i class="fa-brands fa-facebook"></i>
+<div class="row g-4">
 
-      <i class="fa-brands fa-whatsapp"></i>
+<div class="col-md-4">
+<div class="stat-card">
+<h2>50K+</h2>
+<p>Mutlu Müşteri</p>
+</div>
+</div>
 
-    </div>
+<div class="col-md-4">
+<div class="stat-card">
+<h2>120+</h2>
+<p>Premium Ürün</p>
+</div>
+</div>
 
-  </footer>
+<div class="col-md-4">
+<div class="stat-card">
+<h2>24/7</h2>
+<p>Canlı Destek</p>
+</div>
+</div>
 
-  <!-- LOGIN MODAL -->
+</div>
 
-  <div class="modal fade" id="loginModal">
+</section>
 
-    <div class="modal-dialog modal-dialog-centered">
+<!-- BRANDS -->
 
-      <div class="modal-content p-3">
+<section class="brands container" id="brands">
 
-        <div class="modal-header border-0">
+<div class="section-title">
 
-          <h4>Giriş Yap</h4>
+<h2>Popüler Markalar</h2>
 
-          <button class="btn-close"
-            data-bs-dismiss="modal"></button>
+<p>
+Dünyanın en iyi sneaker markaları
+</p>
 
-        </div>
+</div>
 
-        <div class="modal-body">
+<div class="row g-4">
 
-          <input type="email"
-            class="form-control mb-3"
-            placeholder="E-posta">
+<div class="col-6 col-md-4 col-lg-2">
+<a href="nike.html" class="text-decoration-none">
+<div class="brand-card">
+<img src="images/nike.png">
+</div>
+</a>
+</div>
 
-          <input type="password"
-            class="form-control mb-3"
-            placeholder="Şifre">
+<div class="col-6 col-md-4 col-lg-2">
+<a href="adidas.html" class="text-decoration-none">
+<div class="brand-card">
+<img src="images/adidas.png">
+</div>
+</a>
+</div>
 
-          <button class="btn btn-primary w-100">
-            Giriş Yap
-          </button>
+<div class="col-6 col-md-4 col-lg-2">
+<a href="puma.html" class="text-decoration-none">
+<div class="brand-card">
+<img src="images/puma.png">
+</div>
+</a>
+</div>
 
-        </div>
+<div class="col-6 col-md-4 col-lg-2">
+<a href="vans.html" class="text-decoration-none">
+<div class="brand-card">
+<img src="images/vans.png">
+</div>
+</a>
+</div>
 
-      </div>
+<div class="col-6 col-md-4 col-lg-2">
+<a href="converse.html" class="text-decoration-none">
+<div class="brand-card">
+<img src="images/Converse.png">
+</div>
+</a>
+</div>
 
-    </div>
+<div class="col-6 col-md-4 col-lg-2">
+<a href="newbalance.html" class="text-decoration-none">
+<div class="brand-card">
+<img src="images/New Balance.png">
+</div>
+</a>
+</div>
 
-  </div>
+</div>
 
-  <!-- REGISTER MODAL -->
+</section>
 
-  <div class="modal fade" id="registerModal">
+<!-- PRODUCTS -->
 
-    <div class="modal-dialog modal-dialog-centered">
+<section class="products container" id="products">
 
-      <div class="modal-content p-3">
+<div class="section-title">
 
-        <div class="modal-header border-0">
+<h2>Trend Ürünler</h2>
 
-          <h4>Kayıt Ol</h4>
+<p>
+En çok tercih edilen sneaker modelleri
+</p>
 
-          <button class="btn-close"
-            data-bs-dismiss="modal"></button>
+</div>
 
-        </div>
+<div class="row g-4">
 
-        <div class="modal-body">
+<div class="col-md-4">
 
-          <input type="text"
-            class="form-control mb-3"
-            placeholder="Ad Soyad">
+<div class="product-card">
 
-          <input type="email"
-            class="form-control mb-3"
-            placeholder="E-posta">
+<div class="product-image">
+<img src="images/logo1.png">
+</div>
 
-          <input type="password"
-            class="form-control mb-3"
-            placeholder="Şifre">
+<div class="product-info">
 
-          <button class="btn btn-primary w-100">
-            Kaydol
-          </button>
+<h4>Nike Air Max</h4>
 
-        </div>
+<p>
+Modern görünüm ve maksimum rahatlık.
+</p>
 
-      </div>
+<div class="product-price">
+₺7.999
+</div>
 
-    </div>
+<button class="buy-btn">
+Sepete Ekle
+</button>
 
-  </div>
+</div>
 
-  <!-- DARK MODE -->
+</div>
 
-  <script>
+</div>
 
-    const btn = document.getElementById("themeToggle");
+<div class="col-md-4">
 
-    btn.addEventListener("click", () => {
+<div class="product-card">
 
-      document.body.classList.toggle("dark");
+<div class="product-image">
+<img src="images/adidasay1.png">
+</div>
 
-      if(document.body.classList.contains("dark")){
-        btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-      }else{
-        btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-      }
+<div class="product-info">
 
-    });
+<h4>Adidas UltraBoost</h4>
 
-  </script>
+<p>
+Günlük kullanım için premium konfor.
+</p>
 
-  <!-- Bootstrap -->
+<div class="product-price">
+₺6.499
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<button class="buy-btn">
+Sepete Ekle
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="product-card">
+
+<div class="product-image">
+<img src="images/pumaay1.png">
+</div>
+
+<div class="product-info">
+
+<h4>Puma RS-X</h4>
+
+<p>
+Sokak stiline güçlü bir dokunuş.
+</p>
+
+<div class="product-price">
+₺5.899
+</div>
+
+<button class="buy-btn">
+Sepete Ekle
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features container">
+
+<div class="section-title">
+
+<h2>Neden StepUp ?</h2>
+
+<p>
+Kaliteli alışveriş deneyimi
+</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+
+<div class="feature-card">
+
+<i class="fa-solid fa-truck-fast"></i>
+
+<h4>Hızlı Teslimat</h4>
+
+<p>
+Türkiye'nin her yerine hızlı gönderim.
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="feature-card">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+<h4>Güvenli Ödeme</h4>
+
+<p>
+Gelişmiş güvenlik sistemleriyle korunan ödeme altyapısı.
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="feature-card">
+
+<i class="fa-solid fa-medal"></i>
+
+<h4>%100 Orijinal</h4>
+
+<p>
+Tüm ürünler resmi distribütör garantilidir.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- NEWSLETTER -->
+
+<section class="newsletter container">
+
+<div class="news-box">
+
+<h2>
+Kampanyaları Kaçırma
+</h2>
+
+<p>
+Yeni çıkan ürünler ve indirimlerden ilk sen haberdar ol.
+</p>
+
+<form class="news-form">
+
+<input type="email" placeholder="E-posta adresiniz">
+
+<button type="submit">
+Katıl
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="row g-5">
+
+<div class="col-lg-5">
+
+<div class="footer-logo">
+StepUp
+</div>
+
+<p class="mt-4">
+Sneaker kültürünü modern teknolojiyle birleştiren premium alışveriş platformu.
+</p>
+
+<div class="socials">
+
+<a href="#">
+<i class="fa-brands fa-instagram"></i>
+</a>
+
+<a href="#">
+<i class="fa-brands fa-facebook-f"></i>
+</a>
+
+<a href="#">
+<i class="fa-brands fa-x-twitter"></i>
+</a>
+
+<a href="#">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<h4 class="mb-4">Sayfalar</h4>
+
+<div class="footer-links">
+
+<a href="#">Anasayfa</a>
+<a href="#products">Ürünler</a>
+<a href="#brands">Markalar</a>
+<a href="harita.html">Mağazalar</a>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<h4 class="mb-4">İletişim</h4>
+
+<p>İzmir / Türkiye</p>
+<p>stepup@gmail.com</p>
+<p>+90 555 555 55 55</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 StepUp - Tüm Hakları Saklıdır
+</div>
+
+</div>
+
+</footer>
+
+<!-- LOGIN MODAL -->
+
+<div class="modal fade" id="loginModal">
+
+<div class="modal-dialog modal-dialog-centered">
+
+<div class="modal-content p-3">
+
+<div class="modal-header border-0">
+
+<h4>Giriş Yap</h4>
+
+<button class="btn-close btn-close-white"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<input type="email"
+class="form-control mb-3"
+placeholder="E-posta">
+
+<input type="password"
+class="form-control mb-3"
+placeholder="Şifre">
+
+<button class="modal-btn">
+Giriş Yap
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- REGISTER MODAL -->
+
+<div class="modal fade" id="registerModal">
+
+<div class="modal-dialog modal-dialog-centered">
+
+<div class="modal-content p-3">
+
+<div class="modal-header border-0">
+
+<h4>Kayıt Ol</h4>
+
+<button class="btn-close btn-close-white"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<input type="text"
+class="form-control mb-3"
+placeholder="Ad Soyad">
+
+<input type="email"
+class="form-control mb-3"
+placeholder="E-posta">
+
+<input type="password"
+class="form-control mb-3"
+placeholder="Şifre">
+
+<button class="modal-btn">
+Hesap Oluştur
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Bootstrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- BUNU </body> ÜSTÜNE EKLE -->
+
+<script>
+
+/* THEME TOGGLE */
+
+const toggle = document.getElementById("themeToggle");
+const body = document.body;
+
+/* SAYFA YENİLENİNCE TEMA KALSIN */
+
+if(localStorage.getItem("theme") === "light"){
+
+  body.classList.add("light-mode");
+
+  toggle.innerHTML =
+  `<div class="toggle-circle">
+    <i class="fa-solid fa-sun"></i>
+  </div>`;
+
+}
+
+toggle.addEventListener("click",()=>{
+
+  body.classList.toggle("light-mode");
+
+  if(body.classList.contains("light-mode")){
+
+    toggle.innerHTML =
+    `<div class="toggle-circle">
+      <i class="fa-solid fa-sun"></i>
+    </div>`;
+
+    localStorage.setItem("theme","light");
+
+  }else{
+
+    toggle.innerHTML =
+    `<div class="toggle-circle">
+      <i class="fa-solid fa-moon"></i>
+    </div>`;
+
+    localStorage.setItem("theme","dark");
+
+  }
+
+});
+
+</script>
 
 </body>
 </html>
