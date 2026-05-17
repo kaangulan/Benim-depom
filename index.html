@@ -34,6 +34,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:'Poppins',sans-serif;
   background:
@@ -42,10 +46,19 @@ body{
   var(--bg);
   color:white;
   overflow-x:hidden;
+  transition:background .4s ease,color .4s ease;
 }
 
-html{
-  scroll-behavior:smooth;
+/* GLOBAL */
+
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+
+.container{
+  overflow:hidden;
 }
 
 /* SCROLLBAR */
@@ -99,6 +112,10 @@ html{
 .nav-icon:hover{
   background:linear-gradient(to right,var(--primary),var(--secondary));
   transform:translateY(-3px);
+}
+
+.navbar-collapse{
+  transition:.4s ease;
 }
 
 /* HERO */
@@ -172,6 +189,7 @@ html{
   text-decoration:none;
   font-weight:600;
   transition:.3s;
+  white-space:nowrap;
 }
 
 .btn-main{
@@ -304,6 +322,8 @@ html{
   transition:.4s;
   border:1px solid rgba(255,255,255,.05);
   height:100%;
+  display:flex;
+  flex-direction:column;
 }
 
 .product-card:hover{
@@ -329,6 +349,9 @@ html{
 
 .product-info{
   padding:30px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
 }
 
 .product-info h4{
@@ -348,7 +371,7 @@ html{
 
 .buy-btn{
   width:100%;
-  margin-top:20px;
+  margin-top:auto;
   border:none;
   padding:15px;
   border-radius:18px;
@@ -356,6 +379,7 @@ html{
   color:white;
   font-weight:600;
   transition:.3s;
+  white-space:nowrap;
 }
 
 .buy-btn:hover{
@@ -436,6 +460,7 @@ html{
 
 .news-form input{
   flex:1;
+  min-width:0;
   padding:18px;
   border:none;
   border-radius:18px;
@@ -454,6 +479,7 @@ html{
   background:linear-gradient(to right,var(--primary),var(--secondary));
   color:white;
   font-weight:600;
+  white-space:nowrap;
 }
 
 /* FOOTER */
@@ -556,50 +582,8 @@ html{
   background:linear-gradient(to right,var(--primary),var(--secondary));
   color:white;
   font-weight:600;
+  white-space:nowrap;
 }
-
-/* MOBILE */
-
-@media(max-width:992px){
-
-  .hero{
-    text-align:center;
-    padding-top:100px;
-  }
-
-  .hero-text h1{
-    font-size:55px;
-  }
-
-  .hero-buttons{
-    justify-content:center;
-  }
-
-  .hero-card{
-    margin-top:50px;
-  }
-}
-
-@media(max-width:768px){
-
-  .hero-text h1{
-    font-size:42px;
-  }
-
-  .section-title h2{
-    font-size:38px;
-  }
-
-  .news-box h2{
-    font-size:36px;
-  }
-
-  .news-form{
-    flex-direction:column;
-  }
-
-}
-/* BUNU CSS DOSYANIN EN ALTINA EKLE */
 
 /* THEME TOGGLE */
 
@@ -640,7 +624,6 @@ body.light-mode .toggle-circle{
 body.light-mode{
   background:#f5f7fb !important;
   color:#111827 !important;
-  transition:.5s;
 }
 
 body.light-mode .navbar{
@@ -679,9 +662,239 @@ body.light-mode .btn-second{
   border:1px solid rgba(0,0,0,.1);
 }
 
+body.light-mode .dropdown-menu{
+  background:white;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+body.light-mode .dropdown-item{
+  color:#111827;
+}
+
+body.light-mode .dropdown-item:hover{
+  background:#f1f5f9;
+}
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+  .hero{
+    text-align:center;
+    padding-top:100px;
+  }
+
+  .hero-text h1{
+    font-size:55px;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .hero-card{
+    margin-top:50px;
+  }
+
+  .navbar-collapse{
+    background:rgba(15,23,42,.97);
+    padding:20px;
+    border-radius:20px;
+    margin-top:15px;
+  }
+
+  body.light-mode .navbar-collapse{
+    background:white;
+  }
+
+  .navbar-nav{
+    gap:10px;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .hero{
+    min-height:auto;
+    padding:140px 0 70px;
+  }
+
+  .hero-text h1{
+    font-size:42px;
+  }
+
+  .hero-text p{
+    font-size:16px;
+    line-height:1.8;
+  }
+
+  .section-title h2{
+    font-size:38px;
+  }
+
+  .news-box{
+    padding:50px 25px;
+  }
+
+  .news-box h2{
+    font-size:36px;
+  }
+
+  .news-form{
+    flex-direction:column;
+  }
+
+  .hero-card{
+    margin-top:40px;
+    padding:20px;
+  }
+
+}
+/* =========================
+   CART TOAST
+========================= */
+
+.cart-toast{
+  position:fixed;
+  top:30px;
+  right:30px;
+  background:rgba(15,23,42,.95);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  padding:18px 22px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  color:white;
+  z-index:999999;
+  min-width:320px;
+  transform:translateX(400px);
+  opacity:0;
+  transition:.5s cubic-bezier(.68,-0.55,.27,1.55);
+  box-shadow:0 20px 40px rgba(0,0,0,.45);
+}
+
+.cart-toast.show{
+  transform:translateX(0);
+  opacity:1;
+}
+
+.toast-icon{
+  width:60px;
+  height:60px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+  linear-gradient(to right,var(--primary),var(--secondary));
+  font-size:24px;
+}
+
+.cart-toast h4{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+}
+
+.cart-toast p{
+  margin:4px 0 0;
+  color:#cbd5e1;
+  font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .cart-toast{
+    right:15px;
+    left:15px;
+    min-width:auto;
+    width:auto;
+    top:20px;
+  }
+
+}
+/* =========================
+   HERO SHOE ANIMATION
+========================= */
+
+.hero-card img{
+  width:100%;
+  filter:drop-shadow(0 25px 40px rgba(0,0,0,.5));
+  transition:
+  transform .6s cubic-bezier(.22,1,.36,1),
+  filter .6s ease;
+}
+
+/* MOUSE GELİNCE */
+
+.hero-card:hover img{
+
+  transform:
+  rotate(-12deg)
+  scale(1.08)
+  translateY(-10px);
+
+  filter:
+  drop-shadow(0 35px 60px rgba(56,189,248,.35));
+
+}
+
+/* KART EFEKTİ */
+
+.hero-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(15px);
+  border-radius:35px;
+  padding:35px;
+  position:relative;
+  overflow:hidden;
+  transition:.5s;
+}
+
+.hero-card:hover{
+
+  transform:
+  translateY(-8px);
+
+  box-shadow:
+  0 25px 60px rgba(0,0,0,.45);
+
+}
+
+/* LIGHT EFFECT */
+
+.hero-card::before{
+
+  content:"";
+  position:absolute;
+  top:-100%;
+  left:-100%;
+  width:220px;
+  height:220px;
+
+  background:
+  radial-gradient(circle,
+  rgba(255,255,255,.18),
+  transparent 70%);
+
+  transition:.7s;
+}
+
+.hero-card:hover::before{
+
+  top:-20px;
+  left:70%;
+
+}
+
 </style>
 </head>
-
 
 <body>
 
@@ -995,7 +1208,7 @@ Modern görünüm ve maksimum rahatlık.
 </p>
 
 <div class="product-price">
-₺7.999
+$249
 </div>
 
 <button class="buy-btn">
@@ -1025,7 +1238,7 @@ Günlük kullanım için premium konfor.
 </p>
 
 <div class="product-price">
-₺6.499
+$199
 </div>
 
 <button class="buy-btn">
@@ -1055,7 +1268,7 @@ Sokak stiline güçlü bir dokunuş.
 </p>
 
 <div class="product-price">
-₺5.899
+$179
 </div>
 
 <button class="buy-btn">
@@ -1373,6 +1586,142 @@ toggle.addEventListener("click",()=>{
     localStorage.setItem("theme","dark");
 
   }
+
+});
+
+
+</script>
+<script>
+
+/* =========================
+   CART SYSTEM
+========================= */
+
+const buttons =
+document.querySelectorAll(".buy-btn");
+
+buttons.forEach((button)=>{
+
+  button.addEventListener("click",()=>{
+
+    const product =
+    button.closest(".product-card");
+
+    const name =
+    product.querySelector("h4").innerText;
+
+    const price =
+    product.querySelector(".product-price").innerText;
+
+    const image =
+    product.querySelector("img").src;
+
+    /* STORAGE */
+
+    let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing =
+    cart.find(item => item.title === name);
+
+    if(existing){
+
+      existing.quantity++;
+
+    }else{
+
+      cart.push({
+
+        title:name,
+        price:price,
+        image:image,
+        quantity:1
+
+      });
+
+    }
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart)
+    );
+
+    /* BUTTON EFFECT */
+
+    button.innerHTML =
+    `<i class="fa-solid fa-check"></i> Eklendi`;
+
+    button.style.background =
+    "linear-gradient(to right,#22c55e,#16a34a)";
+
+    button.style.transform =
+    "scale(1.05)";
+
+
+
+    /* TOAST */
+
+    const toast =
+    document.createElement("div");
+
+    toast.className = "cart-toast";
+
+    toast.innerHTML = `
+
+      <div class="toast-icon">
+
+        <i class="fa-solid fa-bag-shopping"></i>
+
+      </div>
+
+      <div>
+
+        <h4>Sepete Eklendi</h4>
+
+        <p>${name}</p>
+
+      </div>
+
+    `;
+
+    document.body.appendChild(toast);
+
+    setTimeout(()=>{
+
+      toast.classList.add("show");
+
+    },100);
+
+    setTimeout(()=>{
+
+      toast.classList.remove("show");
+
+      setTimeout(()=>{
+
+        toast.remove();
+
+      },500);
+
+    },2500);
+
+
+
+    /* RESET BUTTON */
+
+    setTimeout(()=>{
+
+      button.innerHTML =
+      "Sepete Ekle";
+
+      button.style.background =
+      "linear-gradient(to right,var(--primary),var(--secondary))";
+
+      button.style.transform =
+      "scale(1)";
+
+    },1500);
+
+  });
 
 });
 
