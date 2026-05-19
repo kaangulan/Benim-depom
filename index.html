@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -57,8 +58,25 @@ img{
   display:block;
 }
 
-.container{
-  overflow:hidden;
+body,
+.container,
+.navbar,
+.navbar .container{
+  overflow:visible !important;
+}
+
+.dropdown-menu{
+  position:absolute !important;
+  top:100% !important;
+  left:50% !important;
+  transform:translateX(-50%);
+  z-index:999999 !important;
+  min-width:220px;
+  margin-top:15px !important;
+}
+
+.nav-item.dropdown{
+  position:relative;
 }
 
 /* SCROLLBAR */
@@ -892,7 +910,136 @@ body.light-mode .dropdown-item:hover{
   left:70%;
 
 }
+/* SPONSOR SECTION */
 
+.sponsor-slider{
+  margin-top:82px;
+  background:rgba(255,255,255,.03);
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  padding:18px 0 25px;
+  overflow:hidden;
+}
+
+.sponsor-title{
+  font-size:30px;
+  font-weight:800;
+  color:white;
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  text-align:center;
+}
+
+.sponsor-title i{
+  color:var(--primary);
+}
+
+.sponsor-marquee{
+  width:100%;
+  overflow:hidden;
+  position:relative;
+}
+
+.sponsor-track{
+  display:flex;
+  width:max-content;
+  animation:sponsorLoop 18s linear infinite;
+}
+
+.sponsor-item{
+  width:230px;
+  flex-shrink:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.sponsor-item img{
+  height:75px;
+  object-fit:contain;
+  transition:.3s;
+}
+
+.sponsor-item img:hover{
+  transform:scale(1.12);
+}
+
+@keyframes sponsorLoop{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-33.333%);
+  }
+}
+.navbar{
+  overflow:visible !important;
+}
+
+.dropdown-menu{
+  margin-top:14px !important;
+  z-index:99999 !important;
+  position:absolute;
+}
+
+.nav-item.dropdown{
+  position:relative;
+}
+.dropdown-menu{
+  border:none !important;
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+.auth-toast{
+  position:fixed;
+  top:25px;
+  right:25px;
+  background:rgba(15,23,42,.95);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  padding:18px 22px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  color:white;
+  z-index:999999;
+  min-width:260px;
+
+  transform:translateX(120%);
+  opacity:0;
+  transition:.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+.auth-toast.show{
+  transform:translateX(0);
+  opacity:1;
+}
+
+.auth-icon{
+  width:50px;
+  height:50px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(to right,var(--primary),var(--secondary));
+  font-size:20px;
+}
+.toggle-pass{
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  color:#94a3b8;
+}
+
+.toggle-pass:hover{
+  color:white;
+}
 </style>
 </head>
 
@@ -941,44 +1088,35 @@ data-bs-target="#menu">
 
 <!-- USER -->
 
-<li class="nav-item dropdown ms-lg-3">
+<li class="nav-item dropdown ms-lg-3 d-flex align-items-center">
 
-<a class="nav-link nav-icon"
-href="#"
-data-bs-toggle="dropdown">
+  <span id="userText" class="text-white me-2"></span>
 
-<i class="fa-solid fa-user"></i>
+  <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+    <i class="fa-solid fa-user"></i>
+  </a>
 
-</a>
+  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
 
-<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+    <li id="loginItem">
+      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+        Giriş Yap
+      </a>
+    </li>
 
-<li>
-<a class="dropdown-item"
-href="#"
-data-bs-toggle="modal"
-data-bs-target="#loginModal">
+    <li id="registerItem">
+      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">
+        Kayıt Ol
+      </a>
+    </li>
 
-Giriş Yap
+    <li id="logoutItem" style="display:none;">
+      <a class="dropdown-item text-danger" href="#">
+        Çıkış Yap
+      </a>
+    </li>
 
-</a>
-</li>
-
-<li><hr class="dropdown-divider"></li>
-
-<li>
-<a class="dropdown-item"
-href="#"
-data-bs-toggle="modal"
-data-bs-target="#registerModal">
-
-Kayıt Ol
-
-</a>
-</li>
-
-</ul>
-
+  </ul>
 </li>
 
 <!-- CART -->
@@ -1014,7 +1152,49 @@ Kayıt Ol
 </div>
 
 </nav>
+<section class="sponsor-slider">
 
+  <div class="container">
+
+    <div class="sponsor-title">
+      <i class="fa-solid fa-handshake"></i> Sponsorlar
+    </div>
+
+  </div>
+
+  <div class="sponsor-marquee">
+
+    <div class="sponsor-track">
+
+      <!-- set 1 -->
+      <div class="sponsor-item"><img src="images/nike.png"></div>
+      <div class="sponsor-item"><img src="images/adidas.png"></div>
+      <div class="sponsor-item"><img src="images/puma.png"></div>
+      <div class="sponsor-item"><img src="images/vans.png"></div>
+      <div class="sponsor-item"><img src="images/Converse.png"></div>
+      <div class="sponsor-item"><img src="images/New Balance.png"></div>
+
+      <!-- set 2 -->
+      <div class="sponsor-item"><img src="images/nike.png"></div>
+      <div class="sponsor-item"><img src="images/adidas.png"></div>
+      <div class="sponsor-item"><img src="images/puma.png"></div>
+      <div class="sponsor-item"><img src="images/vans.png"></div>
+      <div class="sponsor-item"><img src="images/Converse.png"></div>
+      <div class="sponsor-item"><img src="images/New Balance.png"></div>
+
+      <!-- set 3 -->
+      <div class="sponsor-item"><img src="images/nike.png"></div>
+      <div class="sponsor-item"><img src="images/adidas.png"></div>
+      <div class="sponsor-item"><img src="images/puma.png"></div>
+      <div class="sponsor-item"><img src="images/vans.png"></div>
+      <div class="sponsor-item"><img src="images/Converse.png"></div>
+      <div class="sponsor-item"><img src="images/New Balance.png"></div>
+
+    </div>
+
+  </div>
+
+</section>
 <!-- HERO -->
 
 <section class="hero">
@@ -1457,85 +1637,75 @@ Sneaker kültürünü modern teknolojiyle birleştiren premium alışveriş plat
 </footer>
 
 <!-- LOGIN MODAL -->
-
 <div class="modal fade" id="loginModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
 
-<div class="modal-dialog modal-dialog-centered">
+      <div class="modal-header border-0">
+        <h4>Giriş Yap</h4>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
 
-<div class="modal-content p-3">
+      <div class="modal-body">
 
-<div class="modal-header border-0">
+        <input type="email"
+        class="form-control mb-3"
+        placeholder="E-posta">
 
-<h4>Giriş Yap</h4>
+        <div class="position-relative mb-3">
+          <input type="password"
+          class="form-control"
+          placeholder="Şifre">
 
-<button class="btn-close btn-close-white"
-data-bs-dismiss="modal"></button>
+          <i class="fa-solid fa-eye toggle-pass"></i>
+        </div>
 
-</div>
+        <button class="modal-btn">
+          Giriş Yap
+        </button>
 
-<div class="modal-body">
+      </div>
 
-<input type="email"
-class="form-control mb-3"
-placeholder="E-posta">
-
-<input type="password"
-class="form-control mb-3"
-placeholder="Şifre">
-
-<button class="modal-btn">
-Giriş Yap
-</button>
-
-</div>
-
-</div>
-
-</div>
-
+    </div>
+  </div>
 </div>
 
 <!-- REGISTER MODAL -->
-
 <div class="modal fade" id="registerModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
 
-<div class="modal-dialog modal-dialog-centered">
+      <div class="modal-header border-0">
+        <h4>Kayıt Ol</h4>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
 
-<div class="modal-content p-3">
+      <div class="modal-body">
 
-<div class="modal-header border-0">
+        <input type="text"
+        class="form-control mb-3"
+        placeholder="Ad Soyad">
 
-<h4>Kayıt Ol</h4>
+        <input type="email"
+        class="form-control mb-3"
+        placeholder="E-posta">
 
-<button class="btn-close btn-close-white"
-data-bs-dismiss="modal"></button>
+        <div class="position-relative mb-3">
+          <input type="password"
+          class="form-control"
+          placeholder="Şifre">
 
-</div>
+          <i class="fa-solid fa-eye toggle-pass"></i>
+        </div>
 
-<div class="modal-body">
+        <button class="modal-btn">
+          Hesap Oluştur
+        </button>
 
-<input type="text"
-class="form-control mb-3"
-placeholder="Ad Soyad">
+      </div>
 
-<input type="email"
-class="form-control mb-3"
-placeholder="E-posta">
-
-<input type="password"
-class="form-control mb-3"
-placeholder="Şifre">
-
-<button class="modal-btn">
-Hesap Oluştur
-</button>
-
-</div>
-
-</div>
-
-</div>
-
+    </div>
+  </div>
 </div>
 
 <!-- Bootstrap -->
@@ -1725,7 +1895,151 @@ buttons.forEach((button)=>{
 
 });
 
+/* =========================
+   AUTH SYSTEM
+========================= */
+
+const userText = document.getElementById("userText");
+const loginItem = document.getElementById("loginItem");
+const registerItem = document.getElementById("registerItem");
+const logoutItem = document.getElementById("logoutItem");
+
+/* TOAST */
+function showAuthToast(message, sub, icon){
+
+  const toast = document.createElement("div");
+
+  toast.className = "auth-toast";
+
+  toast.innerHTML = `
+    <div class="auth-icon">
+      <i class="${icon}"></i>
+    </div>
+    <div>
+      <h4 style="margin:0;font-size:15px;font-weight:700;">${message}</h4>
+      <p style="margin:3px 0 0;color:#cbd5e1;font-size:13px;">${sub || ""}</p>
+    </div>
+  `;
+
+  document.body.appendChild(toast);
+
+  setTimeout(()=> toast.classList.add("show"), 100);
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+    setTimeout(()=> toast.remove(), 400);
+  }, 2500);
+}
+
+/* UI UPDATE */
+function updateUI(){
+
+  const user = JSON.parse(localStorage.getItem("loggedUser"));
+
+  if(user){
+
+    userText.innerText = "Merhaba, " + user.name;
+
+    loginItem.style.display = "none";
+    registerItem.style.display = "none";
+    logoutItem.style.display = "block";
+
+  } else {
+
+    userText.innerText = "";
+
+    loginItem.style.display = "block";
+    registerItem.style.display = "block";
+    logoutItem.style.display = "none";
+  }
+}
+
+updateUI();
+
+/* REGISTER */
+document.querySelector("#registerModal .modal-btn")
+.addEventListener("click", ()=>{
+
+  const name = document.querySelector("#registerModal input[type='text']").value;
+  const email = document.querySelector("#registerModal input[type='email']").value;
+  const password = document.querySelectorAll("#registerModal input[type='password']")[0].value;
+
+  if(!name || !email || !password){
+    showAuthToast("Hata", "Tüm alanları doldur", "fa-solid fa-xmark");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  if(users.find(u => u.email === email)){
+    showAuthToast("Hata", "Bu e-posta kayıtlı", "fa-solid fa-xmark");
+    return;
+  }
+
+  users.push({name,email,password});
+  localStorage.setItem("users", JSON.stringify(users));
+
+  showAuthToast("Kayıt Başarılı", "Şimdi giriş yapabilirsin", "fa-solid fa-user-plus");
+
+  document.querySelector("#registerModal .btn-close").click();
+});
+
+/* LOGIN */
+document.querySelector("#loginModal .modal-btn")
+.addEventListener("click", ()=>{
+
+  const email = document.querySelector("#loginModal input[type='email']").value;
+  const password = document.querySelector("#loginModal input[type='password']").value;
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const user = users.find(u => u.email === email && u.password === password);
+
+  if(!user){
+    showAuthToast("Hatalı Giriş", "E-posta veya şifre yanlış", "fa-solid fa-xmark");
+    return;
+  }
+
+  localStorage.setItem("loggedUser", JSON.stringify(user));
+
+  showAuthToast("Giriş Başarılı", user.name, "fa-solid fa-check");
+
+  updateUI();
+
+  document.querySelector("#loginModal .btn-close").click();
+});
+
+/* LOGOUT */
+logoutItem.addEventListener("click", ()=>{
+
+  localStorage.removeItem("loggedUser");
+
+  updateUI();
+
+  showAuthToast("Çıkış Yapıldı", "", "fa-solid fa-right-from-bracket");
+});
+document.querySelectorAll(".toggle-pass").forEach(icon => {
+
+  icon.addEventListener("click", () => {
+
+    const input = icon.parentElement.querySelector("input");
+
+    if (input.type === "password") {
+      input.type = "text";
+      icon.classList.remove("fa-eye");
+      icon.classList.add("fa-eye-slash");
+    } else {
+      input.type = "password";
+      icon.classList.remove("fa-eye-slash");
+      icon.classList.add("fa-eye");
+    }
+
+  });
+
+});
+
 </script>
+
 
 </body>
 </html>
