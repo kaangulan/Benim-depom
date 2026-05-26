@@ -1040,6 +1040,137 @@ body.light-mode .dropdown-item:hover{
 .toggle-pass:hover{
   color:white;
 }
+/* EMAIL SUCCESS TOAST */
+
+.mail-toast{
+position:fixed;
+top:25px;
+right:25px;
+z-index:999999;
+
+background:
+linear-gradient(
+135deg,
+rgba(15,23,42,.95),
+rgba(30,41,59,.95)
+);
+
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+
+padding:20px 24px;
+border-radius:24px;
+
+display:flex;
+align-items:center;
+gap:18px;
+
+min-width:340px;
+
+transform:translateX(130%);
+opacity:0;
+
+transition:.55s cubic-bezier(.68,-0.55,.27,1.55);
+
+box-shadow:
+0 25px 55px rgba(0,0,0,.45);
+}
+
+.mail-toast.show{
+transform:translateX(0);
+opacity:1;
+}
+
+.mail-icon{
+
+width:65px;
+height:65px;
+
+border-radius:18px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:
+linear-gradient(
+to right,
+#22c55e,
+#16a34a
+);
+
+font-size:28px;
+color:white;
+
+box-shadow:
+0 0 30px rgba(34,197,94,.35);
+
+animation:pulse 1.8s infinite;
+}
+
+.mail-toast h4{
+margin:0;
+font-size:18px;
+font-weight:700;
+}
+
+.mail-toast p{
+margin:6px 0 0;
+color:#cbd5e1;
+font-size:14px;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+.mail-toast{
+position:fixed;
+top:25px;
+right:25px;
+background:rgba(15,23,42,.95);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+padding:18px 22px;
+border-radius:22px;
+display:flex;
+align-items:center;
+gap:18px;
+color:white;
+z-index:999999;
+min-width:320px;
+
+transform:translateX(120%);
+opacity:0;
+transition:.5s ease;
+}
+
+.mail-toast.show{
+transform:translateX(0);
+opacity:1;
+}
+
+.mail-icon{
+width:60px;
+height:60px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(to right,#22c55e,#16a34a);
+font-size:24px;
+}
 </style>
 </head>
 
@@ -1547,9 +1678,13 @@ Kampanyaları Kaçırma
 Yeni çıkan ürünler ve indirimlerden ilk sen haberdar ol.
 </p>
 
-<form class="news-form">
+<form class="news-form" id="newsletterForm">
 
-<input type="email" placeholder="E-posta adresiniz">
+<input
+type="email"
+id="newsletterEmail"
+placeholder="E-posta adresiniz"
+required>
 
 <button type="submit">
 Katıl
@@ -2039,6 +2174,91 @@ document.querySelectorAll(".toggle-pass").forEach(icon => {
 });
 
 </script>
+<!-- EMAILJS -->
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+
+(function(){
+
+emailjs.init({
+  publicKey:"ZUvCQX9iVBYyEInlD"
+});
+
+})();
+
+document.getElementById("newsletterForm")
+.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+const email =
+document.getElementById("newsletterEmail").value;
+
+emailjs.send(
+  "service_5quk4k4",
+  "template_hjo04an",
+  {
+    user_email: email
+  }
+)
+
+.then(function(){
+
+const toast =
+document.createElement("div");
+
+toast.className = "mail-toast";
+
+toast.innerHTML = `
+
+<div class="mail-icon">
+<i class="fa-solid fa-paper-plane"></i>
+</div>
+
+<div>
+<h4>Abonelik Başarılı</h4>
+<p>Kampanya bildirimleri aktif edildi 🚀</p>
+</div>
+
+`;
+
+document.body.appendChild(toast);
+
+setTimeout(()=>{
+toast.classList.add("show");
+},100);
+
+setTimeout(()=>{
+
+toast.classList.remove("show");
+
+setTimeout(()=>{
+toast.remove();
+},500);
+
+},3000);
+
+document.getElementById("newsletterForm").reset();
+
+})
+
+.catch(function(error){
+
+alert(
+"Status: " + error.status +
+"\nMesaj: " + error.text
+);
+
+});
+
+});
+
+</script>
+
 
 
 </body>
