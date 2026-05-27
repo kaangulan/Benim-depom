@@ -438,6 +438,239 @@
       }
 
     }
+    /* =========================
+   CHECKOUT MODAL
+========================= */
+
+.checkout-modal{
+  background:rgba(15,23,42,.97);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:35px;
+  color:white;
+}
+
+.credit-card{
+  width:100%;
+  height:240px;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:1s;
+}
+
+.credit-card.flip{
+  transform:rotateY(180deg);
+}
+
+.card-front,
+.card-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:30px;
+  padding:30px;
+  backface-visibility:hidden;
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+  135deg,
+  rgba(56,189,248,.95),
+  rgba(139,92,246,.95)
+  );
+
+  box-shadow:
+  0 25px 50px rgba(0,0,0,.45);
+}
+
+.card-front::before{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  top:-100px;
+  right:-100px;
+}
+
+.card-back{
+  transform:rotateY(180deg);
+}
+
+.chip{
+  width:70px;
+  height:50px;
+  border-radius:12px;
+  background:linear-gradient(#facc15,#fde68a);
+  margin-bottom:40px;
+}
+
+.card-number{
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:3px;
+  margin-bottom:35px;
+}
+
+.card-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+}
+
+.card-bottom span,
+.cvv-box span{
+  font-size:13px;
+  opacity:.8;
+}
+
+.card-bottom h5,
+.cvv-box h4{
+  margin-top:8px;
+  font-size:20px;
+  font-weight:700;
+}
+
+.black-strip{
+  width:100%;
+  height:55px;
+  background:black;
+  margin-top:20px;
+}
+
+.cvv-box{
+  margin-top:40px;
+  background:white;
+  color:black;
+  border-radius:12px;
+  padding:12px 18px;
+}
+
+.pay-btn{
+  width:100%;
+  border:none;
+  padding:18px;
+  border-radius:18px;
+  background:
+  linear-gradient(to right,var(--primary),var(--secondary));
+
+  color:white;
+  font-size:18px;
+  font-weight:700;
+  transition:.3s;
+}
+
+.pay-btn:hover{
+  transform:translateY(-5px);
+}
+
+.success-box{
+  text-align:center;
+  padding:40px 20px;
+}
+
+.success-box i{
+  font-size:90px;
+  color:#22c55e;
+  margin-bottom:25px;
+  animation:pop .6s ease;
+}
+
+.success-box h2{
+  font-size:42px;
+  font-weight:800;
+}
+
+.success-box p{
+  color:var(--text);
+  margin-top:10px;
+}
+
+@keyframes pop{
+
+  0%{
+    transform:scale(.2);
+    opacity:0;
+  }
+
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+
+}
+/* =========================
+   NOTIFICATION
+========================= */
+
+.toast-box{
+  position:fixed;
+  top:30px;
+  right:30px;
+  min-width:320px;
+  padding:20px 24px;
+  border-radius:24px;
+
+  background:
+  linear-gradient(
+  135deg,
+  rgba(15,23,42,.98),
+  rgba(30,41,59,.98)
+  );
+
+  border:1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  display:flex;
+  align-items:center;
+  gap:18px;
+
+  z-index:99999;
+
+  transform:translateX(450px);
+  opacity:0;
+
+  transition:.5s ease;
+
+  box-shadow:
+  0 25px 50px rgba(0,0,0,.45);
+}
+
+.toast-box.show{
+  transform:translateX(0);
+  opacity:1;
+}
+
+.toast-icon{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+  linear-gradient(to right,#ef4444,#f97316);
+
+  font-size:24px;
+  color:white;
+
+  flex-shrink:0;
+}
+
+.toast-text h4{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+}
+
+.toast-text p{
+  margin:4px 0 0;
+  color:var(--text);
+  font-size:14px;
+}
 
   </style>
 
@@ -549,6 +782,170 @@
     </div>
 
   </section>
+  <!-- CHECKOUT MODAL -->
+
+<div class="modal fade" id="checkoutModal">
+
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+
+    <div class="modal-content checkout-modal p-4">
+
+      <div class="modal-header border-0">
+
+        <h3>Ödeme Yap</h3>
+
+        <button class="btn-close btn-close-white"
+        data-bs-dismiss="modal"></button>
+
+      </div>
+
+      <div class="modal-body" id="paymentContent">
+
+        <div class="row align-items-center g-5">
+
+          <!-- CARD -->
+
+          <div class="col-lg-6">
+
+            <div class="credit-card" id="creditCard">
+
+              <!-- FRONT -->
+
+              <div class="card-front">
+
+                <div class="chip"></div>
+
+                <div class="card-number" id="cardNumber">
+                  #### #### #### ####
+                </div>
+
+                <div class="card-bottom">
+
+                  <div>
+
+                    <span>Kart Sahibi</span>
+
+                    <h5 id="cardName">
+                      FULL NAME
+                    </h5>
+
+                  </div>
+
+                  <div>
+
+                    <span>SKT</span>
+
+                    <h5 id="cardExpiry">
+                      00/00
+                    </h5>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- BACK -->
+
+              <div class="card-back">
+
+                <div class="black-strip"></div>
+
+                <div class="cvv-box">
+
+                  <span>CVV</span>
+
+                  <h4 id="cardCvv">
+                    ***
+                  </h4>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- FORM -->
+
+          <div class="col-lg-6">
+
+            <form id="paymentForm">
+
+              <input
+              type="text"
+              id="inputName"
+              class="form-control mb-3"
+              placeholder="Kart Sahibi">
+
+              <input
+              type="text"
+              id="inputNumber"
+              class="form-control mb-3"
+              maxlength="19"
+              placeholder="1234 5678 9012 3456">
+
+              <div class="row">
+
+                <div class="col-6">
+
+                  <input
+                  type="text"
+                  id="inputExpiry"
+                  class="form-control mb-3"
+                  maxlength="5"
+                  placeholder="MM/YY">
+
+                </div>
+
+                <div class="col-6">
+
+                  <input
+                  type="password"
+                  id="inputCvv"
+                  class="form-control mb-3"
+                  maxlength="3"
+                  placeholder="CVV">
+
+                </div>
+
+              </div>
+
+              <button class="pay-btn">
+                Ödemeyi Tamamla
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="toast-box" id="toastBox">
+
+  <div class="toast-icon">
+    <i class="fa-solid fa-cart-shopping"></i>
+  </div>
+
+  <div class="toast-text">
+
+    <h4>Sepetin Boş</h4>
+
+    <p>
+      Önce premium sneaker eklemelisin 👟
+    </p>
+
+  </div>
+
+</div>
 
   <!-- JAVASCRIPT -->
 
@@ -744,6 +1141,166 @@
     renderCart();
 
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+document.querySelector(".checkout-btn")
+.addEventListener("click",()=>{
+
+  if(cart.length === 0){
+
+    const toast =
+    document.getElementById("toastBox");
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+      toast.classList.remove("show");
+
+    },3000);
+
+    return;
+  }
+
+  new bootstrap.Modal(
+    document.getElementById("checkoutModal")
+  ).show();
+
+});
+
+/* CARD INPUTS */
+
+const inputName =
+document.getElementById("inputName");
+
+const inputNumber =
+document.getElementById("inputNumber");
+
+const inputExpiry =
+document.getElementById("inputExpiry");
+
+const inputCvv =
+document.getElementById("inputCvv");
+
+inputName.addEventListener("input",()=>{
+
+  document.getElementById("cardName")
+  .innerText =
+  inputName.value || "FULL NAME";
+
+});
+
+inputNumber.addEventListener("input",()=>{
+
+  let value =
+  inputNumber.value
+  .replace(/\D/g,'')
+  .replace(/(.{4})/g,"$1 ")
+  .trim();
+
+  inputNumber.value = value;
+
+  document.getElementById("cardNumber")
+  .innerText =
+  value || "#### #### #### ####";
+
+});
+
+inputExpiry.addEventListener("input",()=>{
+
+  let value =
+  inputExpiry.value
+  .replace(/\D/g,'');
+
+  if(value.length >= 3){
+
+    value =
+    value.substring(0,2)
+    + "/"
+    + value.substring(2,4);
+
+  }
+
+  inputExpiry.value = value;
+
+  document.getElementById("cardExpiry")
+  .innerText =
+  value || "00/00";
+
+});
+
+/* CVV FLIP */
+
+inputCvv.addEventListener("focus",()=>{
+
+  document
+  .getElementById("creditCard")
+  .classList.add("flip");
+
+});
+
+inputCvv.addEventListener("blur",()=>{
+
+  document
+  .getElementById("creditCard")
+  .classList.remove("flip");
+
+});
+
+inputCvv.addEventListener("input",()=>{
+
+  document.getElementById("cardCvv")
+  .innerText =
+  inputCvv.value || "***";
+
+});
+
+/* PAYMENT */
+
+document.getElementById("paymentForm")
+.addEventListener("submit",(e)=>{
+    if(cart.length === 0){
+
+    alert("Sepette ürün yok!");
+
+    return;
+  }
+
+  e.preventDefault();
+
+  document.getElementById("paymentContent")
+  .innerHTML = `
+
+    <div class="success-box">
+
+      <i class="fa-solid fa-circle-check"></i>
+
+      <h2>Ödeme Başarılı</h2>
+
+      <p>
+        Siparişiniz başarıyla oluşturuldu 🚀
+      </p>
+
+    </div>
+
+  `;
+
+  localStorage.removeItem("cart");
+
+  setTimeout(()=>{
+
+    window.location.href = "index.html";
+
+  },2500);
+
+});
+
+</script>
+
+</body>
+</html>
 
 </body>
 
