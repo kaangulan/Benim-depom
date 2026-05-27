@@ -1375,11 +1375,78 @@ justify-content:center;
 
 box-shadow:0 0 15px rgba(239,68,68,.5);
 }
+/* CUSTOM CURSOR */
+
+body{
+  cursor:none;
+}
+
+.sneaker-cursor{
+
+  position:fixed;
+  width:70px;
+  pointer-events:none;
+
+  top:0;
+  left:0;
+
+  z-index:9999999;
+
+  transform:
+  translate(-50%,-50%)
+  rotate(-15deg);
+
+  transition:
+  transform .08s linear;
+
+  filter:
+  drop-shadow(0 10px 20px rgba(0,0,0,.45));
+
+}
+
+/* TIKLAYINCA */
+
+.sneaker-cursor.click{
+
+  transform:
+  translate(-50%,-50%)
+  rotate(10deg)
+  scale(.9);
+
+}
+.sneaker-cursor{
+
+animation:floatCursor 2s infinite ease-in-out;
+
+}
+
+@keyframes floatCursor{
+
+0%{
+transform:
+translate(-50%,-50%)
+rotate(-15deg);
+}
+
+50%{
+transform:
+translate(-50%,-54%)
+rotate(-10deg);
+}
+
+100%{
+transform:
+translate(-50%,-50%)
+rotate(-15deg);
+}
+
+}
 
 </style>
 </head>
 
 <body>
+  <img src="images/logo1.png" class="sneaker-cursor" id="cursorSneaker">
   <!-- LOADING SCREEN -->
 
 <div id="loader">
@@ -1476,6 +1543,11 @@ data-bs-target="#menu">
         Kayıt Ol
       </a>
     </li>
+    <li id="accountItem" style="display:none;">
+  <a class="dropdown-item" href="hesabim.html">
+    Hesabım
+  </a>
+</li>
 
     <li id="logoutItem" style="display:none;">
       <a class="dropdown-item text-danger" href="#">
@@ -2706,7 +2778,49 @@ function updateCartCount(){
 /* SAYFA AÇILINCA */
 updateCartCount();
 
+const cursor =
+document.getElementById("cursorSneaker");
+
+document.addEventListener("mousemove",(e)=>{
+
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+
+});
+
+/* CLICK EFFECT */
+
+document.addEventListener("mousedown",()=>{
+
+  cursor.classList.add("click");
+
+});
+
+document.addEventListener("mouseup",()=>{
+
+  cursor.classList.remove("click");
+
+});
+document.querySelectorAll("a,button")
+.forEach(el=>{
+
+el.addEventListener("mouseenter",()=>{
+
+cursor.style.transform =
+"translate(-50%,-50%) scale(1.2) rotate(-10deg)";
+
+});
+
+el.addEventListener("mouseleave",()=>{
+
+cursor.style.transform =
+"translate(-50%,-50%) scale(1) rotate(-15deg)";
+
+});
+
+});
 </script>
+
 
 
 
