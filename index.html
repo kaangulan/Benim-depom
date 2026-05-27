@@ -2550,122 +2550,98 @@ document.querySelectorAll(".toggle-pass").forEach(icon => {
 
 <script>
 
-(function(){
-
-emailjs.init({
-  publicKey:"ZUvCQX9iVBYyEInlD"
-});
-
+(function () {
+  emailjs.init({
+    publicKey: "ZUvCQX9iVBYyEInlD"
+  });
 })();
 
 document.getElementById("newsletterForm")
-.addEventListener("submit", function(e){
+.addEventListener("submit", function (e) {
 
-e.preventDefault();
+  e.preventDefault();
 
-const email =
-document.getElementById("newsletterEmail")
-.value
-.trim()
-.toLowerCase();
+  const email = document
+    .getElementById("newsletterEmail")
+    .value
+    .trim()
+    .toLowerCase();
 
-/* EMAIL FORMAT KONTROL */
+  /* EMAIL FORMAT */
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const emailRegex =
-/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Lütfen düzgün bir e-posta girin.");
+    return;
+  }
 
-if(!emailRegex.test(email)){
+  /* DUPLICATE CHECK */
+  let subscribers =
+    JSON.parse(localStorage.getItem("subscribers")) || [];
 
-alert("Lütfen düzgün bir e-posta girin.");
+  if (subscribers.includes(email)) {
+    alert("Bu e-posta zaten kayıtlı.");
+    return;
+  }
 
-return;
+  /* DEVICE INFO */
+  const device = navigator.userAgent;
 
-}
+  /* IP + EMAIL SEND (FULL FIXED) */
+  fetch("https://api.ipify.org?format=json")
+    .then(res => res.json())
+    .then(ipData => {
 
-/* AYNI MAIL KONTROL */
+      emailjs.send(
+        "service_5quk4k4",
+        "template_hjo04an",
+        {
+          user_email: email,
+          user_device: device,
+          user_ip: ipData.ip
+        }
+      )
+      .then(function () {
 
-let subscribers =
-JSON.parse(
-localStorage.getItem("subscribers")
-) || [];
+        /* SAVE LOCALLY */
+        subscribers.push(email);
+        localStorage.setItem("subscribers", JSON.stringify(subscribers));
 
-if(subscribers.includes(email)){
+        /* TOAST */
+        const toast = document.createElement("div");
 
-alert("Bu e-posta zaten kayıtlı.");
+        toast.className = "mail-toast";
 
-return;
+        toast.innerHTML = `
+          <div class="mail-icon">
+            <i class="fa-solid fa-paper-plane"></i>
+          </div>
+          <div>
+            <h4>Abonelik Başarılı</h4>
+            <p>Kampanya bildirimleri aktif edildi 🚀</p>
+          </div>
+        `;
 
-}
+        document.body.appendChild(toast);
 
-/* EMAIL GÖNDER */
+        setTimeout(() => toast.classList.add("show"), 100);
 
-emailjs.send(
-"service_5quk4k4",
-"template_hjo04an",
-{
-  user_email: email
-}
-)
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => toast.remove(), 500);
+        }, 3000);
 
-.then(function(){
+        document.getElementById("newsletterForm").reset();
 
-/* STORAGE SAVE */
+      })
+      .catch(function (error) {
+        alert("Email gönderim hatası: " + error.text);
+      });
 
-subscribers.push(email);
-
-localStorage.setItem(
-"subscribers",
-JSON.stringify(subscribers)
-);
-
-/* TOAST */
-
-const toast =
-document.createElement("div");
-
-toast.className = "mail-toast";
-
-toast.innerHTML = `
-
-<div class="mail-icon">
-<i class="fa-solid fa-paper-plane"></i>
-</div>
-
-<div>
-<h4>Abonelik Başarılı</h4>
-<p>Kampanya bildirimleri aktif edildi 🚀</p>
-</div>
-
-`;
-
-document.body.appendChild(toast);
-
-setTimeout(()=>{
-toast.classList.add("show");
-},100);
-
-setTimeout(()=>{
-
-toast.classList.remove("show");
-
-setTimeout(()=>{
-toast.remove();
-},500);
-
-},3000);
-
-document.getElementById("newsletterForm").reset();
-
-})
-
-.catch(function(error){
-
-alert(
-"Status: " + error.status +
-"\nMesaj: " + error.text
-);
-
-});
+    })
+    .catch(() => {
+      alert("IP alınamadı, tekrar deneyin.");
+    });
 
 });
 
