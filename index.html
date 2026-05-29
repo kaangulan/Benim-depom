@@ -1441,6 +1441,80 @@ rotate(-15deg);
 }
 
 }
+/* SEARCH BOX */
+
+.search-box{
+
+position:relative;
+display:flex;
+align-items:center;
+
+}
+
+.search-box input{
+
+width:240px;
+
+padding:12px 45px 12px 18px;
+
+border:none;
+outline:none;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+transition:.3s;
+
+}
+
+.search-box input:focus{
+
+box-shadow:
+0 0 0 2px rgba(56,189,248,.35);
+
+background:
+rgba(255,255,255,.12);
+
+}
+
+.search-box i{
+
+position:absolute;
+right:16px;
+
+color:#94a3b8;
+
+}
+
+/* LIGHT MODE */
+
+body.light-mode .search-box input{
+
+background:#f1f5f9;
+color:#111827;
+
+}
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+.search-box{
+
+margin:15px 0;
+
+}
+
+.search-box input{
+
+width:100%;
+
+}
+
+}
 
 
 </style>
@@ -1494,6 +1568,20 @@ data-bs-target="#menu">
 <div class="collapse navbar-collapse" id="menu">
 
 <ul class="navbar-nav ms-auto align-items-lg-center">
+  <li class="nav-item ms-lg-3">
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Ürün ara...">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</div>
+
+</li>
 
 <li class="nav-item">
 <a class="nav-link" href="#">Anasayfa</a>
@@ -2787,10 +2875,51 @@ cursor.style.transform =
 
 });
 </script>
+<script>
 
+/* PRODUCT SEARCH */
 
+const searchInput =
+document.getElementById("searchInput");
 
+searchInput.addEventListener("input",()=>{
 
+const value =
+searchInput.value
+.toLowerCase()
+.trim();
+
+let found = false;
+
+document
+.querySelectorAll(".product-card")
+.forEach(card=>{
+
+const title =
+card.querySelector("h4")
+.innerText
+.toLowerCase();
+
+const description =
+card.querySelector("p")
+.innerText
+.toLowerCase();
+
+const match =
+title.includes(value)
+||
+description.includes(value);
+
+card.parentElement.style.display =
+match ? "block" : "none";
+
+if(match) found = true;
+
+});
+
+});
+
+</script>
 
 </body>
 </html>
