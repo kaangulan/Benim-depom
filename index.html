@@ -1160,22 +1160,44 @@ document.getElementById("newsletterForm")
     .trim()
     .toLowerCase();
 
-  /* EMAIL FORMAT */
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  /* SADECE GERÇEK GMAIL KONTROLÜ */
 
-  if (!emailRegex.test(email)) {
-    alert("Lütfen düzgün bir e-posta girin.");
-    return;
-  }
+const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+if (!gmailRegex.test(email)) {
+  alert("Lütfen geçerli bir Gmail adresi girin. Örnek: gecersiz@gmail.com");
+  return;
+}
+
+/* gmail.comcom gibi hataları engelle */
+if (
+  email.includes("@gmail.comcom") ||
+  email.includes("@gmail.comm") ||
+  email.includes("@gmail.co") ||
+  email.endsWith(".")
+) {
+ showAlert(
+  "Geçersiz E-posta",
+  "Lütfen geçerli bir Gmail adresi girin."
+);
+  return;
+}
 
   /* DUPLICATE CHECK */
   let subscribers =
     JSON.parse(localStorage.getItem("subscribers")) || [];
 
-  if (subscribers.includes(email)) {
-    alert("Bu e-posta zaten kayıtlı.");
-    return;
-  }
+ if (
+  subscribers.some(
+    item => item.toLowerCase() === email.toLowerCase()
+  )
+) {
+ showAlert(
+  "Kayıt Başarısız",
+  "Bu Gmail adresi zaten kayıtlı."
+);
+  return;
+}
 
   /* DEVICE INFO */
   const device = navigator.userAgent;
@@ -1423,6 +1445,38 @@ if(match) found = true;
 
 });
 
+</script>
+<script>
+  function showAlert(title,message){
+
+const alertBox=document.createElement("div");
+
+alertBox.className="custom-alert";
+
+alertBox.innerHTML=`
+<i class="fa-solid fa-circle-exclamation"></i>
+<div>
+<h4>${title}</h4>
+<p>${message}</p>
+</div>
+`;
+
+document.body.appendChild(alertBox);
+
+setTimeout(()=>{
+alertBox.classList.add("show");
+},100);
+
+setTimeout(()=>{
+alertBox.classList.remove("show");
+
+setTimeout(()=>{
+alertBox.remove();
+},400);
+
+},3000);
+
+}
 </script>
 
 </body>
