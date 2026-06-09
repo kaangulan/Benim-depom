@@ -11,1478 +11,693 @@
 <meta name="application-name" content="StepUp">
 <meta name="apple-mobile-web-app-title" content="StepUp">
 <meta name="theme-color" content="#060816">
-<meta http-equiv="Content-Security-Policy"
-content="default-src 'self';
-img-src 'self' data: https:;
-script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js 'unsafe-inline';
-style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
-font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com;">
-
 <title>StepUp | Premium Sneaker Store</title>
 <meta name="description" content="StepUp - Premium Sneaker Store. Nike, Adidas, Puma, Converse ve daha fazlası. Modern sneaker alışveriş deneyimi.">
 <link rel="icon" type="image/png" sizes="32x32" href="https://stepup.rf.gd/images/logo.png">
 <link rel="shortcut icon" href="https://stepup.rf.gd/images/logo.png">
 <link rel="apple-touch-icon" href="https://stepup.rf.gd/images/logo.png">
-<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<!--Css-->
 <link rel="stylesheet" type="text/css" href="style.css">
-<!-- EMAILJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<!-- Font Awesome -->
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-<!-- Google Font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
- "@context":"https://schema.org",
- "@type":"WebSite",
- "name":"StepUp",
- "url":"https://stepup.rf.gd/",
- "description":"Premium Sneaker Store",
- "potentialAction":{
-   "@type":"SearchAction",
-   "target":"https://stepup.rf.gd/?q={search_term_string}",
-   "query-input":"required name=search_term_string"
- }
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"StepUp",
+  "url":"https://stepup.rf.gd/",
+  "description":"Premium Sneaker Store",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":"https://stepup.rf.gd/?q={search_term_string}",
+    "query-input":"required name=search_term_string"
+  }
 }
 </script>
 </head>
 <body>
-  <img src="images/logo1.png" class="sneaker-cursor" id="cursorSneaker">
-  <!-- LOADING SCREEN -->
 
+<img src="images/logo1.png" class="sneaker-cursor" id="cursorSneaker" alt="">
+
+<!-- LOADER -->
 <div id="loader">
-
-<div class="loader-content">
-
-<i class="fa-solid fa-shoe-prints loader-icon"></i>
-
-<h1>StepUp</h1>
-
-<p>Loading...</p>
-
-<div class="loader-bar">
-
-<div class="loader-progress"></div>
-
-</div>
-
-</div>
-
+  <div class="loader-content">
+    <i class="fa-solid fa-shoe-prints loader-icon"></i>
+    <h1>StepUp</h1>
+    <p>Yükleniyor...</p>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
 </div>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-
-<div class="container">
-
-<a class="navbar-brand" href="#">
-<i class="fa-solid fa-shoe-prints"></i> StepUp
-</a>
-
-<button class="navbar-toggler"
-type="button"
-data-bs-toggle="collapse"
-data-bs-target="#menu">
-
-<span class="navbar-toggler-icon"></span>
-
-</button>
-
-<div class="collapse navbar-collapse" id="menu">
-
-<ul class="navbar-nav ms-auto align-items-lg-center">
-  <li class="nav-item ms-lg-3">
-
-<div class="search-box">
-
-<input
-type="text"
-id="searchInput"
-placeholder="Ürün ara...">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-</div>
-
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="#">Anasayfa</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="#brands">Markalar</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="#products">Ürünler</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="harita.html">Mağazalar</a>
-</li>
-
-<li class="nav-item ms-2 position-relative">
-
-<a class="nav-link nav-icon" href="Sepet.html">
-<i class="fa-solid fa-bag-shopping"></i>
-</a>
-
-<span id="cartCount" class="cart-count">0</span>
-
-</li>
-
-<!-- USER -->
-
-<li class="nav-item dropdown ms-lg-3 d-flex align-items-center">
-
-  <span id="userText" class="text-white me-2"></span>
-
-  <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-    <i class="fa-solid fa-user"></i>
-  </a>
-
-  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-
-    <li id="loginItem">
-      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-        Giriş Yap
-      </a>
-    </li>
-
-    <li id="registerItem">
-      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">
-        Kayıt Ol
-      </a>
-    </li>
-    <li id="accountItem" style="display:none;">
-  <a class="dropdown-item" href="hesabim.html">
-    Hesabım
-  </a>
-</li>
-
-    <li id="logoutItem" style="display:none;">
-      <a class="dropdown-item text-danger" href="#">
-        Çıkış Yap
-      </a>
-    </li>
-
-  </ul>
-</li>
-<!-- THEME TOGGLE -->
-
-<li class="nav-item ms-2">
-
-<button id="themeToggle" class="theme-toggle">
-
-<div class="toggle-circle">
-<i class="fa-solid fa-moon"></i>
-</div>
-
-</button>
-
-</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</nav>
-<section class="sponsor-slider">
-
   <div class="container">
 
-    <div class="sponsor-title">
-      <i class="fa-solid fa-handshake"></i> Sponsorlar
+    <a class="navbar-brand" href="#">
+      <i class="fa-solid fa-shoe-prints"></i> StepUp
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <li class="nav-item ms-lg-3">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Ürün ara...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#">Anasayfa</a></li>
+        <li class="nav-item"><a class="nav-link" href="#brands">Markalar</a></li>
+        <li class="nav-item"><a class="nav-link" href="#products">Ürünler</a></li>
+        <li class="nav-item"><a class="nav-link" href="harita.html">Mağazalar</a></li>
+
+        <li class="nav-item ms-2 position-relative">
+          <a class="nav-link nav-icon" href="Sepet.html">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </a>
+          <span id="cartCount" class="cart-count">0</span>
+        </li>
+
+        <!-- USER -->
+        <li class="nav-item dropdown ms-lg-3 d-flex align-items-center">
+          <span id="userText" class="text-white me-2" style="font-size:0.85rem;font-weight:600;"></span>
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="fa-solid fa-user"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+            <li id="loginItem">
+              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Giriş Yap</a>
+            </li>
+            <li id="registerItem">
+              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Kayıt Ol</a>
+            </li>
+            <li id="accountItem" style="display:none;">
+              <a class="dropdown-item" href="hesabim.html">Hesabım</a>
+            </li>
+            <li id="logoutItem" style="display:none;">
+              <a class="dropdown-item text-danger" href="#" id="logoutBtn">Çıkış Yap</a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- THEME TOGGLE -->
+        <li class="nav-item ms-2">
+          <button id="themeToggle" class="theme-toggle">
+            <div class="toggle-circle"><i class="fa-solid fa-moon"></i></div>
+          </button>
+        </li>
+
+      </ul>
     </div>
-
   </div>
+</nav>
 
+<!-- SPONSOR SLIDER -->
+<section class="sponsor-slider">
+  <div class="container">
+    <div class="sponsor-title"><i class="fa-solid fa-handshake"></i> Sponsorlar</div>
+  </div>
   <div class="sponsor-marquee">
-
     <div class="sponsor-track">
-
-      <!-- set 1 -->
-      <div class="sponsor-item"><img src="images/nike.png"></div>
-      <div class="sponsor-item"><img src="images/adidas.png"></div>
-      <div class="sponsor-item"><img src="images/puma.png"></div>
-      <div class="sponsor-item"><img src="images/vans.png"></div>
-      <div class="sponsor-item"><img src="images/Converse.png"></div>
-      <div class="sponsor-item"><img src="images/New Balance.png"></div>
-
-      <!-- set 2 -->
-      <div class="sponsor-item"><img src="images/nike.png"></div>
-      <div class="sponsor-item"><img src="images/adidas.png"></div>
-      <div class="sponsor-item"><img src="images/puma.png"></div>
-      <div class="sponsor-item"><img src="images/vans.png"></div>
-      <div class="sponsor-item"><img src="images/Converse.png"></div>
-      <div class="sponsor-item"><img src="images/New Balance.png"></div>
-
-      <!-- set 3 -->
-      <div class="sponsor-item"><img src="images/nike.png"></div>
-      <div class="sponsor-item"><img src="images/adidas.png"></div>
-      <div class="sponsor-item"><img src="images/puma.png"></div>
-      <div class="sponsor-item"><img src="images/vans.png"></div>
-      <div class="sponsor-item"><img src="images/Converse.png"></div>
-      <div class="sponsor-item"><img src="images/New Balance.png"></div>
-
+      <div class="sponsor-item"><img src="images/nike.png" alt="Nike"></div>
+      <div class="sponsor-item"><img src="images/adidas.png" alt="Adidas"></div>
+      <div class="sponsor-item"><img src="images/puma.png" alt="Puma"></div>
+      <div class="sponsor-item"><img src="images/vans.png" alt="Vans"></div>
+      <div class="sponsor-item"><img src="images/Converse.png" alt="Converse"></div>
+      <div class="sponsor-item"><img src="images/New Balance.png" alt="New Balance"></div>
+      <div class="sponsor-item"><img src="images/nike.png" alt="Nike"></div>
+      <div class="sponsor-item"><img src="images/adidas.png" alt="Adidas"></div>
+      <div class="sponsor-item"><img src="images/puma.png" alt="Puma"></div>
+      <div class="sponsor-item"><img src="images/vans.png" alt="Vans"></div>
+      <div class="sponsor-item"><img src="images/Converse.png" alt="Converse"></div>
+      <div class="sponsor-item"><img src="images/New Balance.png" alt="New Balance"></div>
+      <div class="sponsor-item"><img src="images/nike.png" alt="Nike"></div>
+      <div class="sponsor-item"><img src="images/adidas.png" alt="Adidas"></div>
+      <div class="sponsor-item"><img src="images/puma.png" alt="Puma"></div>
+      <div class="sponsor-item"><img src="images/vans.png" alt="Vans"></div>
+      <div class="sponsor-item"><img src="images/Converse.png" alt="Converse"></div>
+      <div class="sponsor-item"><img src="images/New Balance.png" alt="New Balance"></div>
     </div>
-
   </div>
-
 </section>
+
 <!-- HERO -->
 <section class="hero">
-
-<div class="blur1"></div>
-<div class="blur2"></div>
-
-<div class="container">
-
-<div class="row align-items-center">
-
-<div class="col-lg-7">
-
-<div class="hero-text">
-
-<h1>
-StepUp ile
-<span class="gradient">Tarzını Yansıt</span>
-</h1>
-
-<p>
-Premium sneaker koleksiyonlarını keşfet.
-Nike, Adidas, Puma ve daha fazlası modern tasarımla StepUp'ta.
-</p>
-
-<div class="hero-buttons">
-
-<a href="#products" class="hero-btn btn-main">
-Ürünleri İncele
-</a>
-
-<a href="harita.html" class="hero-btn btn-second">
-Mağazalarımız
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-lg-5">
-
-<div class="hero-card">
-
-<div class="sale-badge">
-%30 İndirim
-</div>
-
-<img src="images/logo2.png">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+  <div class="blur1"></div>
+  <div class="blur2"></div>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <div class="hero-text">
+          <h1>StepUp ile <span class="gradient">Tarzını Yansıt</span></h1>
+          <p>Premium sneaker koleksiyonlarını keşfet. Nike, Adidas, Puma ve daha fazlası modern tasarımla StepUp'ta.</p>
+          <div class="hero-buttons">
+            <a href="#products" class="hero-btn btn-main">Ürünleri İncele</a>
+            <a href="harita.html" class="hero-btn btn-second">Mağazalarımız</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-card">
+          <div class="sale-badge">%30 İndirim</div>
+          <img src="images/logo2.png" alt="Featured Sneaker">
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- STATS -->
-
 <section class="stats container">
-
-<div class="row g-4">
-
-<div class="col-md-4">
-<div class="stat-card">
-<h2>50K+</h2>
-<p>Mutlu Müşteri</p>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="stat-card">
-<h2>120+</h2>
-<p>Premium Ürün</p>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="stat-card">
-<h2>24/7</h2>
-<p>Canlı Destek</p>
-</div>
-</div>
-
-</div>
-
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="stat-card"><h2>50K+</h2><p>Mutlu Müşteri</p></div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card"><h2>120+</h2><p>Premium Ürün</p></div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card"><h2>24/7</h2><p>Canlı Destek</p></div>
+    </div>
+  </div>
 </section>
 
 <!-- BRANDS -->
-
 <section class="brands container" id="brands">
-
-<div class="section-title">
-
-<h2>Popüler Markalar</h2>
-
-<p>
-Dünyanın en iyi sneaker markaları
-</p>
-
-</div>
-
-<div class="row g-4">
-
-<div class="col-6 col-md-4 col-lg-2">
-<a href="nike.html" class="text-decoration-none">
-<div class="brand-card">
-<img src="images/nike.png">
-</div>
-</a>
-</div>
-
-<div class="col-6 col-md-4 col-lg-2">
-<a href="adidas.html" class="text-decoration-none">
-<div class="brand-card">
-<img src="images/adidas.png">
-</div>
-</a>
-</div>
-
-<div class="col-6 col-md-4 col-lg-2">
-<a href="puma.html" class="text-decoration-none">
-<div class="brand-card">
-<img src="images/puma.png">
-</div>
-</a>
-</div>
-
-<div class="col-6 col-md-4 col-lg-2">
-<a href="vans.html" class="text-decoration-none">
-<div class="brand-card">
-<img src="images/vans.png">
-</div>
-</a>
-</div>
-
-<div class="col-6 col-md-4 col-lg-2">
-<a href="converse.html" class="text-decoration-none">
-<div class="brand-card">
-<img src="images/Converse.png">
-</div>
-</a>
-</div>
-
-<div class="col-6 col-md-4 col-lg-2">
-<a href="newbalance.html" class="text-decoration-none">
-<div class="brand-card">
-<img src="images/New Balance.png">
-</div>
-</a>
-</div>
-
-</div>
-
+  <div class="section-title">
+    <h2>Popüler Markalar</h2>
+    <p>Dünyanın en iyi sneaker markaları</p>
+  </div>
+  <div class="row g-4">
+    <div class="col-6 col-md-4 col-lg-2">
+      <a href="nike.html" class="text-decoration-none"><div class="brand-card"><img src="images/nike.png" alt="Nike"></div></a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <a href="adidas.html" class="text-decoration-none"><div class="brand-card"><img src="images/adidas.png" alt="Adidas"></div></a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <a href="puma.html" class="text-decoration-none"><div class="brand-card"><img src="images/puma.png" alt="Puma"></div></a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <a href="vans.html" class="text-decoration-none"><div class="brand-card"><img src="images/vans.png" alt="Vans"></div></a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <a href="converse.html" class="text-decoration-none"><div class="brand-card"><img src="images/Converse.png" alt="Converse"></div></a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <a href="newbalance.html" class="text-decoration-none"><div class="brand-card"><img src="images/New Balance.png" alt="New Balance"></div></a>
+    </div>
+  </div>
 </section>
 
 <!-- PRODUCTS -->
-
 <section class="products container" id="products">
+  <div class="section-title">
+    <h2>Trend Ürünler</h2>
+    <p>En çok tercih edilen sneaker modelleri</p>
+  </div>
+  <div class="row g-4">
 
-<div class="section-title">
+    <div class="col-md-4">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/logo1.png" alt="Nike Air Max">
+          <div class="product-actions">
+            <button class="action-btn fav-btn"><i class="fa-solid fa-heart"></i></button>
+            <button class="action-btn quick-btn"><i class="fa-solid fa-eye"></i></button>
+            <button class="action-btn cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <h4>Nike Air Max</h4>
+          <p>Modern görünüm ve maksimum rahatlık.</p>
+          <div class="product-price">$249</div>
+          <button class="buy-btn">Sepete Ekle</button>
+        </div>
+      </div>
+    </div>
 
-<h2>Trend Ürünler</h2>
+    <div class="col-md-4">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/adidasay1.png" alt="Adidas UltraBoost">
+          <div class="product-actions">
+            <button class="action-btn fav-btn"><i class="fa-solid fa-heart"></i></button>
+            <button class="action-btn quick-btn"><i class="fa-solid fa-eye"></i></button>
+            <button class="action-btn cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <h4>Adidas UltraBoost</h4>
+          <p>Günlük kullanım için premium konfor.</p>
+          <div class="product-price">$199</div>
+          <button class="buy-btn">Sepete Ekle</button>
+        </div>
+      </div>
+    </div>
 
-<p>
-En çok tercih edilen sneaker modelleri
-</p>
+    <div class="col-md-4">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/pumaay1.png" alt="Puma RS-X">
+          <div class="product-actions">
+            <button class="action-btn fav-btn"><i class="fa-solid fa-heart"></i></button>
+            <button class="action-btn quick-btn"><i class="fa-solid fa-eye"></i></button>
+            <button class="action-btn cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <h4>Puma RS-X</h4>
+          <p>Sokak stiline güçlü bir dokunuş.</p>
+          <div class="product-price">$179</div>
+          <button class="buy-btn">Sepete Ekle</button>
+        </div>
+      </div>
+    </div>
 
-</div>
-
-<div class="row g-4">
-
-<div class="col-md-4">
-
-<div class="product-card">
-
-<div class="product-image">
-
-<img src="images/logo1.png">
-
-<div class="product-actions">
-
-<button class="action-btn fav-btn">
-<i class="fa-solid fa-heart"></i>
-</button>
-
-<button class="action-btn quick-btn">
-<i class="fa-solid fa-eye"></i>
-</button>
-
-<button class="action-btn cart-btn">
-<i class="fa-solid fa-cart-shopping"></i>
-</button>
-
-</div>
-
-</div>
-
-<div class="product-info">
-
-<h4>Nike Air Max</h4>
-
-<p>
-Modern görünüm ve maksimum rahatlık.
-</p>
-
-<div class="product-price">
-$249
-</div>
-
-<button class="buy-btn">
-Sepete Ekle
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="product-card">
-
-<div class="product-image">
-
-<img src="images/adidasay1.png">
-
-<div class="product-actions">
-
-<button class="action-btn fav-btn">
-<i class="fa-solid fa-heart"></i>
-</button>
-
-<button class="action-btn quick-btn">
-<i class="fa-solid fa-eye"></i>
-</button>
-
-<button class="action-btn cart-btn">
-<i class="fa-solid fa-cart-shopping"></i>
-</button>
-
-</div>
-
-</div>
-
-<div class="product-info">
-
-<h4>Adidas UltraBoost</h4>
-
-<p>
-Günlük kullanım için premium konfor.
-</p>
-
-<div class="product-price">
-$199
-</div>
-
-<button class="buy-btn">
-Sepete Ekle
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="product-card">
-
-<div class="product-image">
-
-<img src="images/pumaay1.png">
-
-<div class="product-actions">
-
-<button class="action-btn fav-btn">
-<i class="fa-solid fa-heart"></i>
-</button>
-
-<button class="action-btn quick-btn">
-<i class="fa-solid fa-eye"></i>
-</button>
-
-<button class="action-btn cart-btn">
-<i class="fa-solid fa-cart-shopping"></i>
-</button>
-
-</div>
-
-</div>
-
-<div class="product-info">
-
-<h4>Puma RS-X</h4>
-
-<p>
-Sokak stiline güçlü bir dokunuş.
-</p>
-
-<div class="product-price">
-$179
-</div>
-
-<button class="buy-btn">
-Sepete Ekle
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+  </div>
 </section>
 
 <!-- FEATURES -->
-
 <section class="features container">
-
-<div class="section-title">
-
-<h2>Neden StepUp ?</h2>
-
-<p>
-Kaliteli alışveriş deneyimi
-</p>
-
-</div>
-
-<div class="row g-4">
-
-<div class="col-md-4">
-
-<div class="feature-card">
-
-<i class="fa-solid fa-truck-fast"></i>
-
-<h4>Hızlı Teslimat</h4>
-
-<p>
-Türkiye'nin her yerine hızlı gönderim.
-</p>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="feature-card">
-
-<i class="fa-solid fa-shield-heart"></i>
-
-<h4>Güvenli Ödeme</h4>
-
-<p>
-Gelişmiş güvenlik sistemleriyle korunan ödeme altyapısı.
-</p>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="feature-card">
-
-<i class="fa-solid fa-medal"></i>
-
-<h4>%100 Orijinal</h4>
-
-<p>
-Tüm ürünler resmi distribütör garantilidir.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
+  <div class="section-title">
+    <h2>Neden StepUp?</h2>
+    <p>Kaliteli alışveriş deneyimi</p>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="feature-card">
+        <i class="fa-solid fa-truck-fast"></i>
+        <h4>Hızlı Teslimat</h4>
+        <p>Türkiye'nin her yerine hızlı gönderim.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <i class="fa-solid fa-shield-heart"></i>
+        <h4>Güvenli Ödeme</h4>
+        <p>Gelişmiş güvenlik sistemleriyle korunan ödeme altyapısı.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <i class="fa-solid fa-medal"></i>
+        <h4>%100 Orijinal</h4>
+        <p>Tüm ürünler resmi distribütör garantilidir.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- NEWSLETTER -->
-
 <section class="newsletter container">
-
-<div class="news-box">
-
-<h2>
-Kampanyaları Kaçırma
-</h2>
-
-<p>
-Yeni çıkan ürünler ve indirimlerden ilk sen haberdar ol.
-</p>
-
-<form class="news-form" id="newsletterForm">
-
-<input
-type="email"
-id="newsletterEmail"
-placeholder="E-posta adresiniz"
-required>
-
-<button type="submit">
-Katıl
-</button>
-
-</form>
-
-</div>
-
+  <div class="news-box">
+    <h2>Kampanyaları Kaçırma</h2>
+    <p>Yeni çıkan ürünler ve indirimlerden ilk sen haberdar ol.</p>
+    <form class="news-form" id="newsletterForm">
+      <input type="email" id="newsletterEmail" placeholder="E-posta adresiniz" required>
+      <button type="submit">Katıl</button>
+    </form>
+  </div>
 </section>
 
 <!-- FOOTER -->
-
 <footer class="footer">
-
-<div class="container">
-
-<div class="row g-5">
-
-<div class="col-lg-5">
-
-<div class="footer-logo">
-StepUp
-</div>
-
-<p class="mt-4">
-Sneaker kültürünü modern teknolojiyle birleştiren premium alışveriş platformu.
-</p>
-
-<div class="socials">
-
-<a href="#">
-<i class="fa-brands fa-instagram"></i>
-</a>
-
-<a href="#">
-<i class="fa-brands fa-facebook-f"></i>
-</a>
-
-<a href="#">
-<i class="fa-brands fa-x-twitter"></i>
-</a>
-
-<a href="#">
-<i class="fa-brands fa-whatsapp"></i>
-</a>
-
-</div>
-
-</div>
-
-<div class="col-lg-3">
-
-<h4 class="mb-4">Sayfalar</h4>
-
-<div class="footer-links">
-
-<a href="#">Anasayfa</a>
-<a href="#products">Ürünler</a>
-<a href="#brands">Markalar</a>
-<a href="harita.html">Mağazalar</a>
-
-</div>
-
-</div>
-
-<div class="col-lg-4">
-
-<h4 class="mb-4">İletişim</h4>
-
-<p>İzmir / Türkiye</p>
-<p>stepup@gmail.com</p>
-<p>+90 555 555 55 55</p>
-
-</div>
-
-</div>
-
-<div class="footer-bottom">
-© 2026 StepUp - Tüm Hakları Saklıdır
-</div>
-
-</div>
-
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <div class="footer-logo">StepUp</div>
+        <p class="mt-4">Sneaker kültürünü modern teknolojiyle birleştiren premium alışveriş platformu.</p>
+        <div class="socials">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <h4 class="mb-4">Sayfalar</h4>
+        <div class="footer-links">
+          <a href="#">Anasayfa</a>
+          <a href="#products">Ürünler</a>
+          <a href="#brands">Markalar</a>
+          <a href="harita.html">Mağazalar</a>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <h4 class="mb-4">İletişim</h4>
+        <p>İzmir / Türkiye</p>
+        <p>stepup@gmail.com</p>
+        <p>+90 555 555 55 55</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 StepUp - Tüm Hakları Saklıdır</div>
+  </div>
 </footer>
 
 <!-- LOGIN MODAL -->
 <div class="modal fade" id="loginModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-3">
-
       <div class="modal-header border-0">
         <h4>Giriş Yap</h4>
         <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
-
       <div class="modal-body">
-
-        <input type="email"
-        class="form-control mb-3"
-        placeholder="E-posta">
-
+        <input id="loginEmail" type="email" class="form-control mb-3" placeholder="E-posta">
         <div class="position-relative mb-3">
-          <input type="password"
-          class="form-control"
-          placeholder="Şifre">
-
+          <input id="loginPassword" type="password" class="form-control" placeholder="Şifre">
           <i class="fa-solid fa-eye toggle-pass"></i>
         </div>
-
-        <button class="modal-btn">
-          Giriş Yap
-        </button>
-
+        <button class="modal-btn" id="loginBtn">Giriş Yap</button>
       </div>
-
     </div>
   </div>
 </div>
+
 <!-- REGISTER MODAL -->
 <div class="modal fade" id="registerModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-3">
-
       <div class="modal-header border-0">
         <h4>Kayıt Ol</h4>
         <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
-
       <div class="modal-body">
-
-        <input type="text"
-        class="form-control mb-3"
-        placeholder="Ad Soyad">
-
-        <input type="email"
-        class="form-control mb-3"
-        placeholder="E-posta">
-
+        <input id="regName" type="text" class="form-control mb-3" placeholder="Ad Soyad">
+        <input id="regEmail" type="email" class="form-control mb-3" placeholder="E-posta">
         <div class="position-relative mb-3">
-          <input type="password"
-          class="form-control"
-          placeholder="Şifre">
-
+          <input id="regPassword" type="password" class="form-control" placeholder="Şifre">
           <i class="fa-solid fa-eye toggle-pass"></i>
         </div>
-
-        <button class="modal-btn">
-          Hesap Oluştur
-        </button>
-
+        <button class="modal-btn" id="registerBtn">Hesap Oluştur</button>
       </div>
-
     </div>
   </div>
 </div>
+
+<!-- QUICK VIEW MODAL -->
 <div class="modal fade" id="quickModal">
-
-<div class="modal-dialog modal-dialog-centered">
-
-<div class="modal-content p-4">
-
-<h3 id="quickTitle"></h3>
-
-<p id="quickPrice"></p>
-
-<img id="quickImage" style="width:100%;border-radius:20px;">
-
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+      <h3 id="quickTitle"></h3>
+      <p id="quickPrice"></p>
+      <img id="quickImage" style="width:100%;border-radius:20px;" alt="">
+    </div>
+  </div>
 </div>
-
-</div>
-
-</div>
-
-<!-- Bootstrap -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- BUNU </body> ÜSTÜNE EKLE -->
+
 <script>
-
-/* THEME TOGGLE */
-
-const toggle = document.getElementById("themeToggle");
-const body = document.body;
-
-/* SAYFA YENİLENİNCE TEMA KALSIN */
-
-if(localStorage.getItem("theme") === "light"){
-
-  body.classList.add("light-mode");
-
-  toggle.innerHTML =
-  `<div class="toggle-circle">
-    <i class="fa-solid fa-sun"></i>
-  </div>`;
-
+/* =====================
+   UTILITY: showAlert — en üstte tanımlandı
+===================== */
+function showAlert(title, message) {
+  const el = document.createElement("div");
+  el.className = "custom-alert";
+  el.innerHTML = `
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <div><h4>${title}</h4><p>${message}</p></div>
+  `;
+  document.body.appendChild(el);
+  setTimeout(() => el.classList.add("show"), 100);
+  setTimeout(() => {
+    el.classList.remove("show");
+    setTimeout(() => el.remove(), 400);
+  }, 3000);
 }
 
-toggle.addEventListener("click",()=>{
-
-  body.classList.toggle("light-mode");
-
-  if(body.classList.contains("light-mode")){
-
-    toggle.innerHTML =
-    `<div class="toggle-circle">
-      <i class="fa-solid fa-sun"></i>
-    </div>`;
-
-    localStorage.setItem("theme","light");
-
-  }else{
-
-    toggle.innerHTML =
-    `<div class="toggle-circle">
-      <i class="fa-solid fa-moon"></i>
-    </div>`;
-
-    localStorage.setItem("theme","dark");
-
-  }
-
-});
-</script>
-<script>
-/* =========================
-   CART SYSTEM
-========================= */
-
-const buttons =
-document.querySelectorAll(".buy-btn");
-
-buttons.forEach((button)=>{
-
-  button.addEventListener("click",()=>{
-
-    const product =
-    button.closest(".product-card");
-
-    const name =
-    product.querySelector("h4").innerText;
-
-    const price =
-    product.querySelector(".product-price").innerText;
-
-    const image =
-    product.querySelector("img").src;
-
-    /* STORAGE */
-
-    let cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
-
-    const existing =
-    cart.find(item => item.title === name);
-
-    if(existing){
-
-      existing.quantity++;
-
-    }else{
-
-      cart.push({
-
-        title:name,
-        price:price,
-        image:image,
-        quantity:1
-
-      });
-
-    }
-
-    localStorage.setItem(
-      "cart",
-      JSON.stringify(cart)
-    );
-    updateCartCount();
-
-    /* BUTTON EFFECT */
-
-    button.innerHTML =
-    `<i class="fa-solid fa-check"></i> Eklendi`;
-
-    button.style.background =
-    "linear-gradient(to right,#22c55e,#16a34a)";
-
-    button.style.transform =
-    "scale(1.05)";
-
-    /* TOAST */
-
-    const toast =
-    document.createElement("div");
-
-    toast.className = "cart-toast";
-
-    toast.innerHTML = `
-
-      <div class="toast-icon">
-
-        <i class="fa-solid fa-bag-shopping"></i>
-
-      </div>
-
-      <div>
-
-        <h4>Sepete Eklendi</h4>
-
-        <p>${name}</p>
-
-      </div>
-
-    `;
-
-    document.body.appendChild(toast);
-
-    setTimeout(()=>{
-
-      toast.classList.add("show");
-
-    },100);
-
-    setTimeout(()=>{
-
-      toast.classList.remove("show");
-
-      setTimeout(()=>{
-
-        toast.remove();
-
-      },500);
-
-    },2500);
-
-    /* RESET BUTTON */
-
-    setTimeout(()=>{
-
-      button.innerHTML =
-      "Sepete Ekle";
-
-      button.style.background =
-      "linear-gradient(to right,var(--primary),var(--secondary))";
-
-      button.style.transform =
-      "scale(1)";
-
-    },1500);
-
-  });
-
-});
-
-/* =========================
-   AUTH SYSTEM
-========================= */
-
-const userText = document.getElementById("userText");
-const loginItem = document.getElementById("loginItem");
-const registerItem = document.getElementById("registerItem");
-const logoutItem = document.getElementById("logoutItem");
-
-/* TOAST */
-function showAuthToast(message, sub, icon){
-
+function showToast(html, className) {
   const toast = document.createElement("div");
-
-  toast.className = "auth-toast";
-
-  toast.innerHTML = `
-    <div class="auth-icon">
-      <i class="${icon}"></i>
-    </div>
-    <div>
-      <h4 style="margin:0;font-size:15px;font-weight:700;">${message}</h4>
-      <p style="margin:3px 0 0;color:#cbd5e1;font-size:13px;">${sub || ""}</p>
-    </div>
-  `;
-
+  toast.className = className;
+  toast.innerHTML = html;
   document.body.appendChild(toast);
-
-  setTimeout(()=> toast.classList.add("show"), 100);
-
-  setTimeout(()=>{
+  setTimeout(() => toast.classList.add("show"), 100);
+  setTimeout(() => {
     toast.classList.remove("show");
-    setTimeout(()=> toast.remove(), 400);
+    setTimeout(() => toast.remove(), 500);
   }, 2500);
 }
 
-/* UI UPDATE */
-function updateUI(){
+/* =====================
+   THEME
+===================== */
+const themeToggle = document.getElementById("themeToggle");
 
-  const user = JSON.parse(localStorage.getItem("loggedUser"));
-
-  if(user){
-
-    userText.innerText = "Merhaba, " + user.name;
-
-    loginItem.style.display = "none";
-    registerItem.style.display = "none";
-    logoutItem.style.display = "block";
-
+function applyTheme(theme) {
+  if (theme === "light") {
+    document.body.classList.add("light-mode");
+    themeToggle.innerHTML = `<div class="toggle-circle"><i class="fa-solid fa-sun"></i></div>`;
   } else {
-
-    userText.innerText = "";
-
-    loginItem.style.display = "block";
-    registerItem.style.display = "block";
-    logoutItem.style.display = "none";
+    document.body.classList.remove("light-mode");
+    themeToggle.innerHTML = `<div class="toggle-circle"><i class="fa-solid fa-moon"></i></div>`;
   }
 }
 
+applyTheme(localStorage.getItem("theme") || "dark");
+
+themeToggle.addEventListener("click", () => {
+  const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+  applyTheme(next);
+  localStorage.setItem("theme", next);
+});
+
+/* =====================
+   LOADER
+===================== */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.getElementById("loader").classList.add("hide");
+  }, 2000);
+});
+
+/* =====================
+   CART COUNT
+===================== */
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const el = document.getElementById("cartCount");
+  if (el) el.innerText = total;
+}
+updateCartCount();
+
+/* =====================
+   ADD TO CART
+===================== */
+document.querySelectorAll(".buy-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    const card = button.closest(".product-card");
+    const name = card.querySelector("h4").innerText;
+    const price = card.querySelector(".product-price").innerText;
+    const image = card.querySelector("img").src;
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing = cart.find(i => i.title === name);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ title: name, price, image, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+
+    button.innerHTML = `<i class="fa-solid fa-check"></i> Eklendi`;
+    button.style.background = "linear-gradient(to right,#22c55e,#16a34a)";
+    button.style.transform = "scale(1.05)";
+
+    showToast(`
+      <div class="toast-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+      <div><h4>Sepete Eklendi</h4><p>${name}</p></div>
+    `, "cart-toast");
+
+    setTimeout(() => {
+      button.innerHTML = "Sepete Ekle";
+      button.style.background = "";
+      button.style.transform = "";
+    }, 1500);
+  });
+});
+
+/* =====================
+   AUTH SYSTEM
+===================== */
+function updateUI() {
+  const user = JSON.parse(localStorage.getItem("loggedUser"));
+  document.getElementById("userText").innerText = user ? "Merhaba, " + user.name : "";
+  document.getElementById("loginItem").style.display    = user ? "none"  : "block";
+  document.getElementById("registerItem").style.display = user ? "none"  : "block";
+  document.getElementById("accountItem").style.display  = user ? "block" : "none"; // DÜZELTİLDİ
+  document.getElementById("logoutItem").style.display   = user ? "block" : "none";
+}
 updateUI();
 
 /* REGISTER */
-document.querySelector("#registerModal .modal-btn")
-.addEventListener("click", ()=>{
+document.getElementById("registerBtn").addEventListener("click", () => {
+  const name     = document.getElementById("regName").value.trim();
+  const email    = document.getElementById("regEmail").value.trim();
+  const password = document.getElementById("regPassword").value;
 
-  const name = document.querySelector("#registerModal input[type='text']").value;
-  const email = document.querySelector("#registerModal input[type='email']").value;
-  const password = document.querySelectorAll("#registerModal input[type='password']")[0].value;
-
-  if(!name || !email || !password){
-    showAuthToast("Hata", "Tüm alanları doldur", "fa-solid fa-xmark");
-    return;
-  }
+  if (!name || !email || !password) { showAlert("Hata", "Tüm alanları doldur."); return; }
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
+  if (users.find(u => u.email === email)) { showAlert("Hata", "Bu e-posta zaten kayıtlı."); return; }
 
-  if(users.find(u => u.email === email)){
-    showAuthToast("Hata", "Bu e-posta kayıtlı", "fa-solid fa-xmark");
-    return;
-  }
-
-  users.push({name,email,password});
+  users.push({ name, email, password });
   localStorage.setItem("users", JSON.stringify(users));
 
-  showAuthToast("Kayıt Başarılı", "Şimdi giriş yapabilirsin", "fa-solid fa-user-plus");
+  showToast(`
+    <div class="auth-icon"><i class="fa-solid fa-user-plus"></i></div>
+    <div><h4>Kayıt Başarılı</h4><p>Şimdi giriş yapabilirsin.</p></div>
+  `, "auth-toast");
 
   document.querySelector("#registerModal .btn-close").click();
 });
 
 /* LOGIN */
-document.querySelector("#loginModal .modal-btn")
-.addEventListener("click", ()=>{
+document.getElementById("loginBtn").addEventListener("click", () => {
+  const email    = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
 
-  const email = document.querySelector("#loginModal input[type='email']").value;
-  const password = document.querySelector("#loginModal input[type='password']").value;
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const user  = users.find(u => u.email === email && u.password === password);
 
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-
-  const user = users.find(u => u.email === email && u.password === password);
-
-  if(!user){
-    showAuthToast("Hatalı Giriş", "E-posta veya şifre yanlış", "fa-solid fa-xmark");
-    return;
-  }
+  if (!user) { showAlert("Hatalı Giriş", "E-posta veya şifre yanlış."); return; }
 
   localStorage.setItem("loggedUser", JSON.stringify(user));
-
-  showAuthToast("Giriş Başarılı", user.name, "fa-solid fa-check");
-
   updateUI();
+
+  showToast(`
+    <div class="auth-icon"><i class="fa-solid fa-check"></i></div>
+    <div><h4>Giriş Başarılı</h4><p>${user.name}</p></div>
+  `, "auth-toast");
 
   document.querySelector("#loginModal .btn-close").click();
 });
 
 /* LOGOUT */
-logoutItem.addEventListener("click", ()=>{
-
+document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("loggedUser");
-
   updateUI();
-
-  showAuthToast("Çıkış Yapıldı", "", "fa-solid fa-right-from-bracket");
+  showToast(`
+    <div class="auth-icon"><i class="fa-solid fa-right-from-bracket"></i></div>
+    <div><h4>Çıkış Yapıldı</h4><p></p></div>
+  `, "auth-toast");
 });
+
+/* PASSWORD TOGGLE */
 document.querySelectorAll(".toggle-pass").forEach(icon => {
-
   icon.addEventListener("click", () => {
-
     const input = icon.parentElement.querySelector("input");
-
-    if (input.type === "password") {
-      input.type = "text";
-      icon.classList.remove("fa-eye");
-      icon.classList.add("fa-eye-slash");
-    } else {
-      input.type = "password";
-      icon.classList.remove("fa-eye-slash");
-      icon.classList.add("fa-eye");
-    }
-
+    const isPass = input.type === "password";
+    input.type = isPass ? "text" : "password";
+    icon.classList.toggle("fa-eye", !isPass);
+    icon.classList.toggle("fa-eye-slash", isPass);
   });
-
 });
 
-</script>
-<script>
-
-(function () {
-  emailjs.init({
-    publicKey: "ZUvCQX9iVBYyEInlD"
+/* =====================
+   FAV + QUICK VIEW
+===================== */
+document.querySelectorAll(".fav-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    btn.classList.toggle("active");
+    btn.style.background = btn.classList.contains("active")
+      ? "#ef4444"
+      : "";
   });
-})();
+});
 
-document.getElementById("newsletterForm")
-.addEventListener("submit", function (e) {
+document.querySelectorAll(".quick-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const card = btn.closest(".product-card");
+    document.getElementById("quickTitle").innerText = card.querySelector("h4").innerText;
+    document.getElementById("quickPrice").innerText = card.querySelector(".product-price").innerText;
+    document.getElementById("quickImage").src = card.querySelector("img").src;
+    new bootstrap.Modal(document.getElementById("quickModal")).show();
+  });
+});
 
+/* =====================
+   PRODUCT SEARCH — boş string düzeltildi
+===================== */
+document.getElementById("searchInput").addEventListener("input", function () {
+  const value = this.value.toLowerCase().trim();
+  document.querySelectorAll(".product-card").forEach(card => {
+    const title = card.querySelector("h4").innerText.toLowerCase();
+    const desc  = card.querySelector("p").innerText.toLowerCase();
+    const match = !value || title.includes(value) || desc.includes(value);
+    card.closest('[class^="col"]').style.display = match ? "block" : "none";
+  });
+});
+
+/* =====================
+   NEWSLETTER — gereksiz ikinci if kaldırıldı
+===================== */
+(function () { emailjs.init({ publicKey: "ZUvCQX9iVBYyEInlD" }); })();
+
+document.getElementById("newsletterForm").addEventListener("submit", function (e) {
   e.preventDefault();
+  const email = document.getElementById("newsletterEmail").value.trim().toLowerCase();
+  const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
-  const email = document
-    .getElementById("newsletterEmail")
-    .value
-    .trim()
-    .toLowerCase();
-
-  /* SADECE GERÇEK GMAIL KONTROLÜ */
-
-const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-
-if (!gmailRegex.test(email)) {
-  alert("Lütfen geçerli bir Gmail adresi girin. Örnek: gecersiz@gmail.com");
-  return;
-}
-
-/* gmail.comcom gibi hataları engelle */
-if (
-  email.includes("@gmail.comcom") ||
-  email.includes("@gmail.comm") ||
-  email.includes("@gmail.co") ||
-  email.endsWith(".")
-) {
- showAlert(
-  "Geçersiz E-posta",
-  "Lütfen geçerli bir Gmail adresi girin."
-);
-  return;
-}
-
-  /* DUPLICATE CHECK */
-  let subscribers =
-    JSON.parse(localStorage.getItem("subscribers")) || [];
-
- if (
-  subscribers.some(
-    item => item.toLowerCase() === email.toLowerCase()
-  )
-) {
- showAlert(
-  "Kayıt Başarısız",
-  "Bu Gmail adresi zaten kayıtlı."
-);
-  return;
-}
-
-  /* DEVICE INFO */
-  const device = navigator.userAgent;
-
-  /* IP + EMAIL SEND (FULL FIXED) */
-  fetch("https://api.ipify.org?format=json")
-    .then(res => res.json())
-    .then(ipData => {
-
-      emailjs.send(
-        "service_5quk4k4",
-        "template_hjo04an",
-        {
-          user_email: email,
-          user_device: device,
-          user_ip: ipData.ip
-        }
-      )
-      .then(function () {
-
-        /* SAVE LOCALLY */
-        subscribers.push(email);
-        localStorage.setItem("subscribers", JSON.stringify(subscribers));
-
-        /* TOAST */
-        const toast = document.createElement("div");
-
-        toast.className = "mail-toast";
-
-        toast.innerHTML = `
-          <div class="mail-icon">
-            <i class="fa-solid fa-paper-plane"></i>
-          </div>
-          <div>
-            <h4>Abonelik Başarılı</h4>
-            <p>Kampanya bildirimleri aktif edildi 🚀</p>
-          </div>
-        `;
-
-        document.body.appendChild(toast);
-
-        setTimeout(() => toast.classList.add("show"), 100);
-
-        setTimeout(() => {
-          toast.classList.remove("show");
-          setTimeout(() => toast.remove(), 500);
-        }, 3000);
-
-        document.getElementById("newsletterForm").reset();
-
-      })
-      .catch(function (error) {
-        alert("Email gönderim hatası: " + error.text);
-      });
-
-    })
-    .catch(() => {
-      alert("IP alınamadı, tekrar deneyin.");
-    });
-
-});
-
-</script>
-<script>
-
-window.addEventListener("load",()=>{
-
-setTimeout(()=>{
-
-document
-.getElementById("loader")
-.classList.add("hide");
-
-},2000);
-
-});
-document.querySelectorAll(".fav-btn")
-.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-btn.classList.toggle("active");
-
-if(btn.classList.contains("active")){
-
-btn.style.background="#ef4444";
-
-}else{
-
-btn.style.background="";
-}
-
-});
-
-});
-document.querySelectorAll(".quick-btn")
-.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-const card =
-btn.closest(".product-card");
-
-const title =
-card.querySelector("h4").innerText;
-
-const price =
-card.querySelector(".product-price").innerText;
-
-const image =
-card.querySelector("img").src;
-
-document.getElementById("quickTitle")
-.innerText = title;
-
-document.getElementById("quickPrice")
-.innerText = price;
-
-document.getElementById("quickImage")
-.src = image;
-
-new bootstrap.Modal(
-document.getElementById("quickModal")
-).show();
-
-});
-
-});
-
-</script>
-
-<script>
-
-
-function updateCartCount(){
-
-  const cart =
-  JSON.parse(localStorage.getItem("cart")) || [];
-
-  let total = 0;
-
-  cart.forEach(item => {
-
-    total += item.quantity;
-
-  });
-
-  const counter =
-  document.getElementById("cartCount");
-
-  if(counter){
-
-    counter.innerText = total;
-
+  if (!gmailRegex.test(email)) {
+    showAlert("Geçersiz E-posta", "Lütfen geçerli bir Gmail adresi girin.");
+    return;
   }
 
-}
+  let subscribers = JSON.parse(localStorage.getItem("subscribers")) || [];
+  if (subscribers.some(s => s.toLowerCase() === email)) {
+    showAlert("Zaten Kayıtlı", "Bu e-posta adresi zaten abone.");
+    return;
+  }
 
-/* SAYFA AÇILINCA */
-updateCartCount();
+  fetch("https://api.ipify.org?format=json")
+    .then(r => r.json())
+    .then(ipData => {
+      emailjs.send("service_5quk4k4", "template_hjo04an", {
+        user_email: email,
+        user_device: navigator.userAgent,
+        user_ip: ipData.ip
+      }).then(() => {
+        subscribers.push(email);
+        localStorage.setItem("subscribers", JSON.stringify(subscribers));
+        showToast(`
+          <div class="mail-icon"><i class="fa-solid fa-paper-plane"></i></div>
+          <div><h4>Abone Oldun</h4><p>Kampanya bildirimleri aktif 🚀</p></div>
+        `, "mail-toast");
+        this.reset();
+      }).catch(err => showAlert("Hata", "E-posta gönderilemedi."));
+    })
+    .catch(() => showAlert("Hata", "Bağlantı hatası, tekrar dene."));
+});
 
-const cursor =
-document.getElementById("cursorSneaker");
-
-document.addEventListener("mousemove",(e)=>{
-
+/* =====================
+   CUSTOM CURSOR
+===================== */
+const cursor = document.getElementById("cursorSneaker");
+document.addEventListener("mousemove", e => {
   cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-
+  cursor.style.top  = e.clientY + "px";
 });
-
-/* CLICK EFFECT */
-
-document.addEventListener("mousedown",()=>{
-
-  cursor.classList.add("click");
-
+document.addEventListener("mousedown", () => cursor.classList.add("click"));
+document.addEventListener("mouseup",   () => cursor.classList.remove("click"));
+document.querySelectorAll("a, button").forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    cursor.style.transform = "translate(-50%,-50%) scale(1.2) rotate(-10deg)";
+  });
+  el.addEventListener("mouseleave", () => {
+    cursor.style.transform = "translate(-50%,-50%) scale(1) rotate(-15deg)";
+  });
 });
-
-document.addEventListener("mouseup",()=>{
-
-  cursor.classList.remove("click");
-
-});
-document.querySelectorAll("a,button")
-.forEach(el=>{
-
-el.addEventListener("mouseenter",()=>{
-
-cursor.style.transform =
-"translate(-50%,-50%) scale(1.2) rotate(-10deg)";
-
-});
-
-el.addEventListener("mouseleave",()=>{
-
-cursor.style.transform =
-"translate(-50%,-50%) scale(1) rotate(-15deg)";
-
-});
-
-});
-</script>
-<script>
-
-/* PRODUCT SEARCH */
-
-const searchInput =
-document.getElementById("searchInput");
-
-searchInput.addEventListener("input",()=>{
-
-const value =
-searchInput.value
-.toLowerCase()
-.trim();
-
-let found = false;
-
-document
-.querySelectorAll(".product-card")
-.forEach(card=>{
-
-const title =
-card.querySelector("h4")
-.innerText
-.toLowerCase();
-
-const description =
-card.querySelector("p")
-.innerText
-.toLowerCase();
-
-const match =
-title.includes(value)
-||
-description.includes(value);
-
-card.parentElement.style.display =
-match ? "block" : "none";
-
-if(match) found = true;
-
-});
-
-});
-
-</script>
-<script>
-  function showAlert(title,message){
-
-const alertBox=document.createElement("div");
-
-alertBox.className="custom-alert";
-
-alertBox.innerHTML=`
-<i class="fa-solid fa-circle-exclamation"></i>
-<div>
-<h4>${title}</h4>
-<p>${message}</p>
-</div>
-`;
-
-document.body.appendChild(alertBox);
-
-setTimeout(()=>{
-alertBox.classList.add("show");
-},100);
-
-setTimeout(()=>{
-alertBox.classList.remove("show");
-
-setTimeout(()=>{
-alertBox.remove();
-},400);
-
-},3000);
-
-}
 </script>
 
 </body>
