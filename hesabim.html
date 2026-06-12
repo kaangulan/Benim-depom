@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StepUp | Hesabım</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="hestyle.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar fixed-top">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="navbar-brand" href="index.html">
+      <i class="fa-solid fa-shoe-prints"></i> StepUp
+    </a>
+    <a class="nav-back" href="index.html">
+      <i class="fa-solid fa-arrow-left"></i> Anasayfaya Dön
+    </a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="page-strip" style="margin-top:72px;">
+  <ul class="breadcrumb">
+    <li><a href="index.html">Anasayfa</a></li>
+    <li class="breadcrumb-sep"><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></li>
+    <li class="active">Hesabım</li>
+  </ul>
+</div>
+
+<!-- MAIN -->
+<div class="account-wrapper">
+
+  <!-- ====== SIDEBAR ====== -->
+  <div class="sidebar">
+
+    <!-- PROFILE CARD -->
+    <div class="profile-card">
+      <div class="avatar-wrap">
+        <div class="avatar" id="avatarLetters">AY</div>
+        <div class="avatar-edit"><i class="fa-solid fa-pen"></i></div>
+      </div>
+      <div class="profile-name" id="sidebarName">Ahmet Yılmaz</div>
+      <div class="profile-email" id="sidebarEmail">ahmet@gmail.com</div>
+      <span class="profile-badge"><i class="fa-solid fa-crown"></i> Premium Üye</span>
+    </div>
+
+    <!-- MINI STATS -->
+    <div class="mini-stats">
+      <div class="mini-stat">
+        <div class="mini-stat-val">12</div>
+        <div class="mini-stat-lbl">Sipariş</div>
+      </div>
+      <div class="mini-stat">
+        <div class="mini-stat-val">5</div>
+        <div class="mini-stat-lbl">Favori</div>
+      </div>
+      <div class="mini-stat">
+        <div class="mini-stat-val">2</div>
+        <div class="mini-stat-lbl">Adres</div>
+      </div>
+      <div class="mini-stat">
+        <div class="mini-stat-val">₺4.2K</div>
+        <div class="mini-stat-lbl">Toplam</div>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <nav class="sidebar-nav">
+      <a class="active" onclick="switchPanel('profile')">
+        <i class="fa-solid fa-user"></i> Profilim
+      </a>
+      <a onclick="switchPanel('orders')">
+        <i class="fa-solid fa-box"></i> Siparişlerim
+      </a>
+      <a onclick="switchPanel('favorites')">
+        <i class="fa-solid fa-heart"></i> Favorilerim
+      </a>
+      <a onclick="switchPanel('addresses')">
+        <i class="fa-solid fa-location-dot"></i> Adreslerim
+      </a>
+      <a onclick="switchPanel('security')">
+        <i class="fa-solid fa-shield-halved"></i> Güvenlik
+      </a>
+      <a onclick="switchPanel('notifications')">
+        <i class="fa-solid fa-bell"></i> Bildirimler
+        <span style="margin-left:auto;background:var(--primary);color:var(--bg);padding:2px 10px;border-radius:30px;font-size:11px;font-weight:700;">3</span>
+      </a>
+      <a class="logout" onclick="handleLogout()">
+        <i class="fa-solid fa-right-from-bracket"></i> Çıkış Yap
+      </a>
+    </nav>
+
+  </div>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <div class="main-content">
+
+    <!-- ── PROFILE ── -->
+    <div class="panel active" id="panel-profile">
+      <div class="panel-header">
+        <div class="panel-header-icon"><i class="fa-solid fa-user"></i></div>
+        <div>
+          <h2>Profil Bilgileri</h2>
+          <p>Kişisel bilgilerini güncelleyebilirsin</p>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Ad</label>
+          <input class="form-control" type="text" id="firstName" placeholder="Adın" value="Ahmet">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Soyad</label>
+          <input class="form-control" type="text" id="lastName" placeholder="Soyadın" value="Yılmaz">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">E-posta</label>
+        <input class="form-control" type="email" id="profileEmail" placeholder="E-posta adresin" value="ahmet@gmail.com">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Telefon</label>
+          <input class="form-control" type="tel" placeholder="+90 ___ ___ __ __" value="+90 555 555 55 55">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Doğum Tarihi</label>
+          <input class="form-control" type="date" value="1995-06-15">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Cinsiyet</label>
+        <select class="form-control">
+          <option>Erkek</option>
+          <option>Kadın</option>
+          <option>Belirtmek istemiyorum</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Hakkımda</label>
+        <textarea class="form-control" rows="3" placeholder="Kendini kısaca tanıt..."></textarea>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn-save" onclick="saveProfile()"><i class="fa-solid fa-check" style="margin-right:8px;"></i>Değişiklikleri Kaydet</button>
+        <button class="btn-outline">İptal</button>
+      </div>
+    </div>
+
+    <!-- ── ORDERS ── -->
+    <div class="panel" id="panel-orders">
+      <div class="panel-header">
+        <div class="panel-header-icon"><i class="fa-solid fa-box"></i></div>
+        <div>
+          <h2>Siparişlerim</h2>
+          <p>Tüm geçmiş ve aktif siparişlerin</p>
+        </div>
+      </div>
+
+      <!-- Order 1 -->
+      <div class="order-card">
+        <div class="order-top">
+          <div>
+            <div class="order-id">#SU-2024-0041</div>
+            <div class="order-date">12 Haziran 2026</div>
+          </div>
+          <span class="order-status status-delivered"><i class="fa-solid fa-circle-check" style="margin-right:6px;"></i>Teslim Edildi</span>
+        </div>
+        <div class="order-items">
+          <div class="order-item">
+            <div class="order-item-img">👟</div>
+            <div>
+              <div class="order-item-name">Nike Air Max 270</div>
+              <div class="order-item-price">$249</div>
+            </div>
+          </div>
+          <div class="order-item">
+            <div class="order-item-img">👟</div>
+            <div>
+              <div class="order-item-name">Adidas UltraBoost 22</div>
+              <div class="order-item-price">$199</div>
+            </div>
+          </div>
+        </div>
+        <div class="order-total">
+          <span class="order-total-lbl">Sipariş Toplamı</span>
+          <span class="order-total-val">$448</span>
+        </div>
+      </div>
+
+      <!-- Order 2 -->
+      <div class="order-card">
+        <div class="order-top">
+          <div>
+            <div class="order-id">#SU-2024-0038</div>
+            <div class="order-date">2 Haziran 2026</div>
+          </div>
+          <span class="order-status status-shipping"><i class="fa-solid fa-truck" style="margin-right:6px;"></i>Kargoda</span>
+        </div>
+        <div class="order-items">
+          <div class="order-item">
+            <div class="order-item-img">👟</div>
+            <div>
+              <div class="order-item-name">Puma RS-X3</div>
+              <div class="order-item-price">$179</div>
+            </div>
+          </div>
+        </div>
+        <div class="order-total">
+          <span class="order-total-lbl">Sipariş Toplamı</span>
+          <span class="order-total-val">$179</span>
+        </div>
+      </div>
+
+      <!-- Order 3 -->
+      <div class="order-card">
+        <div class="order-top">
+          <div>
+            <div class="order-id">#SU-2024-0035</div>
+            <div class="order-date">22 Mayıs 2026</div>
+          </div>
+          <span class="order-status status-processing"><i class="fa-solid fa-clock" style="margin-right:6px;"></i>Hazırlanıyor</span>
+        </div>
+        <div class="order-items">
+          <div class="order-item">
+            <div class="order-item-img">👟</div>
+            <div>
+              <div class="order-item-name">Converse Chuck 70</div>
+              <div class="order-item-price">$110</div>
+            </div>
+          </div>
+          <div class="order-item">
+            <div class="order-item-img">👟</div>
+            <div>
+              <div class="order-item-name">New Balance 574</div>
+              <div class="order-item-price">$140</div>
+            </div>
+          </div>
+        </div>
+        <div class="order-total">
+          <span class="order-total-lbl">Sipariş Toplamı</span>
+          <span class="order-total-val">$250</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FAVORITES ── -->
+    <div class="panel" id="panel-favorites">
+      <div class="panel-header">
+        <div class="panel-header-icon" style="background:linear-gradient(to right,#ef4444,#dc2626);"><i class="fa-solid fa-heart"></i></div>
+        <div>
+          <h2>Favorilerim</h2>
+          <p>Beğendiğin ürünler</p>
+        </div>
+      </div>
+      <div class="fav-grid">
+
+        <div class="fav-card">
+          <div class="fav-img">👟
+            <button class="fav-remove"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="fav-info">
+            <div class="fav-brand">Nike</div>
+            <div class="fav-name">Air Max 270</div>
+            <div class="fav-price">$249</div>
+            <button class="fav-cart-btn"><i class="fa-solid fa-cart-shopping" style="margin-right:6px;"></i>Sepete Ekle</button>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img" style="font-size:52px;">👟
+            <button class="fav-remove"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="fav-info">
+            <div class="fav-brand">Adidas</div>
+            <div class="fav-name">UltraBoost 22</div>
+            <div class="fav-price">$199</div>
+            <button class="fav-cart-btn"><i class="fa-solid fa-cart-shopping" style="margin-right:6px;"></i>Sepete Ekle</button>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img" style="font-size:52px;">👟
+            <button class="fav-remove"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="fav-info">
+            <div class="fav-brand">New Balance</div>
+            <div class="fav-name">990v5</div>
+            <div class="fav-price">$185</div>
+            <button class="fav-cart-btn"><i class="fa-solid fa-cart-shopping" style="margin-right:6px;"></i>Sepete Ekle</button>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img" style="font-size:52px;">👟
+            <button class="fav-remove"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="fav-info">
+            <div class="fav-brand">Vans</div>
+            <div class="fav-name">Old Skool Pro</div>
+            <div class="fav-price">$95</div>
+            <button class="fav-cart-btn"><i class="fa-solid fa-cart-shopping" style="margin-right:6px;"></i>Sepete Ekle</button>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img" style="font-size:52px;">👟
+            <button class="fav-remove"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="fav-info">
+            <div class="fav-brand">Puma</div>
+            <div class="fav-name">RS-X3 Puzzle</div>
+            <div class="fav-price">$179</div>
+            <button class="fav-cart-btn"><i class="fa-solid fa-cart-shopping" style="margin-right:6px;"></i>Sepete Ekle</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── ADDRESSES ── -->
+    <div class="panel" id="panel-addresses">
+      <div class="panel-header">
+        <div class="panel-header-icon" style="background:linear-gradient(to right,#22c55e,#16a34a);"><i class="fa-solid fa-location-dot"></i></div>
+        <div>
+          <h2>Adreslerim</h2>
+          <p>Kayıtlı teslimat adreslerini yönet</p>
+        </div>
+      </div>
+      <div class="address-grid">
+
+        <div class="address-card default">
+          <span class="address-default-tag"><i class="fa-solid fa-star" style="margin-right:4px;"></i>Varsayılan</span>
+          <div class="address-icon"><i class="fa-solid fa-house"></i></div>
+          <div class="address-label">Ev Adresi</div>
+          <div class="address-text">Alsancak Mah. Kıbrıs Şehitleri Cad.<br>No: 42 / 7<br>Konak / İzmir</div>
+          <div class="address-actions">
+            <button class="address-btn edit" onclick="showToast('Düzenle', 'Adres düzenleme yakında!','#38bdf8')"><i class="fa-solid fa-pen" style="margin-right:5px;"></i>Düzenle</button>
+            <button class="address-btn del" onclick="showToast('Sil', 'Varsayılan adres silinemez.','#ef4444')"><i class="fa-solid fa-trash" style="margin-right:5px;"></i>Sil</button>
+          </div>
+        </div>
+
+        <div class="address-card">
+          <div class="address-icon" style="background:linear-gradient(to right,#8b5cf6,#7c3aed);"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="address-label">İş Adresi</div>
+          <div class="address-text">Bayraklı Mah. İzmir Teknoloji Plaza<br>B Blok Kat: 4<br>Bayraklı / İzmir</div>
+          <div class="address-actions">
+            <button class="address-btn edit" onclick="showToast('Düzenle','Adres düzenleme yakında!','#38bdf8')"><i class="fa-solid fa-pen" style="margin-right:5px;"></i>Düzenle</button>
+            <button class="address-btn del" onclick="showToast('Silindi','İş adresi silindi.','#ef4444')"><i class="fa-solid fa-trash" style="margin-right:5px;"></i>Sil</button>
+          </div>
+        </div>
+
+      </div>
+      <button class="add-address-btn" style="margin-top:16px;" onclick="showToast('Yeni Adres','Adres ekleme özelliği yakında!','#38bdf8')">
+        <i class="fa-solid fa-plus"></i> Yeni Adres Ekle
+      </button>
+    </div>
+
+    <!-- ── SECURITY ── -->
+    <div class="panel" id="panel-security">
+      <div class="panel-header">
+        <div class="panel-header-icon" style="background:linear-gradient(to right,#f59e0b,#d97706);"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <h2>Güvenlik</h2>
+          <p>Hesap güvenliği ve gizlilik ayarları</p>
+        </div>
+      </div>
+
+      <div class="security-item">
+        <div class="security-left">
+          <div class="security-icon sec-green"><i class="fa-solid fa-lock"></i></div>
+          <div>
+            <div class="security-title">Şifre</div>
+            <div class="security-desc">Son değişiklik: 3 ay önce</div>
+          </div>
+        </div>
+        <button class="btn-change" onclick="showToast('Şifre','Şifre değiştirme ekranı yakında!','#38bdf8')">Değiştir</button>
+      </div>
+
+      <div class="security-item">
+        <div class="security-left">
+          <div class="security-icon sec-blue"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div>
+            <div class="security-title">İki Faktörlü Doğrulama</div>
+            <div class="security-desc">Hesabına ekstra güvenlik katmanı ekle</div>
+          </div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle2fa">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="security-item">
+        <div class="security-left">
+          <div class="security-icon sec-purple"><i class="fa-solid fa-eye"></i></div>
+          <div>
+            <div class="security-title">Profil Görünürlüğü</div>
+            <div class="security-desc">Diğer kullanıcılar profilini görebilsin</div>
+          </div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleProfile" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="security-item">
+        <div class="security-left">
+          <div class="security-icon sec-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div>
+            <div class="security-title">Hesabı Sil</div>
+            <div class="security-desc">Bu işlem geri alınamaz</div>
+          </div>
+        </div>
+        <button class="btn-change" style="color:#f87171;border-color:rgba(239,68,68,.25);background:rgba(239,68,68,.08);" onclick="showToast('Dikkat','Hesap silme isteği alındı.','#ef4444')">Sil</button>
+      </div>
+    </div>
+
+    <!-- ── NOTIFICATIONS ── -->
+    <div class="panel" id="panel-notifications">
+      <div class="panel-header">
+        <div class="panel-header-icon" style="background:linear-gradient(to right,#f59e0b,#f97316);"><i class="fa-solid fa-bell"></i></div>
+        <div>
+          <h2>Bildirimler</h2>
+          <p>Son aktiviteler ve duyurular</p>
+        </div>
+      </div>
+
+      <div class="notif-item unread">
+        <div class="notif-icon" style="background:rgba(34,197,94,.12);color:#4ade80;"><i class="fa-solid fa-circle-check"></i></div>
+        <div style="flex:1;">
+          <div class="notif-title">Siparişin Teslim Edildi</div>
+          <div class="notif-text">#SU-2024-0041 numaralı siparişin kapına ulaştı.</div>
+          <div class="notif-time">2 saat önce</div>
+        </div>
+        <div class="notif-dot"></div>
+      </div>
+
+      <div class="notif-item unread">
+        <div class="notif-icon" style="background:rgba(56,189,248,.12);color:#38bdf8;"><i class="fa-solid fa-tag"></i></div>
+        <div style="flex:1;">
+          <div class="notif-title">%20 İndirim Kuponu!</div>
+          <div class="notif-text">Nike koleksiyonunda sana özel indirim kuponu tanımlandı.</div>
+          <div class="notif-time">1 gün önce</div>
+        </div>
+        <div class="notif-dot"></div>
+      </div>
+
+      <div class="notif-item unread">
+        <div class="notif-icon" style="background:rgba(139,92,246,.12);color:#a78bfa;"><i class="fa-solid fa-truck"></i></div>
+        <div style="flex:1;">
+          <div class="notif-title">Kargo Yola Çıktı</div>
+          <div class="notif-text">#SU-2024-0038 numaralı siparişin kargoya verildi.</div>
+          <div class="notif-time">3 gün önce</div>
+        </div>
+        <div class="notif-dot"></div>
+      </div>
+
+      <div class="notif-item">
+        <div class="notif-icon" style="background:rgba(251,191,36,.10);color:#fbbf24;"><i class="fa-solid fa-star"></i></div>
+        <div style="flex:1;">
+          <div class="notif-title">Yorumun için Teşekkürler</div>
+          <div class="notif-text">Nike Air Max 270 için verdiğin yorum onaylandı.</div>
+          <div class="notif-time">1 hafta önce</div>
+        </div>
+      </div>
+
+      <div class="notif-item">
+        <div class="notif-icon" style="background:rgba(255,255,255,.05);color:#94a3b8;"><i class="fa-solid fa-user-plus"></i></div>
+        <div style="flex:1;">
+          <div class="notif-title">Hoşgeldin, Ahmet!</div>
+          <div class="notif-text">StepUp ailesine katıldığın için mutluyuz.</div>
+          <div class="notif-time">1 ay önce</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /account-wrapper -->
+
+<!-- TOAST -->
+<div class="su-toast" id="suToast">
+  <div class="su-toast-icon" id="toastIcon" style="background:linear-gradient(to right,#38bdf8,#8b5cf6);">
+    <i class="fa-solid fa-check" id="toastIco"></i>
+  </div>
+  <div>
+    <h4 id="toastTitle">Başlık</h4>
+    <p id="toastMsg">Mesaj</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ── PANEL SWITCH ── */
+function switchPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── TOAST ── */
+function showToast(title, msg, color) {
+  document.getElementById('toastTitle').innerText = title;
+  document.getElementById('toastMsg').innerText   = msg;
+  document.getElementById('toastIcon').style.background = color || 'linear-gradient(to right,#38bdf8,#8b5cf6)';
+  const t = document.getElementById('suToast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ── SAVE PROFILE ── */
+function saveProfile() {
+  const first = document.getElementById('firstName').value.trim();
+  const last  = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('profileEmail').value.trim();
+  const full  = first + ' ' + last;
+
+  document.getElementById('sidebarName').innerText   = full;
+  document.getElementById('sidebarEmail').innerText  = email;
+  document.getElementById('avatarLetters').innerText = (first[0] || '') + (last[0] || '');
+
+  showToast('Kaydedildi', 'Profil bilgilerin güncellendi.', 'linear-gradient(to right,#22c55e,#16a34a)');
+}
+
+/* ── LOGOUT ── */
+function handleLogout() {
+  localStorage.removeItem('loggedUser');
+  showToast('Çıkış Yapıldı', 'Güvenli çıkış yapıldı.', 'linear-gradient(to right,#ef4444,#dc2626)');
+  setTimeout(() => window.location.href = 'index.html', 1500);
+}
+
+/* ── LOAD USER ── */
+window.addEventListener('DOMContentLoaded', () => {
+  const user = JSON.parse(localStorage.getItem('loggedUser'));
+  if (user) {
+    const parts  = user.name.split(' ');
+    const initials = parts.map(p => p[0]).join('').substring(0, 2).toUpperCase();
+    document.getElementById('avatarLetters').innerText = initials;
+    document.getElementById('sidebarName').innerText   = user.name;
+    document.getElementById('sidebarEmail').innerText  = user.email;
+    document.getElementById('firstName').value = parts[0] || '';
+    document.getElementById('lastName').value  = parts.slice(1).join(' ') || '';
+    document.getElementById('profileEmail').value = user.email;
+  }
+});
+
+/* ── REMOVE FAV ── */
+document.querySelectorAll('.fav-remove').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.fav-card');
+    card.style.transform = 'scale(.9)';
+    card.style.opacity   = '0';
+    card.style.transition = '.35s';
+    setTimeout(() => card.remove(), 350);
+    showToast('Favorilerden Çıkarıldı', 'Ürün favorilerinden kaldırıldı.', 'linear-gradient(to right,#ef4444,#dc2626)');
+  });
+});
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+
+    if (!user) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    // PROFİL BİLGİLERİNİ DOLDUR
+    const fullName = user.name.split(" ");
+
+    document.getElementById("firstName").value =
+        fullName[0] || "";
+
+    document.getElementById("lastName").value =
+        fullName.slice(1).join(" ") || "";
+
+    document.getElementById("profileEmail").value =
+        user.email || "";
+
+    document.getElementById("sidebarName").innerText =
+        user.name;
+
+    document.getElementById("sidebarEmail").innerText =
+        user.email;
+
+    // AVATAR
+    const letters =
+        user.name
+        .split(" ")
+        .map(x => x[0])
+        .join("")
+        .substring(0,2)
+        .toUpperCase();
+
+    document.getElementById("avatarLetters").innerText =
+        letters;
+});
+
+function saveProfile(){
+
+    const firstName =
+        document.getElementById("firstName").value.trim();
+
+    const lastName =
+        document.getElementById("lastName").value.trim();
+
+    const email =
+        document.getElementById("profileEmail").value.trim();
+
+    if(!firstName || !email){
+        alert("Gerekli alanları doldur.");
+        return;
+    }
+
+    const fullName =
+        firstName + " " + lastName;
+
+    let user =
+        JSON.parse(localStorage.getItem("loggedUser"));
+
+    user.name = fullName;
+    user.email = email;
+
+    localStorage.setItem(
+        "loggedUser",
+        JSON.stringify(user)
+    );
+
+    // users dizisini de güncelle
+
+    let users =
+        JSON.parse(localStorage.getItem("users")) || [];
+
+    users = users.map(u => {
+
+        if(u.email === user.email){
+            u.name = fullName;
+            u.email = email;
+        }
+
+        return u;
+    });
+
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
+
+    document.getElementById("sidebarName").innerText =
+        fullName;
+
+    document.getElementById("sidebarEmail").innerText =
+        email;
+
+    alert("Profil güncellendi.");
+}
+
+function handleLogout(){
+
+    localStorage.removeItem("loggedUser");
+
+    window.location.href = "index.html";
+}
+</script>
+</body>
+</html>

@@ -531,12 +531,24 @@ document.querySelectorAll(".buy-btn").forEach(button => {
    AUTH SYSTEM
 ===================== */
 function updateUI() {
-  const user = JSON.parse(localStorage.getItem("loggedUser"));
-  document.getElementById("userText").innerText = user ? "Merhaba, " + user.name : "";
-  document.getElementById("loginItem").style.display    = user ? "none"  : "block";
-  document.getElementById("registerItem").style.display = user ? "none"  : "block";
-  document.getElementById("accountItem").style.display  = user ? "block" : "none"; // DÜZELTİLDİ
-  document.getElementById("logoutItem").style.display   = user ? "block" : "none";
+
+    const user =
+      JSON.parse(localStorage.getItem("loggedUser"));
+
+    document.getElementById("userText").innerText =
+      user ? "Merhaba, " + user.name : "";
+
+    document.getElementById("loginItem").style.display =
+      user ? "none" : "block";
+
+    document.getElementById("registerItem").style.display =
+      user ? "none" : "block";
+
+    document.getElementById("accountItem").style.display =
+      user ? "block" : "none";
+
+    document.getElementById("logoutItem").style.display =
+      user ? "block" : "none";
 }
 updateUI();
 
